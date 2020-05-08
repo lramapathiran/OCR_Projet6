@@ -1,0 +1,5 @@
+package com.lavanya.escalade.repository;
+
+public interface TopoReservationRepository {
+
+}

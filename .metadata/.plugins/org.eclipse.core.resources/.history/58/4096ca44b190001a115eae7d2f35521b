@@ -1,0 +1,28 @@
+package com.lavanya.escalade.model;
+
+public class Comment {
+
+	int commentId;
+	String commentContent;
+	
+	public Comment() {
+		
+	}
+
+	public int getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
+	}
+
+	public String getCommentContent() {
+		return commentContent;
+	}
+
+	public void setCommentContent(String commentContent) {
+		this.commentContent = commentContent;
+	}
+	
+}
