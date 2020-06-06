@@ -2,13 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 	    <title>Liste des Utilisateurs</title>
-	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <link th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" rel="stylesheet" />
+	    
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
 	</head>
 	<body>
 		<h1>Liste des Utilisateurs</h1>
+		 <div class="btn-group">
+            <button type="button" class="btn btn-success">This is a success button</button>
+            <button type="button" class="btn btn-warning">This is a warning button</button>
+            <button type="button" class="btn btn-danger">This is a danger button</button>
+     	</div>
 		<br/><br/>
-		<div>
-			<table border="1">
+		<div class = "container">
+			<table border="1" class="table table-stripped">
 				<thead>
 				<tr>
 						<th>Nom</th>

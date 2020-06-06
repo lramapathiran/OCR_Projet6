@@ -2,15 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 	    <title>Les Amis de l'Escalade</title>
-	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <link th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" rel="stylesheet" />
+	    
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
 	</head>
 	<body>
 		<h1>Accueil</h1>
 		<h2>Bienvenue sur notre site communautaire</h2>
 		
-		<p><a href="/signup">Je m'inscris!</a></p>
-		<p><a href="/users">Liste des Utilisateurs</a></p>
+		<nav class="navbar navbar-default navbar-fixed-top">
+		  <div class="container">
+		    <a href="/signup"><button type="button" class="btn btn-default navbar-btn">Inscription</button></a>
+		    <a href="/users"><button type="button" class="btn btn-default navbar-btn">Les Utilisateurs</button></a>
+		  </div>
+		</nav>
 		
-	<!--     <p th:text="'Hello, ' + ${name} + '!'" /> -->
+		<p><a href="/signup">Inscription</a></p>
+		<p><a href="/users">Les Utilisateurs</a></p>
+		
+		<div>
+		<p th:utext = "${passwordConfirmFail}"></p>
+		</div>
+		
+<!-- 	    <p th:text="'Hello, ' + ${name} + '!'" /> -->
 	</body>
 </html>

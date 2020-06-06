@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <title>Bienvenue!</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<h1>Bonjour 
+			<span th:utext = "${user.firstName}"></</span>
+			<span th:utext = "${user.lastName}"></span>
+		</h1>
+		<br/><br/>
+		<div>
+			<table border="1">
+				<thead>
+				<tr>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>email</th>
+						<th>mot de passe</th>
+						<th>Droits d'utilisateurs</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user : ${listUsers}">
+						<td th:utext = "${user.firstName}">...</td>
+						<td th:utext = "${user.lastName}">...</td>
+						<td th:utext = "${user.email}">...</td>
+						<td th:utext = "${user.password}">...</td>
+						<td>
+							<span th:if="${user.admin}">Administrateur</span>
+							<span th:unless="${user.admin}">Utilisateur</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<p><a href="/">Accueil</a></p>
+		
+	<!--     <p th:text="'Hello, ' + ${name} + '!'" /> -->
+	</body>
+</html>

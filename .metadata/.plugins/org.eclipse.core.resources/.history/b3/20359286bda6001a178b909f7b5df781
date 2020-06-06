@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <title>Bienvenue!</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<h1>Bonjour 
+			<span th:utext = "${user.firstName}"></span>
+			<span th:utext = "${user.lastName}"></span>
+		</h1>
+		<br/><br/>
+		<h2><a th:href="@{/createSite/(id = ${user.id})}">Ajouter un Site d'escalade</a></h2>
+			<div>
+			<table border="1">
+				<thead>
+				<tr>
+						<th>Nom</th>
+						<th>Region</th>
+						<th>Département</th>
+						<th>Ville</th>
+						<th>Voies</th>
+						<th>Equipé</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="site : ${listUserSites}">
+						<td th:utext = "${site.siteName}">...</td>
+						<td th:utext = "${site.region}">...</td>
+						<td th:utext = "${site.department}">...</td>
+						<td th:utext = "${site.city}">...</td>
+						<td th:utext = "${site.areasNumber}">...</td>
+						<td>
+							<span th:if="${site.equipped}">Oui</span>
+							<span th:unless="${site.equipped}">Non</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+			<p><a href="/">Accueil</a></p>
+		
+	<!--     <p th:text="'Hello, ' + ${name} + '!'" /> -->
+	</body>
+</html>

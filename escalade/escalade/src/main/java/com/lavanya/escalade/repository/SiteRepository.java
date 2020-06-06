@@ -1,9 +1,19 @@
 package com.lavanya.escalade.repository;
 
-import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.lavanya.escalade.model.Site;
 
-public interface SiteRepository extends CrudRepository<Site, Integer>{
+@Repository
+public interface SiteRepository extends JpaRepository<Site, Integer> {
 
+	@Query("select u from Site u where u.userId = ?1")
+	List <Site> findByUserId(int userId);
+
+	
 }

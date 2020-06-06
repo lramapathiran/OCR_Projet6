@@ -5,41 +5,71 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Site {
 	
 	@Id
 	@GeneratedValue (strategy=GenerationType.AUTO)
-	@Column (name = "id")
-	int siteId;
-	
+	int id;
+
+	@Column (name = "creator_id")
+	@NotNull
+	int userId;
+
 	@Column (name = "name")
+	@NotNull(message = "Ce champs est obligatoire")
 	String siteName;
 	
+	@NotNull(message = "Ce champs est obligatoire")
 	String region;
 	
+	@NotNull(message = "Ce champs est obligatoire")
+	@Size(min = 2, max = 2)
 	String department;
 	
+	@NotNull(message = "Ce champs est obligatoire")
 	String city;
 	
 	@Column (name = "areas_number")
+	@NotNull(message = "Ce champs est obligatoire")
 	int areasNumber;
 	
 	@Column (name = "is_equipped")
-	boolean isEquipped;
+	@NotNull(message = "Ce champs est obligatoire")
+	boolean equipped;
 	
 	public Site() {
 		
 	}
-
-	public int getSiteId() {
-		return siteId;
+	
+	public Site(String siteName, String region, String department, String city, int areasNumber, boolean equipped) {
+		this.siteName = siteName;
+		this.region = region;
+		this.department = department;
+		this.city = city;
+		this.areasNumber = areasNumber;
+		this.equipped = equipped;		
 	}
 
-	public void setSiteId(int siteId) {
-		this.siteId = siteId;
+	public int getId() {
+		return id;
 	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 
 	public String getSiteName() {
 		return siteName;
@@ -82,12 +112,17 @@ public class Site {
 	}
 
 	public boolean isEquipped() {
-		return isEquipped;
+		return equipped;
 	}
 
-	public void setEquipped(boolean isEquipped) {
-		this.isEquipped = isEquipped;
+	public void setEquipped(boolean equipped) {
+		this.equipped = equipped;
 	}
+
 	
+	@Override
+	public String toString() {
+		return "Site(" + "id=" + id + ", userId=" + userId + ", siteName=" + siteName + ", region=" + region + ", department=" + department + ", city=" + city + ", areasNumber=" + areasNumber + ", equipped=" + equipped + "}";
+	}
 
 }

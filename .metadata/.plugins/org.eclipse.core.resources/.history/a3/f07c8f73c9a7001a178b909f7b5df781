@@ -1,0 +1,5 @@
+package com.lavanya.escalade.config;
+
+public class WebMvcConfig {
+
+}

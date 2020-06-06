@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <title>Bienvenue!</title>
+	    <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <link th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" rel="stylesheet" />
+	    
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+	</head>
+	<body>
+		<h1>Bonjour 
+			<span th:utext = "${user.firstName}"></span>
+			<span th:utext = "${user.lastName}"></span>
+		</h1>
+		<br/><br/>
+		<h2><a th:href="@{/createSite(userId = ${user.id})}">Ajouter un Site d'escalade</a></h2>
+			<div>
+			<table border="1">
+				<thead>
+				<tr>
+						<th>Nom</th>
+						<th>Region</th>
+						<th>Département</th>
+						<th>Ville</th>
+						<th>Voies</th>
+						<th>Equipé</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="site : ${listUserSites}">
+						<td th:utext = "${site.siteName}">...</td>
+						<td th:utext = "${site.region}">...</td>
+						<td th:utext = "${site.department}">...</td>
+						<td th:utext = "${site.city}">...</td>
+						<td th:utext = "${site.areasNumber}">...</td>
+						<td>
+							<span th:if="${site.equipped}">Oui</span>
+							<span th:unless="${site.equipped}">Non</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+			<p><a href="/">Accueil</a></p>
+		
+	<!--     <p th:text="'Hello, ' + ${name} + '!'" /> -->
+	</body>
+</html>

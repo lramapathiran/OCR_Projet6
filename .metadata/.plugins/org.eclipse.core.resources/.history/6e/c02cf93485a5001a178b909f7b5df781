@@ -1,0 +1,11 @@
+package com.lavanya.escalade.repository.custom;
+
+import java.util.List;
+
+import com.lavanya.escalade.model.Site;
+
+public interface SiteRepositoryCustom {
+	
+	List<Site> getUserAllSites(int id);
+
+}
