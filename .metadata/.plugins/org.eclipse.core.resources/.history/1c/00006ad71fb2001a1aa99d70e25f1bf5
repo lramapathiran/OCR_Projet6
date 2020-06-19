@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:insert="fragments/components.html :: head-connected"> 
+  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Ajouter un Site</title>
+  </head>
+  <body>
+    <!-- navbar-->
+    <header class="header" th:insert="fragments/components.html :: nav-connected"></header>
+    
+    <div class="d-flex align-items-stretch">
+	  <div th:insert="fragments/components.html :: sidebar-connected"></div>
+      <div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-4">
+          <section class="py-5">
+            <div class="row">
+              
+              <!-- Form Elements -->
+              <div class="col-lg-9 mb-5">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Ajouter un Site d'escalade</h3>
+                  </div>
+                  <div class="card-body">
+                    <form class="form-horizontal" action="#" th:action="@{/saveSite}" th:object="${site}" method="post">
+                    
+                      <div class="form-group row ${#fields.hasErrors('siteName')}? has-error" >
+                        <label class="col-sm-2 col-form-label" for="siteName">Nom du site</label>
+                        <div class="col-sm-8">
+                        	<input type="text" th:field="*{siteName}" id="siteName" class="form-control"/>
+                        	<span th:if="${#fields.hasErrors('siteName')}" th:errors="*{siteName}" th:errorclass="fieldError">Incorrect input</span>
+                        </div>
+                      </div>
+                      
+                      <input type="hidden" th:field="*{userId}" id="userId"/>
+                      <br></br>
+
+					  
+	                  <div class="form-group row ${#fields.hasErrors('region')}? has-error">
+	                     <label class="col-sm-2 col-form-label" for="region">Region</label>
+	                     <div class="col-sm-8">
+		                     <input type="text" th:field="*{region}" id="region" class="form-control">
+		                     <span th:if="${#fields.hasErrors('region')}" th:errors="*{region}" th:errorclass="fieldError"></span>
+		                 </div>
+	                  </div>
+
+ 	                  <div class="form-group row ${#fields.hasErrors('department')}? has-error">
+	                      <label class="col-sm-2 col-form-label" for="department">Département</label>
+	                      <div class="col-sm-2">
+		                      <input type="number" th:field="*{department}" id="department" class="form-control">
+		                      <span th:if="${#fields.hasErrors('department')}" th:errors="*{department}" th:errorclass="fieldError"></span>
+		                  </div>
+	                  </div>
+	                  
+                      <br></br>
+                                            
+                      <div class="form-group row has-success ${#fields.hasErrors('city')}? has-error">
+                        <label class="col-sm-2 col-form-label" for="city">Ville</label>
+                        <div class="col-sm-8">
+	                        <input type="text" th:field="*{city}" id="region" class="form-control is-valid">
+	                        <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" th:errorclass="fieldError">Please provide a city.</span>
+	                    </div>
+<!--                           <div class="invalid-feedback ml-3">Please provide a city.</div> -->         
+                      </div>    
+                      <br></br>           
+					
+                      
+                      <div class="form-group row ${#fields.hasErrors('areasNumber')}? has-error">
+                        <label class="col-sm-2 col-form-label" for="areasNumber">Nombre de Voies</label>
+                        <div class="col-sm-2">
+	                        <input type="text" th:field="*{areasNumber}" id="areasNumber" class="form-control">
+	                        <span th:if="${#fields.hasErrors('areasNumber')}" th:errors="*{areasNumber}" th:errorclass="fieldError"></span>
+                        </div>
+                      </div>               
+                
+                      <div class="form-group row ${#fields.hasErrors('equipped')}? has-error">
+                      	<div class="col-sm-8">
+	                        <div class="custom-control custom-checkbox">
+	                      	    <label for="equipped" class="custom-control-label">Site équipé</label>
+		                        <input type="checkbox" th:field="*{equipped}" id="equipped" class="custom-control-input">
+		                        <span th:if="${#fields.hasErrors('equipped')}" th:errors="*{equipped}" th:errorclass="fieldError"></span>
+		                    </div>
+	                    </div>
+                      </div>
+                         
+                              
+                    <div class="line"></div>
+                    
+                      <div class="form-group row">
+                        <div class="col-md-4  mx-auto d-block">
+                          <a th:href="admin" ><button class="btn btn-secondary">Annuler</button></a>
+                          <a th:href="admin" ><button type="submit" class="btn btn-primary">Enregistrer</button></a>
+                        </div>
+                      </div>
+                        
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100" th:insert="fragments/components.html :: footer-connected"></footer>
+      </div>
+    </div>
+
+    <!-- JavaScript files-->
+    <th:block th:replace="fragments/components.html :: js-script"></th:block>
+
+  </body>
+</html>

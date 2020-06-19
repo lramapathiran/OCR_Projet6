@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <head th:insert="fragments/components.html :: head-connected"> 
+  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Ajouter un Site</title>
+  </head>
+  
+  <body>
+    <!-- navbar-->
+	<header class="header" th:insert="fragments/components.html :: nav-connected"></header>
+	
+    <div class="d-flex align-items-stretch">
+	  <div th:insert="fragments/components.html :: sidebar-connected"></div>
+      <div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5" th:insert="fragments/components.html :: dashboard-data"></section>
+          
+          <section>
+            <div class="row mb-4">
+              <div class="col-lg-7 mb-4 mb-lg-0">
+                <div class="card">
+                  <div class="card-header">
+                  	<div class="row">
+                  		<div class="col-md-6 text-center">
+				            <h6 class="text-uppercase mb-0">
+				            	<span class="float-md-left">Liste des Sites</span>
+				            </h6>
+				        </div>
+				        <div class="col-md-6 text-center">
+				            <span class="float-md-right">
+				            	<a th:href="@{/createSite(userId = ${user.id})}"><button type="button" class="btn btn-secondary">Ajouter un Site</button></a>
+				            </span>
+				        </div>
+ 					</div>                 
+                  </div>
+                  <div class="card-body">                           
+                    <table class="table table-striped table-hover card-text">
+                      <thead>
+						<tr>
+							<th>Nom</th>
+							<th>Region</th>
+							<th>Département</th>
+							<th>Ville</th>
+							<th>Voies</th>
+							<th>Equipé</th>
+							
+						</tr>
+					</thead>
+                      <tbody>
+						<tr th:each="site : ${listUserSites}">
+							<td th:utext = "${site.siteName}">...</td>
+							<td th:utext = "${site.region}">...</td>
+							<td th:utext = "${site.department}">...</td>
+							<td th:utext = "${site.city}">...</td>
+							<td th:utext = "${site.areasNumber}">...</td>
+							<td>
+								<span th:if="${site.equipped}">Oui</span>
+								<span th:unless="${site.equipped}">Non</span>
+							</td>
+						</tr>
+					</tbody>
+                    </table>
+                  </div>
+                  <div class="row">
+                  	<div class="col-md-12 form-group text-center">
+                  		<a th:href="@{/createSite(userId = ${user.id})}"><button type="button" class="btn btn-secondary">Ajouter un Site</button></a>
+                  	</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+
+          <section class="py-5">
+            <div class="row">
+              <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
+                  <div class="row">
+                    <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left"><strong class="h5 mb-0">24<sup class="smaller text-gray font-weight-normal">Apr</sup></strong><img src="img/avatar-1.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+                      <h6 class="mb-0">Jason Maxwell</h6>
+                    </div>
+                    <div class="col-lg-9 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+                      <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode">User testing</div>
+                      <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                    </div>
+                  </div></a>
+              </div>
+              <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
+                  <div class="row">
+                    <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left"><strong class="h5 mb-0">24<sup class="smaller text-gray font-weight-normal">Nov</sup></strong><img src="img/avatar-2.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+                      <h6 class="mb-0">Sam Andy</h6>
+                    </div>
+                    <div class="col-lg-9 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+                      <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode">Web Developer</div>
+                      <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+                    </div>
+                  </div></a>
+              </div>
+              <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
+                  <div class="row">
+                    <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left"><strong class="h5 mb-0">17<sup class="smaller text-gray font-weight-normal">Aug</sup></strong><img src="img/avatar-3.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+                      <h6 class="mb-0">Margret Peter</h6>
+                    </div>
+                    <div class="col-lg-9 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+                      <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode">Analysis Agent</div>
+                      <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+                    </div>
+                  </div></a>
+              </div>
+              <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
+                  <div class="row">
+                    <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left"><strong class="h5 mb-0">15<sup class="smaller text-gray font-weight-normal">Sep</sup></strong><img src="img/avatar-4.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+                      <h6 class="mb-0">Jason Doe</h6>
+                    </div>
+                    <div class="col-lg-9 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+                      <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode">User testing</div>
+                      <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+                    </div>
+                  </div></a>
+              </div>
+            </div>
+          </section>
+        </div>
+        
+        <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100" th:insert="fragments/components.html :: footer-connected"></footer>
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <th:block th:replace="fragments/components.html :: js-script"></th:block>
+  </body>
+</html>
