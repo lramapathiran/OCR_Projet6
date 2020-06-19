@@ -35,7 +35,7 @@
 	    <input type="password" th:field="*{password}" id="password" >
 	    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="fieldError"></span>
 	    <br/><br/>
-	    <input type="submit" value="Valider">   
+	    <input type="button" class="btn btn-success" value="Valider">   
 	    
 	    <ul th:if="${#fields.hasErrors('*')}" class="errorlist">
             <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>

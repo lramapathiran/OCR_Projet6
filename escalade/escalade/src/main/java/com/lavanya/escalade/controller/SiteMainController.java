@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -44,6 +43,7 @@ public class SiteMainController {
 	    return "addSite";
 	}
 	
+	
 	@PostMapping("/saveSite")
 	public String saveSite(@Valid @ModelAttribute ("site") Site site, BindingResult result, Model model) {
 		
@@ -60,7 +60,7 @@ public class SiteMainController {
 	}
 	
 	
-	@GetMapping(path="/sites")
+	@GetMapping("/sites")
 	public String showSitesList (Model model){
 		List<Site> sitesList = siteService.sitesList();
 		model.addAttribute("listSites", sitesList);

@@ -1,5 +1,0 @@
-package com.lavanya.escalade.repository.custom;
-
-public interface SiteRepositoryCustom {
-
-}

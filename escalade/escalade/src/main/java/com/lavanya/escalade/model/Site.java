@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -16,29 +16,28 @@ public class Site {
 	int id;
 
 	@Column (name = "creator_id")
-	@NotNull
+	@NotBlank
 	int userId;
 
 	@Column (name = "name")
-	@NotNull(message = "Ce champs est obligatoire")
+	@NotBlank(message = "Ce champs est obligatoire")
 	String siteName;
 	
-	@NotNull(message = "Ce champs est obligatoire")
+	@NotBlank(message = "Ce champs est obligatoire")
 	String region;
 	
-	@NotNull(message = "Ce champs est obligatoire")
+	@NotBlank(message = "Ce champs est obligatoire")
 	@Size(min = 2, max = 2)
 	String department;
 	
-	@NotNull(message = "Ce champs est obligatoire")
+	@NotBlank(message = "Ce champs est obligatoire")
 	String city;
 	
 	@Column (name = "areas_number")
-	@NotNull(message = "Ce champs est obligatoire")
+	@NotBlank(message = "Ce champs est obligatoire")
 	int areasNumber;
 	
 	@Column (name = "is_equipped")
-	@NotNull(message = "Ce champs est obligatoire")
 	boolean equipped;
 	
 	public Site() {
