@@ -14,6 +14,9 @@ public interface SiteRepository extends JpaRepository<Site, Integer> {
 
 	@Query("select u from Site u where u.userId = ?1")
 	List <Site> findByUserId(int userId);
+	
+//	@Query("select u.userId from Site u where u.id = ?1")
+//	Integer findUserIdBySiteId(int id);
 
 	
 }

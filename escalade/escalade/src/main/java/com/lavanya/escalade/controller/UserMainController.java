@@ -65,20 +65,6 @@ public class UserMainController {
 	 
       	return "redirect:/";
 	}
-    
-    @GetMapping("/user")
-    public String getUserById(@RequestParam (value = "userId") int id, User user, Model model) {
-	   
-	   user = userService.getUserById(id);
-	   int userId = user.getId();
-	   model.addAttribute("user", user);
-	  
-
-	   List<Site> listUserSites= siteService.getAllUserSites(userId);
-	   model.addAttribute("listUserSites", listUserSites);
-	   
-	   return "user";
-   }
   
     @GetMapping("/users")
    	public String showUsersList(@RequestParam (value = "userId") int id, Model model) {
@@ -91,8 +77,8 @@ public class UserMainController {
 	   return "usersList";
     }
    
-    @GetMapping("/admin")
-	public String showAdmin(@RequestParam (value = "userId") int id, User user, Model model) {
+    @GetMapping("/user")
+	public String showUserConnectedHomePage(@RequestParam (value = "userId") int id, User user, Model model) {
 	   
 	   user = userService.getUserById(id);
 	   int userId = user.getId();
@@ -102,7 +88,7 @@ public class UserMainController {
 	   List<Site> listUserSites= siteService.getAllUserSites(userId);
 	   model.addAttribute("listUserSites", listUserSites);
 	  
-	   return "admin";
+	   return "user";
 	}
    
    

@@ -9,6 +9,7 @@
 		    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 		    <!-- Font Awesome CSS-->
 		    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" th:integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" th:crossorigin="anonymous">
+		    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 		    <!-- Google fonts - Popppins for copy-->
 		    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
 		    <!-- orion icons-->
@@ -82,16 +83,16 @@
 		  <div  th:fragment = "sidebar-connected">
 	        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MENU PRINCIPAL</div>
 	        <ul class="sidebar-menu list-unstyled">
-	              <li class="sidebar-list-item"><a th:href="@{/admin(userId = ${user.id})}" class="sidebar-link text-muted active"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
+	              <li class="sidebar-list-item"><a th:href="@{/user(userId = ${user.id})}" class="sidebar-link text-muted active"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
 	              <li class="sidebar-list-item"><a href="charts.html" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Messagerie</span></a></li>
-	              <li class="sidebar-list-item"><a th:href="@{/users(userId = ${user.id})}" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>Mes Sites</span></a></li>
+	              <li class="sidebar-list-item"><a th:href="@{/siites(userId = ${user.id})}" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>Mes Sites</span></a></li>
 	              <li class="sidebar-list-item"><a href="forms.html" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Mes Topos</span></a></li>
 	              <li class="sidebar-list-item"><a href="login.html" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Login</span></a></li>
 	        </ul>
 	        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">ADMINISTRATEUR</div>
 	        <ul class="sidebar-menu list-unstyled">
 	              <li class="sidebar-list-item"><a th:href="@{/users(userId = ${user.id})}" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Les Utilisateurs</span></a></li>
-	              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Les Sites</span></a></li>
+	              <li class="sidebar-list-item"><a th:href="@{/sites(userId = ${user.id})}" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Les Sites</span></a></li>
 	              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Les Topos</span></a></li>
 	              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Demo</span></a></li>
 	        </ul>

@@ -1,6 +1,7 @@
 package com.lavanya.escalade.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,19 @@ public class SiteService {
 		return siteRepository.findByUserId(userId);
 		
 	}
+	
+	public Site getSiteById(int id) {
+		
+		Optional<Site>  siteResponse = siteRepository.findById(id);
+		Site site = siteResponse.get();
+		return site;
+	}
+	
+//	public Integer getUserIdBySiteId(Integer id) {
+//		
+//		Integer siteResponse = siteRepository.findUserIdBySiteId(id);
+//		Integer userId = siteResponse.get();
+//		return userId;
+//	}
 	
 }

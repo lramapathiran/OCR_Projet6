@@ -7,40 +7,91 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Topo {
 	
 	@Id
 	@GeneratedValue (strategy=GenerationType.AUTO)
-	@Column (name = "id")
-	int topoId;
+	int id;
+	
+	@Column (name = "user_id")
+	@NotBlank(message = "Ce champs est obligatoire")
+	int userId;
+	
+	@Column (name = "site_id")
+	@NotBlank(message = "Ce champs est obligatoire")
+	int siteId;
 	
 	@Column (name = "name")
+	@NotBlank(message = "Ce champs est obligatoire")
 	String topoName;
 	
+	@NotBlank(message = "Ce champs est obligatoire")
 	String localization;
 	
 	@Column (name = "description")
+	@NotBlank(message = "Ce champs est obligatoire")
+	@Size(max = 200)
 	String topoDescription;
 	
 	@Column (name = "date")
+//	@NotBlank(message = "Ce champs est obligatoire")
 	Date topoDate;
 	
 	@Column (name = "is_available")
-	boolean isAvailable;
+	boolean available;
 	
 	public Topo() {
 		
 	}
+	
 
-	public int getTopoId() {
-		return topoId;
+	public Topo(String topoName, String localization, String topoDescription, Date topoDate, boolean available) {
+		this.topoName = topoName;
+		this.localization = localization;
+		this.topoDescription = topoDescription;
+		this.topoDate= topoDate;
+		this.available = available;		
+	}
+	
+	public int getId() {
+		return id;
 	}
 
-	public void setTopoId(int topoId) {
-		this.topoId = topoId;
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
+
+
+
+	public int getUserId() {
+		return userId;
+	}
+
+
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+
+
+	public int getSiteId() {
+		return siteId;
+	}
+
+
+
+	public void setSiteId(int siteId) {
+		this.siteId = siteId;
+	}
+
+
 
 	public String getTopoName() {
 		return topoName;
@@ -74,12 +125,19 @@ public class Topo {
 		this.topoDate = topoDate;
 	}
 
+
 	public boolean isAvailable() {
-		return isAvailable;
+		return available;
 	}
 
-	public void setAvailable(boolean isAvailable) {
-		this.isAvailable = isAvailable;
+
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+	
+	@Override
+	public String toString() {
+		return "Topo(" + "id=" + id + ", userId=" + userId + ", siteId=" + siteId + ", topoName=" + topoName + ", localization=" + localization + ", topoDescription=" + topoDescription + ", topoDate=" + topoDate + ", available=" + available + "}";
 	}
 	
 

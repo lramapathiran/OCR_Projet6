@@ -27,6 +27,7 @@ public class SiteMainController {
 	@Autowired
 	private UserService userService;
 	
+
 	
 	@GetMapping("/createSite")
 	public String showSiteForm(@RequestParam (value = "userId") int id, Model model) {
@@ -59,11 +60,32 @@ public class SiteMainController {
 		return "redirect:/user?userId="+id;
 	}
 	
+//	-----------------------Problème de url----------------------
+	@GetMapping("/siites")
+	public String showListOfSitesOfUser(@RequestParam (value = "userId") int id, User user, Model model) {
+	   
+	   user = userService.getUserById(id);
+	   int userId = user.getId();
+	   model.addAttribute("user", user);
+	  
+
+	   List<Site> listUserSites= siteService.getAllUserSites(userId);
+	   model.addAttribute("listUserSites", listUserSites);
+	  
+	   return "userSites";
+	}
+	
 	
 	@GetMapping("/sites")
-	public String showSitesList (Model model){
-		List<Site> sitesList = siteService.sitesList();
-		model.addAttribute("listSites", sitesList);
+   	public String showUsersList(@RequestParam (value = "userId") int id, Model model) {
+		
+		User userConnected = userService.getUserById(id);
+		model.addAttribute("user", userConnected);
+	   
+		List<Site> listOfSites= siteService.sitesList();
+		model.addAttribute("listOfSites", listOfSites);
+		
 		return "sitesList";
-	}
+
+    }
 }
