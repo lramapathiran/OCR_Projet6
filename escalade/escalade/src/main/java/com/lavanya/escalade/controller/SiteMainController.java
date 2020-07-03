@@ -61,7 +61,7 @@ public class SiteMainController {
 	}
 	
 //	-----------------------Problème de url----------------------
-	@GetMapping("/siites")
+	@GetMapping("siites")
 	public String showListOfSitesOfUser(@RequestParam (value = "userId") int id, User user, Model model) {
 	   
 	   user = userService.getUserById(id);
@@ -82,7 +82,7 @@ public class SiteMainController {
 		User userConnected = userService.getUserById(id);
 		model.addAttribute("user", userConnected);
 	   
-		List<Site> listOfSites= siteService.sitesList();
+		List<Site> listOfSites= siteService.getAllsites();
 		model.addAttribute("listOfSites", listOfSites);
 		
 		return "sitesList";

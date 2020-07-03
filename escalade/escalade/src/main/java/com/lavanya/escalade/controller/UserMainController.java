@@ -46,7 +46,7 @@ public class UserMainController {
 	}
   
     @PostMapping("/saveUser")
-	public String saveUser (@Valid @ModelAttribute("user") User user,BindingResult result, @ModelAttribute("passwordFirstTry") String passwordFirstTry, Model model) {
+	public String saveUser (@ModelAttribute("user") @Valid User user,BindingResult result, @ModelAttribute("passwordFirstTry") String passwordFirstTry, Model model) {
 	  
     	if (result.hasErrors()) {	  
     		return "addUser";
@@ -58,7 +58,7 @@ public class UserMainController {
     		userService.save(user);
     	}
     	else {
-    		String passwordErrormessage = "Les deux mots de passe ne sont pas identiques!";
+    		String passwordErrormessage = "Les deux mots de passe doivent être identiques!";
     		model.addAttribute("passwordConfirmFail", passwordErrormessage);
     		return "addUser";
     	}
@@ -72,7 +72,7 @@ public class UserMainController {
 	   User userConnected = userService.getUserById(id);
 	   model.addAttribute("user", userConnected);
 	   
-	   List<User> usersList = userService.usersList();
+	   List<User> usersList = userService.getUsersList();
 	   model.addAttribute("listUsers", usersList);
 	   return "usersList";
     }

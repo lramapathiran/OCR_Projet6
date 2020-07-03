@@ -8,7 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Topo {
@@ -18,11 +21,11 @@ public class Topo {
 	int id;
 	
 	@Column (name = "user_id")
-	@NotBlank(message = "Ce champs est obligatoire")
+	@NotNull(message = "Ce champs est obligatoire")
 	int userId;
 	
 	@Column (name = "site_id")
-	@NotBlank(message = "Ce champs est obligatoire")
+	@NotNull(message = "Ce champs est obligatoire")
 	int siteId;
 	
 	@Column (name = "name")
@@ -38,7 +41,8 @@ public class Topo {
 	String topoDescription;
 	
 	@Column (name = "date")
-//	@NotBlank(message = "Ce champs est obligatoire")
+	@NotNull(message = "Ce champs est obligatoire")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date topoDate;
 	
 	@Column (name = "is_available")

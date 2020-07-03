@@ -6,7 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 
 @Entity
 public class Site {
@@ -16,7 +18,7 @@ public class Site {
 	int id;
 
 	@Column (name = "creator_id")
-	@NotBlank
+	@NotNull
 	int userId;
 
 	@Column (name = "name")
@@ -34,7 +36,7 @@ public class Site {
 	String city;
 	
 	@Column (name = "areas_number")
-	@NotBlank(message = "Ce champs est obligatoire")
+	@NotNull(message = "Ce champs est obligatoire")
 	int areasNumber;
 	
 	@Column (name = "is_equipped")

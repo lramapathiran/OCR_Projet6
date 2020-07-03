@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -12,18 +13,18 @@ import javax.validation.constraints.Size;
 public class User {
 	
 	@Column (name = "first_name")
-	@NotNull(message = "Ce champs est obligatoire")
+	@NotBlank(message = "Ce champs est obligatoire!")
 	String firstName;
 	
 	@Column (name = "last_name")
-	@NotNull(message = "Ce champs est obligatoire")
+	@NotBlank(message = "Ce champs est obligatoire!")
 	String lastName;
 	
-	@NotNull(message = "Ce champs est obligatoire")
+	@NotBlank(message = "Ce champs est obligatoire")
 	String email;
 	
 	@NotNull
-	@Size(min = 8, max = 14)
+	@Size(min = 8, max = 14, message="veuillez rentrer un mot de passe ayant 8 à 14 caractères!")
 	String password;
 	
 	@Column (name = "admin_rights")

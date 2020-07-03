@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-#header {
+#header{
   height: 80px;
   transition: all 0.5s;
   z-index: 997;
@@ -67,13 +67,23 @@ h1, h2, h3, h4, h5, h6 {
   padding: 20px 0;
 }
 
-#header.header-scrolled {
+#header.header-scrolled, #header2 {
   background: #232323;
   height: 60px;
   padding: 10px 0;
 }
 
-#header .logo h1 {
+#header2 {
+  height: 80px;
+  transition: all 0.5s;
+  z-index: 997;
+  transition: all 0.5s;
+  background: #232323;
+  height: 60px;
+  padding: 1px 0 10px 0px;
+}
+
+#header .logo h1, #header2 .logo h1, #header2 .logo-connected h1 {
   font-size: 24px;
   margin: 0;
   padding: 6px 0;
@@ -84,31 +94,39 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
-#header .logo h1 a, #header .logo h1 a:hover {
+#header .logo h1 a, #header .logo h1 a:hover, #header2 .logo h1 a, #header2 .logo h1 a:hover, #header2 .logo-connected h1 a, #header2 .logo-connected h1 a:hover {
   color: #fff;
   text-decoration: none;
 }
 
-#header .logo img {
+#header .logo img, #header2 .logo img, #header2 .logo-connected img {
   padding: 0;
   margin: 0;
   max-height: 40px;
 }
 
 @media (max-width: 768px) {
-  #header {
+  #header, #header2 {
     height: 60px;
     padding: 10px 0;
   }
+  
+
 }
 
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
 /* Desktop Navigation */
-.nav-menu, .nav-menu * {
+.nav-menu * {
   margin: 0;
   padding: 0;
+  list-style: none;
+}
+
+.nav-menu {
+  margin: 0;
+  padding: 9px 0px 2px 0px;
   list-style: none;
 }
 
@@ -335,6 +353,30 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+
+
+.view {
+  background: url("../img/hero-bg.jpg") center center no-repeat;
+  background-size: cover;
+  opacity: 0.75;
+  padding: 60px 0;
+  position: relative;
+}
+
+.card {
+	z-index:2;
+	opacity:1;
+}
+
+
+@media (max-width: 740px) {
+  body,
+  header,
+  .view {
+    height: 100vh;
+  }
+}
+
 #hero {
   width: 100%;
   height: 100vh;

@@ -15,7 +15,7 @@ public class SiteService {
 	@Autowired
 	private SiteRepository siteRepository;
 	
-	public List<Site> sitesList() {
+	public List<Site> getAllsites() {
 	
 		return siteRepository.findAll();
 	}
@@ -36,12 +36,5 @@ public class SiteService {
 		Site site = siteResponse.get();
 		return site;
 	}
-	
-//	public Integer getUserIdBySiteId(Integer id) {
-//		
-//		Integer siteResponse = siteRepository.findUserIdBySiteId(id);
-//		Integer userId = siteResponse.get();
-//		return userId;
-//	}
 	
 }

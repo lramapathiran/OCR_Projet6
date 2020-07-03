@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:insert="fragments/componentsAdmin.html :: head-connected"> 
+  <head th:insert="fragments/componentsRessources.html :: headVisit"> 
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Ajouter un Site</title>
@@ -8,7 +8,7 @@
   
   <body>
     <!-- navbar-->
-	<header class="header" th:insert="fragments/componentsAdmin.html :: nav-connected"></header>
+	 <header id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
 	
     <div class="d-flex align-items-stretch">
 	  <div id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
@@ -127,6 +127,6 @@
       </div>
     </div>
     <!-- JavaScript files-->
-    <th:block th:replace="fragments/componentsAdmin.html :: js-script"></th:block>
+    <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
   </body>
 </html>

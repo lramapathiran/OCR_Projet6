@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,8 +31,8 @@ public class TopoMainController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/createTopo")
-	public String showTopoForm(@RequestParam (value = "siteId") int id, @RequestParam (value = "userId") int userId, Model model) {
+	@GetMapping("/createTopo/{siteId}/{userId}")
+	public String showTopoForm(@PathVariable("siteId") int id, @PathVariable("userId") int userId, Model model) {
 		
 		User userConnected = userService.getUserById(userId);
 		
@@ -40,7 +41,6 @@ public class TopoMainController {
 		Topo topo = new Topo();
 		topo.setSiteId(id);
 		topo.setUserId(userId);
-		topo.setAvailable(true);
 		model.addAttribute("topo", topo);
 
 		  
@@ -51,10 +51,14 @@ public class TopoMainController {
 	@PostMapping("/saveTopo")
 	public String saveTopo(@Valid @ModelAttribute ("topo") Topo topo, BindingResult result, Model model) {
 		
+		
+//		String dateInString = topo.getTopoDate();
+//		Date date = formatter.parse(dateInString);		
 		if (result.hasErrors()) {		 
 	          return "createTopo";
 	    }
 		
+		topo.setAvailable(true);
 		topoService.save(topo);
 		
 		int id = topo.getUserId();
