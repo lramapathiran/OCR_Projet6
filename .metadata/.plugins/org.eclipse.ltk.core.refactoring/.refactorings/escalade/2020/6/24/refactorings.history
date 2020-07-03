@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;escalade/src/main/resources/templates/usersTale.html&apos; to &apos;usersTable.html&apos;" description="Rename resource &apos;usersTale.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/usersTale.html" name="usersTable.html" stamp="1592024984299" updateReferences="true"/>
-</session>

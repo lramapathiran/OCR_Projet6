@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;escalade/src/main/resources/templates/homePage.html&apos; to &apos;createUser.html&apos;" description="Rename resource &apos;homePage.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/homePage.html" name="createUser.html" stamp="1589618961354" updateReferences="true"/>
-</session>

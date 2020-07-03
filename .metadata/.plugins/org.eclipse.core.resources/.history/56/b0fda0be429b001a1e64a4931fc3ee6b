@@ -1,8 +1,0 @@
-#need to be changed update to none
-#You must begin with either create or update, because you do not yet have the database structure. 
-#After the first run, you can switch it to update or none, according to program requirements. 
-#Use update when you want to make some change to the database structure.
-spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/escalade?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC
-spring.datasource.username=lavanya
-spring.datasource.password=password
