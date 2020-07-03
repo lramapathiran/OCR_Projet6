@@ -68,7 +68,7 @@ public class TopoMainController {
 	}
 	
 //	-----------------------Problème de url----------------------
-	@GetMapping("/toopos")
+	@GetMapping("/user/topos")
 	public String showListOfToposOfUser(@RequestParam (value = "userId") int id, User user, Model model) {
 	   
 	   user = userService.getUserById(id);
