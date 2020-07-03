@@ -6,22 +6,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
 	
 	@Column (name = "first_name")
-	@NotBlank(message = "Ce champs est obligatoire")
+	@NotBlank(message = "Ce champs est obligatoire!")
 	String firstName;
 	
 	@Column (name = "last_name")
-	@NotBlank(message = "Ce champs est obligatoire")
+	@NotBlank(message = "Ce champs est obligatoire!")
 	String lastName;
 	
 	@NotBlank(message = "Ce champs est obligatoire")
 	String email;
 	
-	@NotBlank(message = "Ce champs est obligatoire")
+	@NotNull
+	@Size(min = 8, max = 14, message="veuillez rentrer un mot de passe ayant 8 à 14 caractères!")
 	String password;
 	
 	@Column (name = "admin_rights")
@@ -29,8 +32,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue (strategy=GenerationType.AUTO)
-	@Column (name = "id")
-	int userId;
+	int id;
 
 	public User() {
 		
@@ -85,17 +87,17 @@ public class User {
 		this.admin = admin;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getId() {
+		return id;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	@Override
 	public String toString() {
-		return "User(" + "userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + "}";
+		return "User(" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", admin=" + admin + "}";
 	}
 
 }

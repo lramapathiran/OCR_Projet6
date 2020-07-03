@@ -1,0 +1,18 @@
+/* your styles go here */
+.sidebar {
+	background: #212529;
+}
+
+.row {
+	padding-top: 30px;
+}
+
+
+.form-horizontal {
+	margin: 0px 50px;
+}
+
+.col-sm-3 {
+	margin: Opx;
+	padding: 7px 0px;
+}

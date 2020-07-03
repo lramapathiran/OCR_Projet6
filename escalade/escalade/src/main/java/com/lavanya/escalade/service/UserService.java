@@ -1,6 +1,7 @@
 package com.lavanya.escalade.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,18 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<User> usersList() {
+	public List<User> getUsersList() {
 		return userRepository.findAll();
 	}
 	
 	public void save(User user) {
 		userRepository.save(user);
+	}
+	
+	public User getUserById(int id) {
+		
+		Optional<User>  userResponse = userRepository.findById(id);
+		User user = userResponse.get();
+		return user;
 	}
 }
