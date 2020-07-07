@@ -1,10 +1,15 @@
 package com.lavanya.escalade.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -41,6 +46,10 @@ public class Site {
 	
 	@Column (name = "is_equipped")
 	boolean equipped;
+	
+	@OneToMany(mappedBy = "site", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<Area> areas;
 	
 	public Site() {
 		
@@ -121,6 +130,14 @@ public class Site {
 	}
 
 	
+	public List<Area> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
+	}
+
 	@Override
 	public String toString() {
 		return "Site(" + "id=" + id + ", userId=" + userId + ", siteName=" + siteName + ", region=" + region + ", department=" + department + ", city=" + city + ", areasNumber=" + areasNumber + ", equipped=" + equipped + "}";

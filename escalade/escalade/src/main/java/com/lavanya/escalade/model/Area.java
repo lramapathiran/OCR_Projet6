@@ -1,10 +1,14 @@
 package com.lavanya.escalade.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -16,9 +20,9 @@ public class Area {
 	@Column
 	int id;
 	
-	@Column (name = "site_id")
-	@NotNull
-	int siteId;
+//	@Column (name = "site_id")
+//	@NotNull
+//	int siteId;
 	
 	
 	@Column (name = "name")
@@ -29,6 +33,10 @@ public class Area {
 	@NotBlank(message = "Ce champs est obligatoire")
 	int routesNumber;
 	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "site_id", nullable = false)
+    private Site site;
+	
 	public Area() {
 		
 	}
@@ -37,17 +45,17 @@ public class Area {
 		return id;
 	}
 
-	public void setAreaId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public int getSiteId() {
-		return siteId;
-	}
-
-	public void setSiteId(int siteId) {
-		this.siteId = siteId;
-	}
+//	public int getSiteId() {
+//		return siteId;
+//	}
+//
+//	public void setSiteId(int siteId) {
+//		this.siteId = siteId;
+//	}
 
 	public String getAreaName() {
 		return areaName;
@@ -65,9 +73,18 @@ public class Area {
 		this.routesNumber = routesNumber;
 	}
 	
-	@Override
-	public String toString() {
-		return "Area(" + "id=" + id + ", siteId=" + siteId + ", areaName=" + areaName + ", routesNumber=" + routesNumber + "}";
+	
+	public Site getSite() {
+		return site;
 	}
 
+	public void setSite(Site site) {
+		this.site = site;
+	}
+
+	@Override
+	public String toString() {
+		return "Area(" + "id=" + id + ", areaName=" + areaName + ", routesNumber=" + routesNumber + "}";
+	}
+//	siteId=" + siteId + ",
 }

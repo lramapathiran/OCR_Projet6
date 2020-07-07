@@ -67,7 +67,6 @@ public class TopoMainController {
 		return "redirect:/user?userId="+id;
 	}
 	
-//	-----------------------Problème de url----------------------
 	@GetMapping("/user/topos")
 	public String showListOfToposOfUser(@RequestParam (value = "userId") int id, User user, Model model) {
 	   
