@@ -5,8 +5,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Ajouter un Site</title>
 	<!--     test insertion Jquery -->
+	<link href="/path/to/font-awesome.min.css" rel="stylesheet">
+	<link href="/path/to/jq.multiinput.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 	<script src="js/dynamic-form.js"></script>
+<!-- 	script for second test -->
+	<script type="text/javascript" th:src="jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="../public/js/main.js" th:src="@{/public/js/main.js}"></script>
+	
 	<style>
 
     .container-fluid { margin: 150px auto; }
@@ -23,132 +29,150 @@
       <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-4">
           <section class="py-6 d-flex justify-content-center">
-<!--             <div class="row justify-content-center"> -->
+            <div class="row justify-content-center">
               
 <!--               Form Elements -->
-<!--               <div class="col-lg-12 mb-5"> -->
-<!--                 <div class="card"> -->
-<!--                   <div class="card-header"> -->
-<!--                     <h3 class="h6 text-uppercase mb-0">Les Secteurs</h3> -->
-<!--                   </div> -->
-<!--                   <div class="card-body"> -->
-<!--                     <form class="form-horizontal" action="#" th:action="@{/saveArea}" th:object="${area}" method="post"> -->
+              <div class="col-lg-12 mb-5">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Les Secteurs</h3>
+                  </div>
+                  <div class="card-body">
+                    <form class="form-inline" action="#" th:action="@{/saveArea}" th:object="${area}" method="post">
                     
-<!--                       <div class="form-group row ${#fields.hasErrors('areaName')}? has-error" > -->
-<!--                         <label class="col-sm-3 col-form-label" for="areaName">Nom du Secteur</label> -->
-<!--                         <div class="col-sm-9"> -->
-<!--                         	<input type="text" th:field="*{areaName}" id="areaName" class="form-control"/> -->
-<!--                         	<span th:if="${#fields.hasErrors('areaName')}" th:errors="*{areaName}" th:errorclass="fieldError">Champ incorrect</span> -->
-<!--                         </div> -->
-<!--                       </div> -->
-                      
-<!--                       <input type="hidden" th:field="*{siteId}" id="siteId"/> -->
-
+                      <div class="form-group row ${#fields.hasErrors('areaName')}? has-error" >
+                        <label class="col-sm-3 col-form-label" for="areaName">Nom du Secteur</label>
+                        <input type="text" th:field="*{areaName}" id="areaName" placeholder="Nom du Secteur" class="mr-3 form-control"/>
+                        <span th:if="${#fields.hasErrors('areaName')}" th:errors="*{areaName}" th:errorclass="fieldError">Champ incorrect</span>
+                      </div>       
 					  
-<!-- 	                  <div class="form-group row ${#fields.hasErrors('routesNumber')}? has-error"> -->
-<!-- 	                     <label class="col-sm-3 col-form-label" for="routesNumber">Voies</label> -->
-<!-- 	                     <div class="col-sm-4"> -->
-<!-- 		                     <input type="number" th:field="*{routesNumber}" id="routesNumber" class="form-control"> -->
-<!-- 		                     <span th:if="${#fields.hasErrors('routesNumber')}" th:errors="*{routesNumber}" th:errorclass="fieldError"></span> -->
-<!-- 		                 </div> -->
-<!-- 	                  </div> -->
+	                  <div class="form-group row ${#fields.hasErrors('routesNumber')}? has-error">
+	                     <label class="col-sm-3 col-form-label" for="routesNumber">Nombre de Voies</label>
+		                 <input type="number" th:field="*{routesNumber}" id="routesNumber" class="mr-3 form-control">
+		                 <span th:if="${#fields.hasErrors('routesNumber')}" th:errors="*{routesNumber}" th:errorclass="fieldError"></span>
+	                  </div>
                          
                               
-<!--                     <div class="line"></div> -->
+                    <div class="line"></div>
                     
-<!--                       <div class="form-group row"> -->
-<!--                         <div class="col-md-8  mx-auto d-block"> -->
-<!--                           <a th:href="@{/user(userId = ${user.id})}"><button class="btn btn-secondary">Annuler</button></a> -->
-<!--                           <button type="submit" class="btn btn-primary">Enregistrer</button> -->
-<!--                         </div> -->
-<!--                       </div> -->
+                      <div class="form-group row">
+                        <div class="col-md-8  mx-auto d-block">
+                          <a th:href="@{/user(userId = ${user.id})}"><button class="btn btn-secondary">Annuler</button></a>
+                          <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        </div>
+                      </div>
                         
-<!--                     </form> -->
-<!--                   </div> -->
-<!--                 </div> -->
-<!--               </div> -->
-<!--             </div> -->
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
             
 <!--             Test -->
-            <div id="dynamic_form">
-	  <div class="form-control">
-	    <input type="text" name="p_name" id="p_name" placeholder="Enter Product Name">
-	  </div>
-	  <div class="form-control">
-	    <input type="text" name="quantity" id="quantity" placeholder="Enter Product Quantity">
-	  </div>
-	  <div class="form-control">
-	    <textarea name="remarks" placeholder="Enter Remarks" id="remarks"></textarea>
-	  </div>
-	  <div class="button-group">
-	    <a href="javascript:void(0)" class="btn btn-primary" id="plus">Add More</a>
-	    <a href="javascript:void(0)" class="btn btn-danger" id="minus">Remove</a>
-	  </div>
-	</div>
+<!--             <div id="dynamic_form"> -->
+<!-- 	  <div class="form-control"> -->
+<!-- 	    <input type="text" name="p_name" id="p_name" placeholder="Enter Product Name"> -->
+<!-- 	  </div> -->
+<!-- 	  <div class="form-control"> -->
+<!-- 	    <input type="text" name="quantity" id="quantity" placeholder="Enter Product Quantity"> -->
+<!-- 	  </div> -->
+<!-- 	  <div class="form-control"> -->
+<!-- 	    <textarea name="remarks" placeholder="Enter Remarks" id="remarks"></textarea> -->
+<!-- 	  </div> -->
+<!-- 	  <div class="button-group"> -->
+<!-- 	    <a href="javascript:void(0)" class="btn btn-primary" id="plus">Add More</a> -->
+<!-- 	    <a href="javascript:void(0)" class="btn btn-danger" id="minus">Remove</a> -->
+<!-- 	  </div> -->
+<!-- 	</div> -->
 	
 
 	
           </section>
         </div>
         
-        <div class="container" id ="test-js">
-        <form>
-	  <fieldset class="todos_labels">
-	    <div class="repeatable"></div>
-	    <input type="button" value="Add" class="add">
-	  </fieldset>
-	</form>	
+<!--         <div class="container" id ="test-js"> -->
+<!--         <form> -->
+<!-- 	  <fieldset class="todos_labels"> -->
+<!-- 	    <div class="repeatable"></div> -->
+<!-- 	    <input type="button" value="Add" class="add"> -->
+<!-- 	  </fieldset> -->
+<!-- 	</form>	 -->
 	
-	<script th:inline="javascript" type="text/template" id="todos_labels">
-	  <div class="field-group">
-	    <label for="task_{?}">Task to do</label>
-	    <input type="text" name="todos_labels[{?}][task]" value="{task}" id="task_{?}">
-	    <label for="due<a href="https://www.jqueryscript.net/time-clock/">date</a>_{?}">Due date</label>
-	    <input type="text" name="todos_labels[{?}][duedate]" value="{duedate}" id="duedate_{?}">
-	    <input type="button" class="delete" value="Remove">
-	  </div>
-	</script>
+<!-- 	<script th:inline="javascript" type="text/template" id="todos_labels"> -->
+<!-- 	  <div class="field-group"> -->
+<!-- 	    <label for="task_{?}">Task to do</label> -->
+<!-- 	    <input type="text" name="todos_labels[{?}][task]" value="{task}" id="task_{?}"> -->
+<!-- 	    <label for="due<a href="https://www.jqueryscript.net/time-clock/">date</a>_{?}">Due date</label> -->
+<!-- 	    <input type="text" name="todos_labels[{?}][duedate]" value="{duedate}" id="duedate_{?}"> -->
+<!-- 	    <input type="button" class="delete" value="Remove"> -->
+<!-- 	  </div> -->
+<!-- 	</script> -->
+<!-- 	</div> -->
+	
+	
+<!-- 	Second Test -->
+
+
+
+
+<div id='TextBoxesGroup'>
+	<div id="TextBoxDiv1">
+		<label>Textbox #1 : </label><input type='text' id='textbox1' >
 	</div>
+</div>
+<input type='button' value='Add Button' id='addButton'>
+<input type='button' value='Remove Button' id='removeButton'>
+<input type='button' value='Get TextBox Value' id='getButtonValue'>
+
+<!-- end of second test -->
+	
+	
+	
+	
+	
+	
+	
+	
 	
         <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsAdmin.html :: footer-connected"></footer>
       </div>
     </div>
 
-    <!-- JavaScript files-->
+<!--     JavaScript files -->
     <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
     
-	<!-- 	dynamicForm(selectedTarget, plusSelector, minusSelector, options) -->
-<script th:inline="javascript">
-$(document).ready(function() {
-	var dynamic_form =  $("#dynamic_form").dynamicForm("#dynamic_form","#plus5", "#minus5", {
-        limit:10,
-        formPrefix : "dynamic_form",
-        normalizeFullForm : false
-    });
+<!-- 	<!-- 	dynamicForm(selectedTarget, plusSelector, minusSelector, options) -->
+<!-- <script th:inline="javascript"> -->
+<!-- // $(document).ready(function() { -->
+<!-- // 	var dynamic_form =  $("#dynamic_form").dynamicForm("#dynamic_form","#plus5", "#minus5", { -->
+<!-- //         limit:10, -->
+<!-- //         formPrefix : "dynamic_form", -->
+<!-- //         normalizeFullForm : false -->
+<!-- //     }); -->
 
-	dynamic_form.inject([{p_name: 'Hemant',quantity: '123',remarks: 'testing remark'},{p_name: 'Harshal',quantity: '123',remarks: 'testing remark'}]);
+<!-- // 	dynamic_form.inject([{p_name: 'Hemant',quantity: '123',remarks: 'testing remark'},{p_name: 'Harshal',quantity: '123',remarks: 'testing remark'}]); -->
 
-    $("#dynamic_form #minus5").on('click', function(){
-    	var initDynamicId = $(this).closest('#dynamic_form').parent().find("[id^='dynamic_form']").length;
-    	if (initDynamicId === 2) {
-    		$(this).closest('#dynamic_form').next().find('#minus5').hide();
-    	}
-    	$(this).closest('#dynamic_form').remove();
-    });
+<!-- //     $("#dynamic_form #minus5").on('click', function(){ -->
+<!-- //     	var initDynamicId = $(this).closest('#dynamic_form').parent().find("[id^='dynamic_form']").length; -->
+<!-- //     	if (initDynamicId === 2) { -->
+<!-- //     		$(this).closest('#dynamic_form').next().find('#minus5').hide(); -->
+<!-- //     	} -->
+<!-- //     	$(this).closest('#dynamic_form').remove(); -->
+<!-- //     }); -->
 
-    $('form').on('submit', function(event){
-    	var values = {};
-		$.each($('form').serializeArray(), function(i, field) {
-		    values[field.name] = field.value;
-		});
-		console.log(values)
-		event.preventDefault();
-	})
-});
-</script>
+<!-- //     $('form').on('submit', function(event){ -->
+<!-- //     	var values = {}; -->
+<!-- // 		$.each($('form').serializeArray(), function(i, field) { -->
+<!-- // 		    values[field.name] = field.value; -->
+<!-- // 		}); -->
+<!-- // 		console.log(values) -->
+<!-- // 		event.preventDefault(); -->
+<!-- // 	}) -->
+<!-- // }); -->
+<!-- </script> -->
 <!-- 	end test2 -->
 	
-	<script th:inline="javascript" src="//code.jquery.com/jquery.min.js"></script>
-	<script th:inline="javascript" src="jquery.repeatable.js"></script>
+<!-- 	<script th:inline="javascript" src="//code.jquery.com/jquery.min.js"></script> -->
+<!-- 	<script th:inline="javascript" src="jquery.repeatable.js"></script> -->
   </body>
 </html>
