@@ -4,6 +4,9 @@
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Ajouter un Site</title>
+	
+	<!-- 	multiInput query test -->
+	<link th:href="@{/jq.multiinput.min.css}" rel="stylesheet">
   </head>
   <body>
     <!-- navbar-->
@@ -78,6 +81,35 @@
 		                    </div>
 	                    </div>
                       </div>
+                      
+<!--                       <div class="form-group row ${#fields.hasErrors('areas')}? has-error"> -->
+<!-- 	                     <label class="col-sm-3 col-form-label" for="region">Region</label> -->
+<!-- 	                     <div class="col-sm-9"> -->
+<!-- 		                     <input type="text" name = "areas[0].areaName" class="form-control"> -->
+<!-- 		                     <span th:if="${#fields.hasErrors('region')}" th:errors="*{region}" th:errorclass="fieldError"></span> -->
+<!-- 		                 </div> -->
+<!-- 	                  </div> -->
+
+<!-- 	                  <div class="form-group row ${#fields.hasErrors('areas')}? has-error" id="participants" name="participants"> -->
+<!-- 	                     <label class="col-sm-3 col-form-label" for="areas">Nom</label> -->
+<!-- 	                     <div class="col-sm-9"> -->
+<!-- 		                     <input type="text" name = "areas[1].areaName" class="form-control"> -->
+<!-- 		                     <span th:if="${#fields.hasErrors('areas')}" th:errors="*{region}" th:errorclass="fieldError"></span> -->
+<!-- 		                 </div> -->
+<!-- 	                  </div> -->
+	                  
+			                  <!--             Jquery dynamic MultiInput form -->
+			          <div>    
+					       <textarea class="form-control" id="areasData" name="areasData">
+					           [{"areas":"","areas":""}]
+					       </textarea>
+					  </div>
+					              </form>
+					          </div>
+					      </div>
+					  </div>
+			
+	
                          
                               
                     <div class="line"></div>
@@ -102,6 +134,12 @@
 
     <!-- JavaScript files-->
     <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
-
+	
+	<!--     Jquery for multiInput form -->
+    <script src="https://use.fontawesome.com/1e73f8e328.js"></script>
+    <script th:src="@{/jq.multiinput.min.js}"></script>
+    <script th:src="@{/jq.multiinput.js}"></script>
+    
+    <script th:src="@{/site2.js}"></script>
   </body>
 </html>

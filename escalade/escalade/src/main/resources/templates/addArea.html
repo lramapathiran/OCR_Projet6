@@ -4,14 +4,10 @@
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Ajouter un Site</title>
-	<!--     test insertion Jquery -->
-	<link href="/path/to/font-awesome.min.css" rel="stylesheet">
-	<link href="/path/to/jq.multiinput.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-	<script src="js/dynamic-form.js"></script>
 <!-- 	script for second test -->
-	<script type="text/javascript" th:src="jquery-1.3.2.min.js"></script>
-	<script type="text/javascript" src="../public/js/main.js" th:src="@{/public/js/main.js}"></script>
+	<script type="text/javascript" th:src="@{/area.js}"></script>
+<!-- 	multiInput query test -->
+	<link th:href="@{/jq.multiinput.min.css}" rel="stylesheet">
 	
 	<style>
 
@@ -67,62 +63,36 @@
                 </div>
               </div>
             </div>
-            
-<!--             Test -->
-<!--             <div id="dynamic_form"> -->
-<!-- 	  <div class="form-control"> -->
-<!-- 	    <input type="text" name="p_name" id="p_name" placeholder="Enter Product Name"> -->
-<!-- 	  </div> -->
-<!-- 	  <div class="form-control"> -->
-<!-- 	    <input type="text" name="quantity" id="quantity" placeholder="Enter Product Quantity"> -->
-<!-- 	  </div> -->
-<!-- 	  <div class="form-control"> -->
-<!-- 	    <textarea name="remarks" placeholder="Enter Remarks" id="remarks"></textarea> -->
-<!-- 	  </div> -->
-<!-- 	  <div class="button-group"> -->
-<!-- 	    <a href="javascript:void(0)" class="btn btn-primary" id="plus">Add More</a> -->
-<!-- 	    <a href="javascript:void(0)" class="btn btn-danger" id="minus">Remove</a> -->
-<!-- 	  </div> -->
-<!-- 	</div> -->
-	
 
 	
           </section>
         </div>
         
-<!--         <div class="container" id ="test-js"> -->
-<!--         <form> -->
-<!-- 	  <fieldset class="todos_labels"> -->
-<!-- 	    <div class="repeatable"></div> -->
-<!-- 	    <input type="button" value="Add" class="add"> -->
-<!-- 	  </fieldset> -->
-<!-- 	</form>	 -->
-	
-<!-- 	<script th:inline="javascript" type="text/template" id="todos_labels"> -->
-<!-- 	  <div class="field-group"> -->
-<!-- 	    <label for="task_{?}">Task to do</label> -->
-<!-- 	    <input type="text" name="todos_labels[{?}][task]" value="{task}" id="task_{?}"> -->
-<!-- 	    <label for="due<a href="https://www.jqueryscript.net/time-clock/">date</a>_{?}">Due date</label> -->
-<!-- 	    <input type="text" name="todos_labels[{?}][duedate]" value="{duedate}" id="duedate_{?}"> -->
-<!-- 	    <input type="button" class="delete" value="Remove"> -->
-<!-- 	  </div> -->
-<!-- 	</script> -->
-<!-- 	</div> -->
+        
+        <!--             Jquery dynamic MultiInput form -->
+			<div class="container">
+			    <div class="row">
+			        <div class="col-xs-12">
+			            <h1>MultiInput Demo</h1>
+			            <form>
+			                <textarea class="form-control" id="participants" name="participants">
+			                    [{"firstname":"","lastname":""}]
+			                </textarea>
+			            </form>
+			        </div>
+			    </div>
+			</div>
 	
 	
 <!-- 	Second Test -->
-
-
-
-
-<div id='TextBoxesGroup'>
-	<div id="TextBoxDiv1">
-		<label>Textbox #1 : </label><input type='text' id='textbox1' >
-	</div>
-</div>
-<input type='button' value='Add Button' id='addButton'>
-<input type='button' value='Remove Button' id='removeButton'>
-<input type='button' value='Get TextBox Value' id='getButtonValue'>
+<!-- <div id='TextBoxesGroup'> -->
+<!-- 	<div id="TextBoxDiv1"> -->
+<!-- 		<label>Textbox #1 : </label><input type='text' id='textbox1' > -->
+<!-- 	</div> -->
+<!-- </div> -->
+<!-- <input type='button' value='Add Button' id='addButton'> -->
+<!-- <input type='button' value='Remove Button' id='removeButton'> -->
+<!-- <input type='button' value='Get TextBox Value' id='getButtonValue'> -->
 
 <!-- end of second test -->
 	
@@ -141,38 +111,20 @@
 <!--     JavaScript files -->
     <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
     
-<!-- 	<!-- 	dynamicForm(selectedTarget, plusSelector, minusSelector, options) -->
-<!-- <script th:inline="javascript"> -->
-<!-- // $(document).ready(function() { -->
-<!-- // 	var dynamic_form =  $("#dynamic_form").dynamicForm("#dynamic_form","#plus5", "#minus5", { -->
-<!-- //         limit:10, -->
-<!-- //         formPrefix : "dynamic_form", -->
-<!-- //         normalizeFullForm : false -->
-<!-- //     }); -->
+<!--     script for second test -->
+<!--     <script type="text/javascript" th:src="@{/area.js}"></script> -->
 
-<!-- // 	dynamic_form.inject([{p_name: 'Hemant',quantity: '123',remarks: 'testing remark'},{p_name: 'Harshal',quantity: '123',remarks: 'testing remark'}]); -->
 
-<!-- //     $("#dynamic_form #minus5").on('click', function(){ -->
-<!-- //     	var initDynamicId = $(this).closest('#dynamic_form').parent().find("[id^='dynamic_form']").length; -->
-<!-- //     	if (initDynamicId === 2) { -->
-<!-- //     		$(this).closest('#dynamic_form').next().find('#minus5').hide(); -->
-<!-- //     	} -->
-<!-- //     	$(this).closest('#dynamic_form').remove(); -->
-<!-- //     }); -->
 
-<!-- //     $('form').on('submit', function(event){ -->
-<!-- //     	var values = {}; -->
-<!-- // 		$.each($('form').serializeArray(), function(i, field) { -->
-<!-- // 		    values[field.name] = field.value; -->
-<!-- // 		}); -->
-<!-- // 		console.log(values) -->
-<!-- // 		event.preventDefault(); -->
-<!-- // 	}) -->
-<!-- // }); -->
-<!-- </script> -->
-<!-- 	end test2 -->
-	
-<!-- 	<script th:inline="javascript" src="//code.jquery.com/jquery.min.js"></script> -->
-<!-- 	<script th:inline="javascript" src="jquery.repeatable.js"></script> -->
+<!--     Jquery for multiInput form -->
+    <script src="https://use.fontawesome.com/1e73f8e328.js"></script>
+    <script th:src="@{/jq.multiinput.min.js}"></script>
+    <script th:src="@{/jq.multiinput.js}"></script>
+    
+    <script th:src="@{/site.js}"></script>
+    
+    
+    
+
   </body>
 </html>

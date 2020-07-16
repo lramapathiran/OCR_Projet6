@@ -1,5 +1,3 @@
-<script type="text/javascript">
-
     $(document).ready(function(){
 
 	    var counter = 2;
@@ -41,4 +39,3 @@
 		});
 		
   });
-</script>
