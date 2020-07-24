@@ -10,11 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lavanya.escalade.model.Area;
 import com.lavanya.escalade.model.Site;
 import com.lavanya.escalade.model.User;
+import com.lavanya.escalade.service.AreaService;
 import com.lavanya.escalade.service.SiteService;
 import com.lavanya.escalade.service.UserService;
 
@@ -27,17 +30,19 @@ public class SiteMainController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private AreaService areaService;
+	
 
 	
 	@GetMapping("/createSite")
 	public String showSiteForm(@RequestParam (value = "userId") int id, Model model) {
 		
 		User userConnected = userService.getUserById(id);
-		int userId = userConnected.getId();
 		model.addAttribute("user", userConnected);
 		
 		Site site = new Site();
-		site.setUserId(userId);
+		site.setUserId(id);
 		model.addAttribute("site", site);
 
 		  
@@ -48,13 +53,15 @@ public class SiteMainController {
 	@PostMapping("/saveSite")
 	public String saveSite(@Valid @ModelAttribute ("site") Site site, BindingResult result, Model model) {
 		
-		if (result.hasErrors()) {		 
-	          return "createSite";
+		int id = site.getUserId();
+		if (result.hasErrors()) {
+			User userConnected = userService.getUserById(id);
+			model.addAttribute("user", userConnected);
+	          return "addSite";
 	    }
 		
 		siteService.save(site);
 		
-		int id = site.getUserId();
 		
 //		"redirect:/user/"+id;
 		return "redirect:/user?userId="+id;
@@ -69,7 +76,7 @@ public class SiteMainController {
 	   model.addAttribute("user", user);
 	  
 
-	   List<Site> listUserSites= siteService.getAllUserSites(userId);
+	   List<Site> listUserSites= siteService.getUserAllSites(userId);
 	   model.addAttribute("listUserSites", listUserSites);
 	  
 	   return "userSites";
@@ -88,4 +95,16 @@ public class SiteMainController {
 		return "sitesList";
 
     }
+	
+	@GetMapping(value = {"/site/{id}"})
+	public String getSite(@PathVariable(name = "id") int id, Site site, Model model) {
+		site = siteService.getSiteById(id);
+		List<Area> listOfAreas= areaService.getAreasBySiteId(id);
+		
+		site.setAreas(listOfAreas);
+		
+		model.addAttribute("site", site);
+		
+		return "site.html";
+	}
 }

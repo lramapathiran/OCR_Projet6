@@ -85,7 +85,7 @@ public class UserMainController {
 	   model.addAttribute("user", user);
 	  
 
-	   List<Site> listUserSites= siteService.getAllUserSites(userId);
+	   List<Site> listUserSites= siteService.getUserAllSites(userId);
 	   model.addAttribute("listUserSites", listUserSites);
 	  
 	   return "user";

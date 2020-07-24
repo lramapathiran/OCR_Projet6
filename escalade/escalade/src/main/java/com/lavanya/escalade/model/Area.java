@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 @Entity
 public class Area {
@@ -20,18 +21,15 @@ public class Area {
 	@Column
 	int id;
 	
-//	@Column (name = "site_id")
-//	@NotNull
-//	int siteId;
-	
 	
 	@Column (name = "name")
 	@NotBlank(message = "Ce champs est obligatoire")
 	String areaName;
 	
 	@Column (name = "routes_number")
-	@NotBlank(message = "Ce champs est obligatoire")
-	int routesNumber;
+	@NotNull(message = "Ce champs est obligatoire")
+	@Positive
+	Integer routesNumber;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "site_id", nullable = false)
@@ -48,14 +46,6 @@ public class Area {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-//	public int getSiteId() {
-//		return siteId;
-//	}
-//
-//	public void setSiteId(int siteId) {
-//		this.siteId = siteId;
-//	}
 
 	public String getAreaName() {
 		return areaName;
@@ -84,7 +74,6 @@ public class Area {
 
 	@Override
 	public String toString() {
-		return "Area(" + "id=" + id + ", areaName=" + areaName + ", routesNumber=" + routesNumber + "}";
+		return "Area(" + "id=" + id + ", areaName=" + areaName + ", routesNumber=" + routesNumber + ", site=" + site + "}";
 	}
-//	siteId=" + siteId + ",
 }

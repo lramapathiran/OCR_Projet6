@@ -42,7 +42,7 @@
                         <span th:if="${#fields.hasErrors('areaName')}" th:errors="*{areaName}" th:errorclass="fieldError">Champ incorrect</span>
                       </div>       
 					  
-	                  <div class="form-group row ${#fields.hasErrors('routesNumber')}? has-error">
+	                  <div class="form-group row ${#fields.hasErrors('area.routesNumber')}? has-error">
 	                     <label class="col-sm-3 col-form-label" for="routesNumber">Nombre de Voies</label>
 		                 <input type="number" th:field="*{routesNumber}" id="routesNumber" class="mr-3 form-control">
 		                 <span th:if="${#fields.hasErrors('routesNumber')}" th:errors="*{routesNumber}" th:errorclass="fieldError"></span>

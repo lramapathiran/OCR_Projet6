@@ -55,7 +55,7 @@
 		                  </div>
 	                  </div>
                                             
-                      <div class="form-group row has-success ${#fields.hasErrors('city')}? has-error">
+                      <div class="form-group row ${#fields.hasErrors('city')}? has-error">
                         <label class="col-sm-3 col-form-label" for="city">Ville</label>
                         <div class="col-sm-9">
 	                        <input type="text" th:field="*{city}" id="city" class="form-control">
@@ -64,7 +64,7 @@
 <!--                           <div class="invalid-feedback ml-3">Please provide a city.</div> -->         
                       </div>    
                       
-                      <div class="form-group row ${#fields.hasErrors('areasNumber')}?">
+                      <div class="form-group row ${#fields.hasErrors('areasNumber')}? has-error">
                         <label class="col-sm-3 col-form-label" for="areasNumber">Secteurs</label>
                         <div class="col-sm-4">
 	                        <input type="number" th:field="*{areasNumber}" id="areasNumber" class="form-control">
@@ -75,28 +75,12 @@
                       <div class="form-group row ${#fields.hasErrors('equipped')}? has-error">
                       	<div class="col-sm-3">
 	                        <div class="custom-control custom-checkbox">
-	                      	    <label for="equipped" class="custom-control-label">Site équipé</label>
-		                        <input type="checkbox" th:field="*{equipped}" id="equipped" class="custom-control-input">
+		                        <input type="checkbox" class="custom-control-input" th:field="*{equipped}" id="equipped">
 		                        <span th:if="${#fields.hasErrors('equipped')}" th:errors="*{equipped}" th:errorclass="fieldError"></span>
+		                    	<label class="custom-control-label" for="equipped">Site équipé</label>
 		                    </div>
 	                    </div>
                       </div>
-                      
-<!--                       <div class="form-group row ${#fields.hasErrors('areas')}? has-error"> -->
-<!-- 	                     <label class="col-sm-3 col-form-label" for="region">Region</label> -->
-<!-- 	                     <div class="col-sm-9"> -->
-<!-- 		                     <input type="text" name = "areas[0].areaName" class="form-control"> -->
-<!-- 		                     <span th:if="${#fields.hasErrors('region')}" th:errors="*{region}" th:errorclass="fieldError"></span> -->
-<!-- 		                 </div> -->
-<!-- 	                  </div> -->
-
-<!-- 	                  <div class="form-group row ${#fields.hasErrors('areas')}? has-error" id="participants" name="participants"> -->
-<!-- 	                     <label class="col-sm-3 col-form-label" for="areas">Nom</label> -->
-<!-- 	                     <div class="col-sm-9"> -->
-<!-- 		                     <input type="text" name = "areas[1].areaName" class="form-control"> -->
-<!-- 		                     <span th:if="${#fields.hasErrors('areas')}" th:errors="*{region}" th:errorclass="fieldError"></span> -->
-<!-- 		                 </div> -->
-<!-- 	                  </div> -->
 	                  
 			                  <!--             Jquery dynamic MultiInput form -->
 			          <div>    
@@ -104,18 +88,10 @@
 					           [{"areas":"","areas":""}]
 					       </textarea>
 					  </div>
-					              </form>
-					          </div>
-					      </div>
-					  </div>
-			
-	
-                         
-                              
-                    <div class="line"></div>
+					   
                     
                       <div class="form-group row">
-                        <div class="col-md-8  mx-auto d-block">
+                        <div class="col-md-5  mx-auto d-block">
                           <a th:href="@{/user(userId = ${user.id})}"><button class="btn btn-secondary">Annuler</button></a>
                           <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </div>
@@ -138,8 +114,8 @@
 	<!--     Jquery for multiInput form -->
     <script src="https://use.fontawesome.com/1e73f8e328.js"></script>
     <script th:src="@{/jq.multiinput.min.js}"></script>
-    <script th:src="@{/jq.multiinput.js}"></script>
+<!--     <script th:src="@{/jq.multiinput.js}"></script> -->
     
-    <script th:src="@{/site2.js}"></script>
+    <script th:src="@{/site.js}"></script>
   </body>
 </html>

@@ -1,35 +1,30 @@
 $(document).ready(function () {
-		        $('#participants').multiInput({
+	
+				var i = 0;
+		        $('#areasData').multiInput({
+		        	
 		            json: true,
 		            input: $('<div class="row inputElement">\n' +
-		                '<div class="multiinput-title col-xs-12">Secteur <span class="number">1</span></div>\n' +
-		                '<div class="form-group col-xs-6">\n' +
-		                '<input class="form-control" name="firstname" placeholder="Nom" type="text">\n' +
+		                '<div class="multiinput-title col-sm-3">Secteur <span class="number">1</span></div>\n' +
+		                '<div class="form-group col-sm-4">\n' +
+		                '<input class="form-control areaName" name="areas[].areaName" placeholder="Nom" type="text">\n' +
 		                '</div>\n' +
-		                '<div class="form-group col-xs-6">\n' +
-		                '<input class="form-control" name="tn_lastname" placeholder="Nombre de Voies" type="number" min="0">\n' +
+		                '<div class="form-group col-sm-4">\n' +
+		                '<input class="form-control routesNumber" name="areas[].routesNumber" placeholder="Nombre de Voies" type="number" min="0">\n' +
 		                '</div>\n' +
 		                '</div>\n'),
 		            limit: 10,
+		        
 		            onElementAdd: function (el, plugin) {
-		                console.log(plugin.elementCount);
-		                var inputs = $(':input', $(el));
-		                var values = {};
-		                $.each(inputs, function () {
-		                    var name = $(this).attr('name');
-		                    values[name] = $(this).val();
-		                });
-		                console.log(JSON.stringify(values));
+		                
+		                $('.areaName', $(el)).attr('name','areas['+i+'].areaName');
+		                $('.routesNumber', $(el)).attr('name','areas['+i+'].routesNumber');
+		               
+		               i++;
+		                
 		            },
 		            onElementRemove: function (el, plugin) {
-		                console.log(plugin.elementCount);
-		                var inputs = $(':input', $(el));
-		                var values = {};
-		                $.each(inputs, function () {
-		                    var name = $(this).attr('name');
-		                    values[name] = $(this).val();
-		                });
-		                console.log(JSON.stringify(values));
+		                i--;
 		            }
 		        });
 });
