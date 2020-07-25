@@ -12,7 +12,7 @@ import com.lavanya.escalade.model.Area;
 @Repository
 public interface AreaRepository extends JpaRepository<Area, Integer> {
 
-	@Query("select a from Area a LEFT JOIN Site b where b.id = ?1")
+	@Query("select a from Area a JOIN a.site b where b.id = ?1")
 	List <Area> findBySiteId(int siteId);
 	
 }

@@ -24,6 +24,11 @@
 	    		<span th:if="${site.equipped}">Oui</span>
 	    		<span th:unless="${site.equipped}">Non</span>	
 	    	</p>
+	    	
+	    	<p th:each="area : ${site.areas}">
+							<span th:utext = "${area.areaName}">...</span>
+							<span th:utext = "${area.routesNumber}">...</span>
+			</p>
 	      
 	    </div>
 	  </section><!-- End Hero -->

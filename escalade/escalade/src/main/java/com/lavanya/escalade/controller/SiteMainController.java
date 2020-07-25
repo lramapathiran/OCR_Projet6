@@ -102,7 +102,7 @@ public class SiteMainController {
 		List<Area> listOfAreas= areaService.getAreasBySiteId(id);
 		
 		site.setAreas(listOfAreas);
-		
+
 		model.addAttribute("site", site);
 		
 		return "site.html";
