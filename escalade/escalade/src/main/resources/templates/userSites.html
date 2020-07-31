@@ -18,7 +18,7 @@
           
           <section>
             <div class="row mb-4">
-              <div class="col-lg-7 mb-4 mb-lg-0">
+              <div class="col-lg-9 mb-4 mb-lg-0">
                 <div class="card">
                   <div class="card-header">
                   	<div class="row">
@@ -50,7 +50,7 @@
 					</thead>
                       <tbody>
 						<tr th:each="site : ${listUserSites}">
-							<td th:utext = "${site.siteName}">...</td>
+							<td th:utext = "${site.siteName}"><a th:href="@{/site/{id}(id = ${site.id})}"></a></td>
 							<td th:utext = "${site.region}">...</td>
 							<td th:utext = "${site.department}">...</td>
 							<td th:utext = "${site.city}">...</td>

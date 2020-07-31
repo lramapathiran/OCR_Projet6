@@ -47,3 +47,20 @@
 	padding: 0px 0px 5px 60px;
 }
 
+#site {
+	margin: auto;
+	width: 50%;	
+}
+
+.site-card {
+	margin: 50px auto;
+}
+
+.col-lg-9 {
+	margin:0px auto;
+}
+
+.dashboard-data {
+	margin: 20px -15px 0px -15px;
+}
+

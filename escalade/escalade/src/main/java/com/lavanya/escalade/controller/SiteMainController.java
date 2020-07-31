@@ -53,6 +53,7 @@ public class SiteMainController {
 	@PostMapping("/saveSite")
 	public String saveSite(@Valid @ModelAttribute ("site") Site site, BindingResult result, Model model) {
 		
+		
 		int id = site.getUserId();
 		if (result.hasErrors()) {
 			User userConnected = userService.getUserById(id);
@@ -62,9 +63,11 @@ public class SiteMainController {
 		
 		siteService.save(site);
 		
+		int siteId = site.getId();
 		
-//		"redirect:/user/"+id;
-		return "redirect:/user?userId="+id;
+		
+		return "redirect:/site/"+siteId;
+//		return "redirect:/user?userId="+id;
 	}
 	
 //	-----------------------Problème de url----------------------
