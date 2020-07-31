@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head th:insert="fragments/componentsVisit.html :: headVisit">
+	  <meta charset="utf-8">
+	  <meta content="width=device-width, initial-scale=1.0 shrink-to-fit=no" name="viewport">
+	  <title>Les Sites</title>
+	</head>
+
+	<body>
+	
+	  <!-- ======= Header ======= -->
+	  <header id="header2" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: header2Visit"></header>
+	  
+	  <!-- ======= Hero Section ======= -->
+	  <div class="d-flex align-items-stretch justify-content-center">
+	  	<div class="page-holder w-100 d-flex flex-wrap">
+	  
+		  <section id="site">
+		  
+		  	<div class="row mb-4">
+	              <div class="col-lg-9 mb-4 mb-lg-0 site-card">
+	                <div class="card">
+	                  <div class="card-header">
+	                  	<div>
+	                  		<div class="col-md-12 text-center">
+					            <h2 class="text-uppercase mb-0">
+					            	<span class="float-md-left" th:utext="${topo.topoName}">Nom du Topo</span>
+					            </h2>
+					        </div>
+	 					</div>                 
+	                  </div>
+	                  <div class="card-body">    
+	                  	
+	                  	<div>
+					    	<p class="col-sm-8"><strong>Lieu </strong>: <span th:utext="${topo.localization}"></span></p>
+					    	<p class="col-sm-8"><strong>Date de Parution </strong>: <span th:utext="${topo.topoDate}"></span></p>
+					    	<p class="col-sm-8"><strong>Description </strong>: 
+					    		<p th:utext="${topo.topoDescription}"></p>
+					    	</p>
+				    	</div>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+		  </section> 
+	  	</div>
+	  </div>	<!-- End Hero -->
+	
+	  <!-- ======= Footer ======= -->
+	  <footer id="footer" th:insert="fragments/componentsVisit.html :: footerVisit"></footer><!-- End Footer -->
+	
+	  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+	
+	  <!-- Vendor JS Files -->
+	  <th:block th:replace="fragments/componentsVisit.html :: js-scriptVisit"></th:block>
+	
+	</body>
+	
+</html>

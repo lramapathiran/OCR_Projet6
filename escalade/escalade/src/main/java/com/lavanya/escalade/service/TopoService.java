@@ -1,11 +1,12 @@
 package com.lavanya.escalade.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.lavanya.escalade.model.Site;
 import com.lavanya.escalade.model.Topo;
 import com.lavanya.escalade.repository.TopoRepository;
 
@@ -34,6 +35,12 @@ public class TopoService {
 		
 		return topoRepository.findBySiteId(userId);
 		
+	}
+
+	public Topo getTopoById(int id) {
+		Optional<Topo>  topoResponse = topoRepository.findById(id);
+		Topo topo = topoResponse.get();
+		return topo;
 	}
 
 }

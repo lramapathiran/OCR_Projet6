@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lavanya.escalade.model.Area;
 import com.lavanya.escalade.model.Site;
 import com.lavanya.escalade.model.Topo;
 import com.lavanya.escalade.model.User;
@@ -51,20 +52,21 @@ public class TopoMainController {
 	@PostMapping("/saveTopo")
 	public String saveTopo(@Valid @ModelAttribute ("topo") Topo topo, BindingResult result, Model model) {
 		
-		
+		int id = topo.getUserId();
 //		String dateInString = topo.getTopoDate();
 //		Date date = formatter.parse(dateInString);		
-		if (result.hasErrors()) {		 
-	          return "createTopo";
+		if (result.hasErrors()) {
+			User userConnected = userService.getUserById(id);
+			model.addAttribute("user", userConnected);
+	        return "createTopo";
 	    }
 		
 		topo.setAvailable(true);
 		topoService.save(topo);
 		
-		int id = topo.getUserId();
+		int topoId = topo.getId();
 		
-//		"redirect:/user/"+id;
-		return "redirect:/user?userId="+id;
+		return "redirect:/topo/"+topoId;
 	}
 	
 	@GetMapping("/user/topos")
@@ -94,5 +96,17 @@ public class TopoMainController {
 		return "toposList";
 
     }
+	
+	@GetMapping(value = {"/topo/{id}"})
+	public String getSite(@PathVariable(name = "id") int id, Topo topo, Model model) {
+		topo = topoService.getTopoById(id);
+		
+		
+		
+
+		model.addAttribute("topo", topo);
+		
+		return "topo.html";
+	}
 
 }
