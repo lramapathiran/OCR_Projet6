@@ -87,12 +87,12 @@ public class SiteMainController {
 	
 	
 	@GetMapping("/sites")
-   	public String showUsersList(@RequestParam (value = "userId") int id, Model model) {
+   	public String showSitesList(@RequestParam (value = "userId") int id, Model model) {
 		
 		User userConnected = userService.getUserById(id);
 		model.addAttribute("user", userConnected);
 	   
-		List<Site> listOfSites= siteService.getAllsites();
+		List<Site> listOfSites= siteService.getAllSites();
 		model.addAttribute("listOfSites", listOfSites);
 		
 		return "sitesList";

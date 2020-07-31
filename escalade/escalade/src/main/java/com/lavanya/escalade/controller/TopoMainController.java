@@ -82,17 +82,17 @@ public class TopoMainController {
 	}
 	
 	
-//	@GetMapping("/sites")
-//   	public String showUsersList(@RequestParam (value = "userId") int id, Model model) {
-//		
-//		User userConnected = userService.getUserById(id);
-//		model.addAttribute("user", userConnected);
-//	   
-//		List<Site> listOfSites= siteService.sitesList();
-//		model.addAttribute("listOfSites", listOfSites);
-//		
-//		return "sitesList";
-//
-//    }
+	@GetMapping("/topos")
+   	public String showToposList(@RequestParam (value = "userId") int id, Model model) {
+		
+		User userConnected = userService.getUserById(id);
+		model.addAttribute("user", userConnected);
+	   
+		List<Topo> listOfTopos= topoService.getAllTopos();
+		model.addAttribute("listOfTopos", listOfTopos);
+		
+		return "toposList";
+
+    }
 
 }

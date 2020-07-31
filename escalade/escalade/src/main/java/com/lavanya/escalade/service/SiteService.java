@@ -17,7 +17,7 @@ public class SiteService {
 	@Autowired
 	private SiteRepository siteRepository;
 	
-	public List<Site> getAllsites() {
+	public List<Site> getAllSites() {
 	
 		return siteRepository.findAll();
 	}

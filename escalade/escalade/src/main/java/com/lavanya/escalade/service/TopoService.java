@@ -15,7 +15,7 @@ public class TopoService {
 	@Autowired
 	private TopoRepository topoRepository;
 	
-	public List<Topo> toposList() {
+	public List<Topo> getAllTopos() {
 	
 		return topoRepository.findAll();
 	}
