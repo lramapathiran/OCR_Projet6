@@ -31,12 +31,23 @@ public class Area {
 	@Positive
 	Integer routesNumber;
 	
+	@Column (name = "cotations")
+	String cotationsRange;
+	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "site_id", nullable = false)
     private Site site;
 	
 	public Area() {
 		
+	}
+
+	public String getCotationsRange() {
+		return cotationsRange;
+	}
+
+	public void setCotationsRange(String cotationsRange) {
+		this.cotationsRange = cotationsRange;
 	}
 
 	public int getId() {
@@ -74,6 +85,6 @@ public class Area {
 
 	@Override
 	public String toString() {
-		return "Area(" + "id=" + id + ", areaName=" + areaName + ", routesNumber=" + routesNumber + ", site=" + site + "}";
+		return "Area(" + "id=" + id + ", areaName=" + areaName + ", routesNumber=" + routesNumber + ", site=" + site + ", cotationsRange=" + cotationsRange + "}";
 	}
 }

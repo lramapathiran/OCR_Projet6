@@ -9,9 +9,12 @@ $(document).ready(function () {
 		                '<div class="form-group col-sm-4">\n' +
 		                '<input class="form-control areaName" name="areas[].areaName" placeholder="Nom" type="text">\n' +
 		                '</div>\n' +
-		                '<div class="form-group col-sm-4">\n' +
-		                '<input class="form-control routesNumber" name="areas[].routesNumber" placeholder="Nombre de Voies" type="number" min="0">\n' +
+		                '<div class="form-group col-sm-2">\n' +
+		                '<input class="form-control routesNumber" name="areas[].routesNumber" placeholder="Voies" type="number" min="0">\n' +
 		                '</div>\n' +
+		                '<div class="form-group col-sm-2">\n' +
+		                '<input class="form-control cotationsRange" name="areas[].cotationsRange" placeholder="Cotations" type="number" min="0">\n' +
+		                '<small class="form-text text-muted ml-3">Ex:3a à 9c</small>\n' +
 		                '</div>\n'),
 		            limit: 10,
 		        
