@@ -21,13 +21,20 @@
 		  	<div class="row mb-4">
 	              <div class="col-lg-9 mb-4 mb-lg-0 site-card">
 	                <div class="card">
-	                  <div class="card-header">
-	                  	<div>
-	                  		<div class="col-md-12 text-center">
+	                  <div class="card-header display-data">
+	                  	<div class="row">
+	                  		<div class="col-md-8 text-center">
 					            <h2 class="text-uppercase mb-0">
 					            	<span class="float-md-left" th:utext="${site.siteName}">Nom du Site</span>
 					            </h2>
 					        </div>
+					        <div class="col-md-4 row text-center go-to-form-topo">
+					        	<h5 class="text-uppercase mb-0 go-to-form-title-topo">Topo</h5>
+					            <span class="float-md-right text-center">
+					            	<a th:href="@{/createTopo/{siteId}/{userId}(userId=${site.userId},siteId=${site.id})}"><button type="button" class="btn btn-secondary add-button"><i class="fa fa-plus" aria-hidden="true"></i>
+					            	</button></a>
+					            </span>
+				        	</div>
 	 					</div>                 
 	                  </div>
 	                  <div class="card-body">    

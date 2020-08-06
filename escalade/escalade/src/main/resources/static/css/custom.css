@@ -61,10 +61,59 @@
 }
 
 .dashboard-data {
-	margin: 20px -15px 0px -15px;
+	margin: 1.5% -1% 0% -1%;
 }
 
-/* .add .remove { */
-/* 	margin-top: 2%; */
-/* } */
+.btn-secondary {
+	background-color: #897f7d;
+	border-color: #212529;
+}
 
+
+.col-md-5 {
+	padding: 0% 1% 0% 5%;
+}
+.add .remove {
+	margin-top: 2%;
+}
+
+h4 {
+	padding: 0.2rem 0.2rem 0rem 0rem;
+}
+
+.add-button {
+	padding: 0.3rem 0.9rem;
+	background-color: #897f7d;
+	border-color: #212529;
+}
+
+.add-button:hover {
+	background-color: #343a40;
+	border-color: #343a40;
+}
+
+.display-data {
+	margin: 0rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+.go-to-form-site {
+	padding: 0rem 1rem 0rem 5.5rem;
+	position-left:1.3rem;
+}
+
+.go-to-form-title-site {
+	padding-top:0.5rem;
+	padding-right:1.3rem;
+}
+
+.go-to-form-topo {
+	padding: 0rem 0rem 0rem 3.5rem;
+	margin: 0rem;
+}
+
+.go-to-form-title-topo {
+	margin-top:0.4rem;
+	padding-right:0.4rem;
+}

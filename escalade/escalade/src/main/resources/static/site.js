@@ -22,12 +22,18 @@ $(document).ready(function () {
 		                
 		                $('.areaName', $(el)).attr('name','areas['+i+'].areaName');
 		                $('.routesNumber', $(el)).attr('name','areas['+i+'].routesNumber');
+		                $('.cotationsRange', $(el)).attr('name','areas['+i+'].cotationsRange');
 		               
 		               i++;
 		                
 		            },
 		            onElementRemove: function (el, plugin) {
+		            	
 		                i--;
+		                
+//		                for(j=0; j <= i; j++){
+//		    				msg += "\n Textbox #" + i + " : " + $('#textbox' + i).val();
+//		    			}
 		            }
 		        });
 });

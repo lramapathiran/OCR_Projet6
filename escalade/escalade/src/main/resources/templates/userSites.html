@@ -20,16 +20,17 @@
             <div class="row mb-4">
               <div class="col-lg-9 mb-4 mb-lg-0">
                 <div class="card">
-                  <div class="card-header">
+                  <div class="card-header display-data">
                   	<div class="row">
-                  		<div class="col-md-6 text-center">
-				            <h6 class="text-uppercase mb-0">
+                  		<div class="col-md-9 text-center">
+				            <h4 class="text-uppercase mb-0">
 				            	<span class="float-md-left">Ma Liste de Sites</span>
-				            </h6>
+				            </h4>
 				        </div>
-				        <div class="col-md-6 text-center">
+				        <div class="col-md-3 text-center row go-to-form-site">
+				        	<h6 class="text-uppercase mb-0 go-to-form-title-site">Site</h6>
 				            <span class="float-md-right">
-				            	<a th:href="@{/createSite(userId = ${user.id})}"><button type="button" class="btn btn-secondary">Ajouter un Site</button></a>
+				            	<a th:href="@{/createSite(userId = ${user.id})}"><button type="button" class="btn btn-secondary add-button"><i class="fa fa-plus" aria-hidden="true"></i></button></a>
 				            </span>
 				        </div>
  					</div>                 
@@ -60,7 +61,7 @@
 								<span th:unless="${site.equipped}">Non</span>
 							</td>
 							<td><a th:href="@{/createTopo/{siteId}/{userId}(userId=${site.userId},siteId=${site.id})}">
-								<span><i class='fas fa-edit' style='font-size:24px'></i></span>
+								<span><i class="fa fa-plus " aria-hidden="true" style='font-size:20px'></i></span>
 							</a></td>
 						</tr>
 					</tbody>
