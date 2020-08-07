@@ -35,8 +35,8 @@
 							<tr>
 								<th>Nom</th>
 								<th>Ville</th>
-								<th>Date</th>
-								<th>Disponible</th>							
+								<th>Date</th>	
+								<th>Statut</th>					
 							</tr>
 						</thead>
 	                      <tbody>
@@ -45,8 +45,23 @@
 								<td th:utext = "${topo.localization}">...</td>
 								<td th:utext = "${topo.topoDate}">...</td>
 								<td>
-									<span th:if="${topo.available}">Oui</span>
-									<span th:unless="${topo.available}">Non</span>
+									<form action="#" th:action="@{/reservation}" th:method="post">	
+										<input type="hidden" name="id" th:value = "${topo.id}"/>
+										<input type="hidden" name="userId" th:value = "${topo.userId}"/>
+										<input type="hidden" name="siteId" th:value = "${topo.siteId}"/>
+										<input type="hidden" name="topoName" th:value = "${topo.topoName}"/>
+										<input type="hidden" name="localization" th:value = "${topo.localization}"/>
+										<input type="hidden" name="topoDescription" th:value = "${topo.topoDescription}"/>
+										<input type="hidden" name="topoDate" th:value = "${topo.topoDate}"/>								
+										<select name="reservation">
+										    <option th:each="reservationOpt : ${T(com.lavanya.escalade.enums.Reservation).values()}" 
+										        th:value="${reservationOpt}" th:text="${reservationOpt}"></option>
+										</select>
+										<button type="submit">
+											<span><i class="far fa-save" aria-hidden="true" style='font-size:20px'></i></span>
+										</button>
+										
+									</form>
 								</td>
 							</tr>
 						</tbody>

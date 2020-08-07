@@ -117,3 +117,27 @@ h4 {
 	margin-top:0.4rem;
 	padding-right:0.4rem;
 }
+
+.description {
+	text-align: justify;
+}
+
+.reservation{
+	font-family:"Courier New", Courier, monospace, sans-serif, "Times New Roman", Times, serif;
+}
+
+#available {
+	color: green;
+}
+
+#reserved {
+	color: blue;
+}
+
+#unavailable {
+	color: red;
+}
+
+#ignored {
+	color: red;
+}

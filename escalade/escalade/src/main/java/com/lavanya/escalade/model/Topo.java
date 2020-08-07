@@ -13,6 +13,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.lavanya.escalade.enums.Reservation;
+
 @Entity
 public class Topo {
 	
@@ -45,20 +47,19 @@ public class Topo {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date topoDate;
 	
-	@Column (name = "is_available")
-	boolean available;
-	
+	Reservation reservation;
+
 	public Topo() {
 		
 	}
 	
 
-	public Topo(String topoName, String localization, String topoDescription, Date topoDate, boolean available) {
+	public Topo(String topoName, String localization, String topoDescription, Date topoDate, Reservation reservation) {
 		this.topoName = topoName;
 		this.localization = localization;
 		this.topoDescription = topoDescription;
 		this.topoDate= topoDate;
-		this.available = available;		
+		this.reservation = reservation;
 	}
 	
 	public int getId() {
@@ -95,8 +96,6 @@ public class Topo {
 		this.siteId = siteId;
 	}
 
-
-
 	public String getTopoName() {
 		return topoName;
 	}
@@ -129,19 +128,19 @@ public class Topo {
 		this.topoDate = topoDate;
 	}
 
-
-	public boolean isAvailable() {
-		return available;
+	public Reservation getReservation() {
+		return reservation;
 	}
 
 
-	public void setAvailable(boolean available) {
-		this.available = available;
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
 	}
-	
+
+
 	@Override
 	public String toString() {
-		return "Topo(" + "id=" + id + ", userId=" + userId + ", siteId=" + siteId + ", topoName=" + topoName + ", localization=" + localization + ", topoDescription=" + topoDescription + ", topoDate=" + topoDate + ", available=" + available + "}";
+		return "Topo(" + "id=" + id + ", userId=" + userId + ", siteId=" + siteId + ", topoName=" + topoName + ", localization=" + localization + ", topoDescription=" + topoDescription + ", topoDate=" + topoDate + ", reservation=" + reservation + "}";
 	}
 	
 

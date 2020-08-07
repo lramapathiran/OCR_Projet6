@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lavanya.escalade.enums.Reservation;
 import com.lavanya.escalade.model.Area;
 import com.lavanya.escalade.model.Site;
 import com.lavanya.escalade.model.Topo;
@@ -31,6 +32,9 @@ public class TopoMainController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private SiteService siteService;
 	
 	@GetMapping("/createTopo/{siteId}/{userId}")
 	public String showTopoForm(@PathVariable("siteId") int id, @PathVariable("userId") int userId, Model model) {
@@ -61,7 +65,7 @@ public class TopoMainController {
 	        return "createTopo";
 	    }
 		
-		topo.setAvailable(true);
+		topo.setReservation(Reservation.Disponible);
 		topoService.save(topo);
 		
 		int topoId = topo.getId();
@@ -99,14 +103,31 @@ public class TopoMainController {
 	
 	@GetMapping(value = {"/topo/{id}"})
 	public String getSite(@PathVariable(name = "id") int id, Topo topo, Model model) {
+		
 		topo = topoService.getTopoById(id);
+		int siteId = topo.getSiteId();
+		int userId = topo.getUserId();
 		
+		String userEmail = userService.getUserById(userId).getEmail();
 		
-		
+		Site site = siteService.getSiteById(siteId);
+		String siteName = site.getSiteName();		
 
 		model.addAttribute("topo", topo);
+		model.addAttribute("siteName", siteName);
+		model.addAttribute("topoCreatorEmail", userEmail);
 		
 		return "topo.html";
+	}
+	
+	@PostMapping("/reservation")
+	public String setReservation(Topo topo, Model model) {
+		
+		int id = topo.getUserId();
+		
+		topoService.save(topo);
+		
+		return "redirect:/user/topos?userId="+id;
 	}
 
 }
