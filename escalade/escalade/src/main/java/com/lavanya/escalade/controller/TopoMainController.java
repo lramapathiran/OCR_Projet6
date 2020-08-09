@@ -65,7 +65,7 @@ public class TopoMainController {
 	        return "createTopo";
 	    }
 		
-		topo.setReservation(Reservation.Disponible);
+		topo.setReservation(Reservation.A);
 		topoService.save(topo);
 		
 		int topoId = topo.getId();

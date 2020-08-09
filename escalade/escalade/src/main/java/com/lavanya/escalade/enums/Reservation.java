@@ -3,15 +3,15 @@ package com.lavanya.escalade.enums;
 public enum Reservation {
 	
 //	A for AVAILABLE, R for RESERVED, U for UNAVAILABLE, I for IGNORED
-	Disponible("A"), Accepte("R"), Indisponible("U"), Refusé("I");
+	A("Disponible"), R("Accepté"), U("Indisponible"), I("Refusé");
 
-	private String code;
+	private String label;
 
-    Reservation(String code) {
-        this.code = code;
+    Reservation(String label) {
+        this.label = label;
     }
 
-    public String getCode() {
-        return code;
+    public String getLabel() {
+        return label;
     }
 }

@@ -41,7 +41,7 @@
 					    	<p class="col-sm-8"><strong>Date de Parution </strong>: <span th:utext="${topo.topoDate}"></span></p>
 					    	<p class="col-sm-10"><strong>Contact </strong>: 
 					    		<th:block th:switch="${topo.reservation}">
-								     <span th:case="${T(com.lavanya.escalade.enums.Reservation).Accepte}" th:utext="${topoCreatorEmail}"></span>
+								     <span th:case="${T(com.lavanya.escalade.enums.Reservation).R}" th:utext="${topoCreatorEmail}"></span>
 								     <span th:case="*">Visible si demande de topo validée</span>
 								  </th:block>
 					    	</p>
@@ -50,13 +50,13 @@
 				        <div class="float-md-right">
 				        	<p><strong>Réservation </strong>:
 				        		<th:block class="reservation" th:switch="${topo.reservation}">
-								    <span id="available" th:case="${T(com.lavanya.escalade.enums.Reservation).Disponible}">
+								    <span id="available" th:case="${T(com.lavanya.escalade.enums.Reservation).A}">
 								    	Disponible</span>
-								    <span id="reserved" th:case="${T(com.lavanya.escalade.enums.Reservation).Accepte}">
+								    <span id="reserved" th:case="${T(com.lavanya.escalade.enums.Reservation).R}">
 								    	Accepté</span>
-								    <span id="unavailable" th:case="${T(com.lavanya.escalade.enums.Reservation).Indisponible}">
+								    <span id="unavailable" th:case="${T(com.lavanya.escalade.enums.Reservation).U}">
 								    	Déjà Réservé</span>
-								    <span id="ignored" th:case="${T(com.lavanya.escalade.enums.Reservation).Refusé}">
+								    <span id="ignored" th:case="${T(com.lavanya.escalade.enums.Reservation).I}">
 								    	Non accepté</span>
 								</th:block>
 				        	</p>				        	
