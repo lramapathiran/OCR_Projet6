@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,8 +24,11 @@ public class UserService implements UserDetailsService{
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<User> getUsersList() {
-		return userRepository.findAll();
+	public Page<User> getAllUsers(int pageNumber) {
+		Sort sort = Sort.by("lastName").ascending();
+		Pageable pageable = PageRequest.of(pageNumber -1, 10, sort);
+		
+		return userRepository.findAll(pageable);
 	}
 	
 	public void save(User user) {

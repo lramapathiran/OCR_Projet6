@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -70,7 +72,6 @@ public class SiteMainController {
 //		return "redirect:/user?userId="+id;
 	}
 	
-//	-----------------------Problème de url----------------------
 	@GetMapping("/user/sites")
 	public String showListOfSitesOfUser(@RequestParam (value = "userId") int id, User user, Model model) {
 	   
@@ -85,15 +86,34 @@ public class SiteMainController {
 	   return "userSites";
 	}
 	
-	
 	@GetMapping("/sites")
    	public String showSitesList(@RequestParam (value = "userId") int id, Model model) {
 		
 		User userConnected = userService.getUserById(id);
 		model.addAttribute("user", userConnected);
 	   
-		List<Site> listOfSites= siteService.getAllSites();
-		model.addAttribute("listOfSites", listOfSites);
+		return showSitesListByPage(id, 1, model);
+
+    }
+
+	
+	@GetMapping("/sites/{userId}/page/{pageNumber}")
+   	public String showSitesListByPage(@PathVariable ("userId") int id, @PathVariable ("pageNumber") int currentPage, Model model) {
+		
+		User userConnected = userService.getUserById(id);
+		model.addAttribute("user", userConnected);
+		
+		Page<Site> page = siteService.getAllSites(currentPage);
+		
+		List<Site> sitesPage = page.getContent();
+		int totalPages = page.getTotalPages();
+		long totalSites = page.getTotalElements();
+		
+		model.addAttribute("sitesPage", sitesPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("totalSites", totalSites);
+		
 		
 		return "sitesList";
 
@@ -110,5 +130,28 @@ public class SiteMainController {
 		
 		return "site.html";
 	}
-
+	
+	@GetMapping("/showSites")
+	public String showFirstPageOfSitesToVisitors(Model model) {
+		
+		return showNextPagesOfSitesToVisitors(1, model);
+	}
+	
+	@GetMapping("/showSites/page/{pageNumber}")
+	public String showNextPagesOfSitesToVisitors(@PathVariable ("pageNumber") int currentPage, Model model) {
+		
+		Page<Site> page = siteService.getAllSites(currentPage);
+		
+		List<Site> sitesPage = page.getContent();
+		int totalPages = page.getTotalPages();
+		long totalSites = page.getTotalElements();
+		
+		model.addAttribute("sitesPage", sitesPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("totalSites", totalSites);
+		
+		
+		return "sitesListForVisitors";
+	}
 }

@@ -8,56 +8,57 @@
   </head>
   <body>
     <!-- navbar-->
-     <header id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
+     <header id="header2" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: header2Visit"></header>
     
     <div class="d-flex align-items-stretch">
-      <div id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
       <div class="page-holder w-100 d-flex flex-wrap">
-        <div class="container-fluid px-xl-5">
-        	  <section class="py-5" th:insert="fragments/componentsAdmin.html :: dashboard-data"></section>
-	          <section class="py-5">
+        <div class="container-fluid px-xl-5">       	
+	          <section class="site-paginated py-5">
+
 	          	<div class="table-responsive">
 		            <div class="row">
-		              <div class="col-lg-9 mb-5">
+		              <div class="col-lg-6 mb-5">
 		                <div class="card">
 		                  <div class="card-header">
-		                    <h6 class="text-uppercase mb-0">Liste des Topos</h6>
+		                    <h4 class="text-uppercase mb-0">Liste des Topos</h4>
 		                  </div>
 		                  <div class="card-body">                           
-		                    <table class="table table-striped table-hover card-text">
-		                      <thead>
-								<tr>
-									<th>Nom</th>
-									<th>Ville</th>
-									<th>Date</th>						
-								</tr>
-							  </thead>
-		                      <tbody>
-								<tr th:each="topo : ${toposPage}">
-									<td th:utext = "${topo.topoName}">...</td>
-									<td th:utext = "${topo.localization}">...</td>
-									<td th:utext = "${topo.topoDate}">...</td>
-								</tr>
-							  </tbody>
-		                    </table>
-		                    <br>
-		                    <div class="text-center">
-		                    	Total de Topos : [[${totalTopos}]] - Page : [[${currentPage}]]/[[${totalPages}]]
+		                    <ul th:each="topo : ${toposPage}">
+							    <li>
+							    	<span><a target="_blank" th:href="@{/topo/{id}(id = ${topo.id})}" th:utext="${topo.topoName}"></a></span>
+							    	&nbsp; - &nbsp;
+							    	<p>Statut de Réservation : 
+								    	<th:block class="reservation" th:switch="${topo.reservation}">
+										    <span id="available" th:case="${T(com.lavanya.escalade.enums.Reservation).A}">
+										    	Disponible</span>
+										    <span id="reserved" th:case="${T(com.lavanya.escalade.enums.Reservation).R}">
+										    	Accepté</span>
+										    <span id="unavailable" th:case="${T(com.lavanya.escalade.enums.Reservation).U}">
+										    	Déjà Réservé</span>
+										    <span id="ignored" th:case="${T(com.lavanya.escalade.enums.Reservation).I}">
+										    	Non accepté</span>
+										</th:block>
+									</p>
+							    </li>
+							</ul>
+							
+							<div class="text-center">
+		                    	Page : [[${currentPage}]]/[[${totalPages}]]
 		                    	&nbsp; - &nbsp;
 		                    	<span>
-		                    		<a th:if="${currentPage > 1}" th:href="@{'/topos/' + ${user.id} + '/page/' + ${currentPage - 1}}">Précédent</a>
+		                    		<a th:if="${currentPage > 1}" th:href="@{'/showSites/page/' + ${currentPage - 1}}">Précédent</a>
 		                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
 		                    	</span>
 		                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
-		                    		<a th:if="${i != currentPage}" th:href="@{'/topos/' + ${user.id} + '/page/' + ${i}}">[[${i}]]</a>
+		                    		<a th:if="${i != currentPage}" th:href="@{'/showSites/page/' + ${i}}">[[${i}]]</a>
 		                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
 		                    	</span>
 		                    	<span>
-		                    		<a th:if="${currentPage != totalPages}" th:href="@{'/topos/' + ${user.id} + '/page/' + ${currentPage + 1}}">Suivant</a>
+		                    		<a th:if="${currentPage != totalPages}" th:href="@{'/showSites/page/' + ${currentPage + 1}}">Suivant</a>
 		                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
 		                    	</span>
 		                    	<span>
-		                    		<a th:if="${currentPage != totalPages}" th:href="@{'/topos/' + ${user.id} + '/page/' + ${totalPages}}">Dernier</a>
+		                    		<a th:if="${currentPage != totalPages}" th:href="@{'/showSites/page/' + ${totalPages}}">Dernier</a>
 		                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
 		                    	</span>
 		                    </div> 
@@ -75,5 +76,7 @@
     </div>
     <!-- JavaScript files-->
     <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
+    <!-- Vendor JS Files -->
+	  <th:block th:replace="fragments/componentsVisit.html :: js-scriptVisit"></th:block>
   </body>
 </html>

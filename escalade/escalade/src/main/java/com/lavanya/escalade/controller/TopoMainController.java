@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -94,8 +95,27 @@ public class TopoMainController {
 		User userConnected = userService.getUserById(id);
 		model.addAttribute("user", userConnected);
 	   
-		List<Topo> listOfTopos= topoService.getAllTopos();
-		model.addAttribute("listOfTopos", listOfTopos);
+		return showToposListByPage(id, 1, model);
+
+    }
+	
+	@GetMapping("/topos/{userId}/page/{pageNumber}")
+   	public String showToposListByPage(@PathVariable ("userId") int id, @PathVariable ("pageNumber") int currentPage, Model model) {
+		
+		User userConnected = userService.getUserById(id);
+		model.addAttribute("user", userConnected);
+		
+		Page<Topo> page = topoService.getAllTopos(currentPage);
+		
+		List<Topo> toposPage = page.getContent();
+		int totalPages = page.getTotalPages();
+		long totalTopos = page.getTotalElements();
+		
+		model.addAttribute("toposPage", toposPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("totalTopos", totalTopos);
+		
 		
 		return "toposList";
 
@@ -128,6 +148,30 @@ public class TopoMainController {
 		topoService.save(topo);
 		
 		return "redirect:/user/topos?userId="+id;
+	}
+	
+	@GetMapping("/showTopos")
+	public String showFirstPageOfToposToVisitors(Model model) {
+		
+		return showNextPagesOfToposToVisitors(1, model);
+	}
+	
+	@GetMapping("/showTopos/page/{pageNumber}")
+	public String showNextPagesOfToposToVisitors(@PathVariable ("pageNumber") int currentPage, Model model) {
+		
+		Page<Topo> page = topoService.getAllTopos(currentPage);
+		
+		List<Topo> toposPage = page.getContent();
+		int totalPages = page.getTotalPages();
+		long totalTopos = page.getTotalElements();
+		
+		model.addAttribute("toposPage", toposPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("totalSites", totalTopos);
+		
+		
+		return "toposListForVisitors";
 	}
 
 }

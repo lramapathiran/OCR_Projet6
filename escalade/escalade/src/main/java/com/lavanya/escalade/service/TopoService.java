@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.lavanya.escalade.model.Site;
@@ -16,9 +20,12 @@ public class TopoService {
 	@Autowired
 	private TopoRepository topoRepository;
 	
-	public List<Topo> getAllTopos() {
-	
-		return topoRepository.findAll();
+	public Page<Topo> getAllTopos(int pageNumber) {
+		
+		Sort sort = Sort.by("topoName").ascending();
+		Pageable pageable = PageRequest.of(pageNumber -1, 5, sort);
+		
+		return topoRepository.findAll(pageable);
 	}
 	
 	public void save (Topo topo) {
@@ -42,5 +49,15 @@ public class TopoService {
 		Topo topo = topoResponse.get();
 		return topo;
 	}
+	
+	public Page<Topo> getTop3Topos(){
+		
+		Sort sort = Sort.by("id").descending();
+		Pageable pageable = PageRequest.of(0, 3, sort);
+		
+		return topoRepository.findAll(pageable);
+	}
+	
+	
 
 }

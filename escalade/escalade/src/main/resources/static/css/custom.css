@@ -141,3 +141,7 @@ h4 {
 #ignored {
 	color: red;
 }
+
+li {
+	font-size:medium;
+}

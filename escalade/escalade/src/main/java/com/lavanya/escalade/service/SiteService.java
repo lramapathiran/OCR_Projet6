@@ -1,6 +1,6 @@
 package com.lavanya.escalade.service;
 
-import java.awt.print.Pageable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,12 @@ public class SiteService {
 	@Autowired
 	private SiteRepository siteRepository;
 	
-	public List<Site> getAllSites() {
-	
-		return siteRepository.findAll();
+	public Page<Site> getAllSites(int pageNumber) {
+		Sort sort = Sort.by("siteName").ascending();
+		Pageable pageable = PageRequest.of(pageNumber - 1, 10, sort);
+		Page<Site> page = siteRepository.findAll(pageable);
+		
+		return page;
 	}
 	
 	public void save (Site site) {
@@ -49,16 +53,13 @@ public class SiteService {
 		return site;
 	}
 	
-	public Slice<Site> getTopTenSite() {
+	public Page<Site> getTop4Sites(){
 		
-		Slice<Site> slice = null;
+		Sort sort = Sort.by("id").descending();
+		Pageable pageable = PageRequest.of(0, 4, sort);
+		Page<Site> page = siteRepository.findAll(pageable);
 		
-	    Pageable pageable = (Pageable) PageRequest.of(0, 3, Sort.by("id").descending());
-	    
-	    slice = siteRepository.findTop3ById(3, pageable);
-	    
-	    return slice;
-	      
+		return page;
 	}
 	
 }

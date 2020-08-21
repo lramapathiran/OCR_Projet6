@@ -37,7 +37,7 @@
 								</tr>
 							  </thead>
 		                      <tbody>
-								<tr th:each="site : ${listOfSites}">
+								<tr th:each="site : ${sitesPage}">
 									<td th:utext = "${site.siteName}">...</td>
 									<td th:utext = "${site.region}">...</td>
 									<td th:utext = "${site.department}">...</td>
@@ -50,6 +50,27 @@
 								</tr>
 							  </tbody>
 		                    </table>
+		                    <br>
+		                    <div class="text-center">
+		                    	Total de Sites : [[${totalSites}]] - Page : [[${currentPage}]]/[[${totalPages}]]
+		                    	&nbsp; - &nbsp;
+		                    	<span>
+		                    		<a th:if="${currentPage > 1}" th:href="@{'/sites/' + ${user.id} + '/page/' + ${currentPage - 1}}">Précédent</a>
+		                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
+		                    	</span>
+		                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
+		                    		<a th:if="${i != currentPage}" th:href="@{'/sites/' + ${user.id} + '/page/' + ${i}}">[[${i}]]</a>
+		                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
+		                    	</span>
+		                    	<span>
+		                    		<a th:if="${currentPage != totalPages}" th:href="@{'/sites/' + ${user.id} + '/page/' + ${currentPage + 1}}">Suivant</a>
+		                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
+		                    	</span>
+		                    	<span>
+		                    		<a th:if="${currentPage != totalPages}" th:href="@{'/sites/' + ${user.id} + '/page/' + ${totalPages}}">Dernier</a>
+		                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
+		                    	</span>
+		                    </div> 
 		                  </div>
 		                </div>
 		              </div> 

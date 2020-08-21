@@ -34,7 +34,7 @@
 	                        </tr>
 	                      </thead>
 	                      <tbody>
-	                      	<tr th:each="user : ${listUsers}">
+	                      	<tr th:each="user : ${usersPage}">
 								<td th:utext = "${user.firstName}" scope="row">...</td>
 								<td th:utext = "${user.lastName}" scope="row">...</td>
 								<td th:utext = "${user.email}" scope="row">...</td>
@@ -46,6 +46,27 @@
 							</tr>
 	                      </tbody>
 	                    </table>
+	                    <br>
+		                <div class="text-center">
+		                   	Total d'Utilisateurs : [[${totalUsers}]] - Page : [[${currentPage}]]/[[${totalPages}]]
+		                   	&nbsp; - &nbsp;
+		                   	<span>
+		                   		<a th:if="${currentPage > 1}" th:href="@{'/users/' + ${user.id} + '/page/' + ${currentPage - 1}}">Précédent</a>
+		                   		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
+		                   	</span>
+		                   	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
+		                   		<a th:if="${i != currentPage}" th:href="@{'/users/' + ${user.id} + '/page/' + ${i}}">[[${i}]]</a>
+		                   		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
+		                   	</span>
+		                   	<span>
+		                   		<a th:if="${currentPage != totalPages}" th:href="@{'/users/' + ${user.id} + '/page/' + ${currentPage + 1}}">Suivant</a>
+		                   		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
+		                   	</span>
+		                   	<span>
+		                   		<a th:if="${currentPage != totalPages}" th:href="@{'/users/' + ${user.id} + '/page/' + ${totalPages}}">Dernier</a>
+		                   		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
+		                   	</span>
+		                </div> 
 	                  </div>
 	                </div>
 	              </div> 
