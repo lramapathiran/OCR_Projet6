@@ -38,7 +38,7 @@
 							  </thead>
 		                      <tbody>
 								<tr th:each="site : ${sitesPage}">
-									<td th:utext = "${site.siteName}">...</td>
+									<td><a target="_blank" th:href="@{/site/{id}(id = ${site.id})}" th:utext = "${site.siteName}"></a>...</td>
 									<td th:utext = "${site.region}">...</td>
 									<td th:utext = "${site.department}">...</td>
 									<td th:utext = "${site.city}">...</td>

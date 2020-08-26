@@ -51,5 +51,10 @@ public class UserService implements UserDetailsService{
 
 		return user.map(UserServiceImpl::new).get();
 	}
+	
+	public Integer getTotalUsersRegistered() {
+		
+		return userRepository.countUsersRegistered();
+	}
 
 }

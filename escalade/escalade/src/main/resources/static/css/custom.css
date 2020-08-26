@@ -53,7 +53,7 @@
 }
 
 .site-card {
-	margin: 50px auto;
+	margin: 20% auto 0% auto;
 }
 
 .col-lg-9 {
@@ -144,4 +144,28 @@ h4 {
 
 li {
 	font-size:medium;
+}
+
+.col-lg-3 {
+	margin : 0px auto;
+}
+
+.city-1 {
+	left:1%;
+}
+
+.city-2 {
+	left:2%;
+}
+
+.city-3 {
+	left:3%;
+}
+
+.city-4 {
+	left:4%;
+}
+
+.table-responsive {
+	margin-top : 5%;
 }

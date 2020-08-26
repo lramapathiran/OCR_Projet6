@@ -47,13 +47,14 @@ public class UserMainController {
 		List<Topo> top3Topos = topoPage.getContent();
 		long totalTopos = topoPage.getTotalElements();
 		
-		
+		int totalUsers = userService.getTotalUsersRegistered();
 		
 		model.addAttribute("top4Sites", top4Sites);
 		model.addAttribute("totalSites", totalSites);
 		model.addAttribute("top3Topos", top3Topos);
 		model.addAttribute("totalTopos", totalTopos);
-	  
+		model.addAttribute("totalUsers", totalUsers);
+		
 		return "index";
 	}
 

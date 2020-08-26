@@ -41,7 +41,7 @@
 						</thead>
 	                      <tbody>
 							<tr th:each="topo : ${listUserTopos}">
-								<td th:utext = "${topo.topoName}">...</td>
+								<td><a target="_blank" th:href="@{/topo/{id}(id = ${topo.id})}" th:utext = "${topo.topoName}"></a>...</td>
 								<td th:utext = "${topo.localization}">...</td>
 								<td th:utext = "${topo.topoDate}">...</td>
 								<td>
