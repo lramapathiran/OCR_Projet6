@@ -91,9 +91,9 @@
 	        </ul>
 	        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">ADMINISTRATEUR</div>
 	        <ul class="sidebar-menu list-unstyled">
-	              <li class="sidebar-list-item"><a th:href="@{/users(userId = ${user.id})}" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Les Utilisateurs</span></a></li>
-	              <li class="sidebar-list-item"><a th:href="@{/sites(userId = ${user.id})}" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Les Sites</span></a></li>
-	              <li class="sidebar-list-item"><a th:href="@{/topos(userId = ${user.id})}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Les Topos</span></a></li>
+	              <li class="sidebar-list-item"><a th:href="@{/users(userId = ${user.id},pageNumber=1)}" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Les Utilisateurs</span></a></li>
+	              <li class="sidebar-list-item"><a th:href="@{/sites(userId = ${user.id},pageNumber=1)}" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Les Sites</span></a></li>
+	              <li class="sidebar-list-item"><a th:href="@{/topos(userId = ${user.id},pageNumber=1)}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Les Topos</span></a></li>
 	              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Demo</span></a></li>
 	        </ul>
       	  </div>
@@ -184,8 +184,8 @@
 	      <nav class="nav-admin nav-menu mr-auto d-none d-lg-block">
 	        <ul>
 	          <li class="active"><a href="/">Accueil</a></li>
-	          <li><a href="#portfolio">Les Sites</a></li>
-	          <li><a href="#team">Les Topos</a></li>
+	          <li><a th:href="@{/showSites(pageNumber=1)}">Les Sites</a></li>
+	          <li><a th:href="@{/showTopos(pageNumber=1)}">Les Topos</a></li>
 	          <li class="drop-down"><a href="">Rechercher</a>
 	            <ul>
 	              <li><a href="#">Drop Down 1</a></li>

@@ -85,20 +85,10 @@ public class SiteMainController {
 	  
 	   return "userSites";
 	}
+
 	
 	@GetMapping("/sites")
-   	public String showSitesList(@RequestParam (value = "userId") int id, Model model) {
-		
-		User userConnected = userService.getUserById(id);
-		model.addAttribute("user", userConnected);
-	   
-		return showSitesListByPage(id, 1, model);
-
-    }
-
-	
-	@GetMapping("/sites/{userId}/page/{pageNumber}")
-   	public String showSitesListByPage(@PathVariable ("userId") int id, @PathVariable ("pageNumber") int currentPage, Model model) {
+   	public String showSitesListByPage(@RequestParam ("userId") int id, @RequestParam (value = "pageNumber") int currentPage, Model model) {
 		
 		User userConnected = userService.getUserById(id);
 		model.addAttribute("user", userConnected);
@@ -132,13 +122,7 @@ public class SiteMainController {
 	}
 	
 	@GetMapping("/showSites")
-	public String showFirstPageOfSitesToVisitors(Model model) {
-		
-		return showNextPagesOfSitesToVisitors(1, model);
-	}
-	
-	@GetMapping("/showSites/page/{pageNumber}")
-	public String showNextPagesOfSitesToVisitors(@PathVariable ("pageNumber") int currentPage, Model model) {
+	public String showNextPagesOfSitesToVisitors(@RequestParam (value = "pageNumber") int currentPage, Model model) {
 		
 		Page<Site> page = siteService.getAllSites(currentPage);
 		

@@ -89,17 +89,9 @@ public class UserMainController {
       	return "redirect:/";
 	}
   
+    
     @GetMapping("/users")
-   	public String showUsersList(@RequestParam (value = "userId") int id, Model model) {
-	   
-	   User userConnected = userService.getUserById(id);
-	   model.addAttribute("user", userConnected);
-	   
-	   return showUsersListByPage(id, 1, model);
-    }
-   
-    @GetMapping("/users/{userId}/page/{pageNumber}")
-   	public String showUsersListByPage(@PathVariable ("userId") int id, @PathVariable ("pageNumber") int currentPage, Model model) {
+   	public String showUsersListByPage(@RequestParam ("userId") int id, @RequestParam ("pageNumber") int currentPage, Model model) {
 		
 		User userConnected = userService.getUserById(id);
 		model.addAttribute("user", userConnected);

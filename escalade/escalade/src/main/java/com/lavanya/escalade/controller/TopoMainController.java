@@ -88,19 +88,8 @@ public class TopoMainController {
 	   return "userTopos";
 	}
 	
-	
 	@GetMapping("/topos")
-   	public String showToposList(@RequestParam (value = "userId") int id, Model model) {
-		
-		User userConnected = userService.getUserById(id);
-		model.addAttribute("user", userConnected);
-	   
-		return showToposListByPage(id, 1, model);
-
-    }
-	
-	@GetMapping("/topos/{userId}/page/{pageNumber}")
-   	public String showToposListByPage(@PathVariable ("userId") int id, @PathVariable ("pageNumber") int currentPage, Model model) {
+   	public String showToposListByPage(@RequestParam ("userId") int id, @RequestParam ("pageNumber") int currentPage, Model model) {
 		
 		User userConnected = userService.getUserById(id);
 		model.addAttribute("user", userConnected);
@@ -149,15 +138,10 @@ public class TopoMainController {
 		
 		return "redirect:/user/topos?userId="+id;
 	}
+
 	
 	@GetMapping("/showTopos")
-	public String showFirstPageOfToposToVisitors(Model model) {
-		
-		return showNextPagesOfToposToVisitors(1, model);
-	}
-	
-	@GetMapping("/showTopos/page/{pageNumber}")
-	public String showNextPagesOfToposToVisitors(@PathVariable ("pageNumber") int currentPage, Model model) {
+	public String showNextPagesOfToposToVisitors(@RequestParam (value = "pageNumber") int currentPage, Model model) {
 		
 		Page<Topo> page = topoService.getAllTopos(currentPage);
 		
