@@ -35,7 +35,7 @@
 	                  	<div>
 					        <p class="col-sm-8"><strong>Site </strong>: <span th:utext="${siteName}"></span></p>
 					    	<p class="col-sm-8"><strong>Lieu </strong>: <span th:utext="${topo.localization}"></span></p>
-					    	<p class="col-sm-8 description"><strong>Description </strong>: 
+					    	<p class="col-sm-12 description"><strong>Description </strong>: 
 					    		<span th:utext="${topo.topoDescription}"></span>
 					    	</p>
 					    	<p class="col-sm-8"><strong>Date de Parution </strong>: <span th:utext="${topo.topoDate}"></span></p>
@@ -45,10 +45,7 @@
 								     <span th:case="*">Visible si demande de topo validée</span>
 								  </th:block>
 					    	</p>
-				    	</div>
-				      	<br>
-				        <div class="float-md-right">
-				        	<p><strong>Réservation </strong>:
+					    	<p class="col-sm-8"><strong>Réservation </strong>:
 				        		<th:block class="reservation" th:switch="${topo.reservation}">
 								    <span id="available" th:case="${T(com.lavanya.escalade.enums.Reservation).A}">
 								    	Disponible</span>
@@ -59,7 +56,11 @@
 								    <span id="ignored" th:case="${T(com.lavanya.escalade.enums.Reservation).I}">
 								    	Non accepté</span>
 								</th:block>
-				        	</p>				        	
+				        	</p>	
+				    	</div>
+				      	<br>
+				        <div th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).A}" class="float-md-right">
+				        	<button class="btn btn-primary">Demande de Réservation</button>	
 				        </div>
 	                  </div>
 	                </div>
