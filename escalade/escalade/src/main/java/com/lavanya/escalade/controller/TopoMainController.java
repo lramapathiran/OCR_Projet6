@@ -138,6 +138,16 @@ public class TopoMainController {
 		
 		return "redirect:/user/topos?userId="+id;
 	}
+	
+	@PostMapping("/request/reservation")
+	public String sendRequestForReservation(Topo topo, Model model) {
+		
+		int id = topo.getId();
+		
+		topoService.save(topo);
+		
+		return "redirect:/topo/" + id;
+	}
 
 	
 	@GetMapping("/showTopos")

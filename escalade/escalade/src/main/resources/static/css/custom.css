@@ -127,19 +127,19 @@ h4 {
 }
 
 #available {
-	color: green;
+	color: blue;
 }
 
 #reserved {
-	color: blue;
+	color: green;
 }
 
 #unavailable {
 	color: red;
 }
 
-#ignored {
-	color: red;
+#in-progress {
+	color: grey;
 }
 
 li {

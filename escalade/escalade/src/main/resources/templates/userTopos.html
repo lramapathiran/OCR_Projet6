@@ -45,7 +45,7 @@
 								<td><a target="_blank" th:href="@{/topo/{id}(id = ${topo.id})}" th:utext = "${topo.topoName}"></a>...</td>
 								<td th:utext = "${topo.localization}">...</td>
 								<td th:utext = "${topo.topoDate}">...</td>
-								<td th:utext = "${topo.reservation}">...</td>								
+								<td th:utext = "${topo.reservation.label}">...</td>								
 								
 								<td>
 									<form action="#" th:action="@{/reservation}" th:method="post">	
@@ -56,21 +56,48 @@
 										<input type="hidden" name="localization" th:value = "${topo.localization}"/>
 										<input type="hidden" name="topoDescription" th:value = "${topo.topoDescription}"/>
 										<input type="hidden" name="topoDate" th:value = "${topo.topoDate}"/>
+<!-- 										<input type="hidden" name="topoReservation" th:value = "${topo.reservation}"/> -->
 										
-										<th:block class="button" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).A}">
-											<button type="submit" class="btn btn-success" name="reservation.R" th:value="${topo.reservation.R}">Accepté</button>
-											<button type="submit" class="btn btn-secondary" name="reservation.U" th:value="${topo.reservation.U}">Indisponible</button>
-											<button type="submit" class="btn btn-danger" name="reservation.I" th:value="${topo.reservation.I}">Rejeté</button>
-										</th:block>
+										<span class="btn-group-toggle" data-toggle="buttons" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).A} or ${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).R}">
+											  <label class="btn btn-secondary active">
+											    <input type="radio" name="reservation" th:value="${topo.reservation.U}" checked autocomplete="off"> Indisponible
+											  </label>
+										</span>
 										
-										<th:block class="button" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).R}">
-											<button type="submit" class="btn btn-primary" name="reservation.A" th:value="${topo.reservation.A}">Disponible</button>
-											<button type="submit" class="btn btn-secondary" name="reservation.U" th:value="${topo.reservation.U}">Indisponible</button>
-										</th:block>
+										<span class="btn-group btn-group-toggle" data-toggle="buttons" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).I}">
+											  <label class="btn btn-secondary active">
+											    <input type="radio" name="reservation" th:value="${topo.reservation.R}" id="option1" autocomplete="off" checked>Accepté
+											  </label>
+											  <label class="btn btn-secondary option">
+											    <input type="radio" name="reservation" th:value="${topo.reservation.U}" id="option2" autocomplete="off"> Indisponible
+											  </label>
+										</span>
+
 										
-										<th:block class="button" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).U} or ${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).I}">
-											<button type="submit" class="btn btn-primary" name="reservation.A" th:value="${topo.reservation.A}">Disponible</button>
-										</th:block>
+										<span class="btn-group-toggle" data-toggle="buttons" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).U}">
+											  <label class="btn btn-secondary active">
+											    <input type="radio" name="reservation" th:value="${topo.reservation.A}" checked autocomplete="off"> Disponible
+											  </label>
+										</span>
+										
+										<button type="submit" class="float-md-right"><img src="https://img.icons8.com/color/30/000000/save.png"/></button>
+										
+<!-- 										<th:block class="button" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).A}"> -->
+<!-- 											<input type="button" class="btn btn-success" name="reservation" th:value="${topo.reservation.R}">Accepté</button> -->
+<!-- 											<input type="button" class="btn btn-secondary" name="reservation" th:value="${topo.reservation.U}">Indisponible</button> -->
+<!-- 											<input type="button" class="btn btn-danger" name="reservation" th:value="${topo.reservation.I}">Rejeté</button> -->
+<!-- 										</th:block> -->
+										
+<!-- 										<button type="submit" ></button> -->
+										
+<!-- 										<th:block class="button" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).R}"> -->
+<!-- 											<button type="submit" class="btn btn-primary" name="reservation.A" th:value="${topo.reservation.A}">Disponible</button> -->
+<!-- 											<button type="submit" class="btn btn-secondary" name="reservation.U" th:value="${topo.reservation.U}">Indisponible</button> -->
+<!-- 										</th:block> -->
+										
+<!-- 										<th:block class="button" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).U} or ${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).I}"> -->
+<!-- 											<button type="submit" class="btn btn-primary" name="reservation.A" th:value="${topo.reservation.A}">Disponible</button> -->
+<!-- 										</th:block> -->
 										
 										
 <!-- 										    <option th:each="reservationOpt : ${T(com.lavanya.escalade.enums.Reservation).values()}"  -->

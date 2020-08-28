@@ -34,9 +34,9 @@
 										    <span id="reserved" th:case="${T(com.lavanya.escalade.enums.Reservation).R}">
 										    	Accepté</span>
 										    <span id="unavailable" th:case="${T(com.lavanya.escalade.enums.Reservation).U}">
-										    	Déjà Réservé</span>
-										    <span id="ignored" th:case="${T(com.lavanya.escalade.enums.Reservation).I}">
-										    	Non accepté</span>
+										    	Indisponible</span>
+										    <span id="in-progress" th:case="${T(com.lavanya.escalade.enums.Reservation).I}">
+										    	En cours de réservation</span>
 										</th:block>
 									</p>
 							    </li>

@@ -52,15 +52,27 @@
 								    <span id="reserved" th:case="${T(com.lavanya.escalade.enums.Reservation).R}">
 								    	Accepté</span>
 								    <span id="unavailable" th:case="${T(com.lavanya.escalade.enums.Reservation).U}">
-								    	Déjà Réservé</span>
-								    <span id="ignored" th:case="${T(com.lavanya.escalade.enums.Reservation).I}">
-								    	Non accepté</span>
+								    	Indisponible</span>
+								    <span id="in-progress" th:case="${T(com.lavanya.escalade.enums.Reservation).I}">
+								    	En cours de réservation</span>
 								</th:block>
 				        	</p>	
 				    	</div>
 				      	<br>
 				        <div th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).A}" class="float-md-right">
-				        	<button class="btn btn-primary">Demande de Réservation</button>	
+				        	<form action="#" th:action="@{/request/reservation}" th:method="post">
+				        		<input type="hidden" name="id" th:value = "${topo.id}"/>
+								<input type="hidden" name="userId" th:value = "${topo.userId}"/>
+								<input type="hidden" name="siteId" th:value = "${topo.siteId}"/>
+								<input type="hidden" name="topoName" th:value = "${topo.topoName}"/>
+								<input type="hidden" name="localization" th:value = "${topo.localization}"/>
+								<input type="hidden" name="topoDescription" th:value = "${topo.topoDescription}"/>
+								<input type="hidden" name="topoDate" th:value = "${topo.topoDate}"/>
+								<input type="hidden" name="reservation" th:value = "${topo.reservation.I}"/>
+								
+								<button type="submit" class="btn btn-primary">Demande de Réservation</button>	
+				        	</form>
+				        	
 				        </div>
 	                  </div>
 	                </div>
