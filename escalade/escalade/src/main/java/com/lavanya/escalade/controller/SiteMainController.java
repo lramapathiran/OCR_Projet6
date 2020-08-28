@@ -63,6 +63,7 @@ public class SiteMainController {
 	          return "addSite";
 	    }
 		
+		
 		siteService.save(site);
 		
 		int siteId = site.getId();
