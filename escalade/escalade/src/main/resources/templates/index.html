@@ -46,23 +46,23 @@
 	            <div class="icon-boxes d-flex flex-column justify-content-center">
 	              <div class="row">
 	                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
-	                  <img th:src="@{img/icons8-climbing-40.png}" alt="climbing-icon">
+	                  <img th:src="@{/img/icons8-climbing-40.png}" alt="climbing-icon">
 	                  <h4>Plusieurs sites répertoriés</h4>
 	                  <p>Accédez aux fiches d'informations des sites d'escalade qui vous intéressent!</p>
 	                </div>
 	                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
-	                  <img th:src="@{img/icons8-quality-40.png}" alt="quality-tag">
+	                  <img th:src="@{/img/icons8-quality-40.png}" alt="quality-tag">
 	                  <h4>Un gage de qualité</h4>
 	                  <p>Les sites enregistrés sur notre platforme sont vérifiés et tagués "Officiel les amis de l'escalade"</p>
 	                </div>
 	                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
-	                  <img th:src="@{img/icons8-city-guide-40.png}" alt="topo-guide-icon">
+	                  <img th:src="@{/img/icons8-city-guide-40.png}" alt="topo-guide-icon">
 	                  <h4>Des guides topos</h4>
 	                  <p>En intégrant notre communautés, vous pourrez emprunter les guides topos disponibles</p>
 	                </div>
 	                
 	                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
-	                  <img th:src="@{img/icons8-comments-40.png}" alt="comments-icon">
+	                  <img th:src="@{/img/icons8-comments-40.png}" alt="comments-icon">
 	                  <h4>Une communauté active</h4>
 	                  <p>Commentez en toute liberté les sites que vous auriez pu ou auriez envie de visiter à l'aide de notre platforme</p>
 	                </div>
@@ -123,7 +123,7 @@
 	            <div class="icon-box" data-aos="fade-up">
 	              <h4 class="title"><a target="_blank" th:href="@{/site/{id}(id = ${top4Sites[0].id})}"   th:utext="${top4Sites[0].siteName}"></a></h4>
 	              <p class="description">
-	              	<span><img th:src="@{img/icons8-city-48.png}" alt="city-icon"></span>
+	              	<span><img th:src="@{/img/icons8-city-48.png}" alt="city-icon"></span>
 	              	 :  
 	              	<span><a th:utext="${top4Sites[0].city}"></a></span>
 	              </p>
@@ -134,7 +134,7 @@
 	            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
 	              <h4 class="title"><a target="_blank" th:href="@{/site/{id}(id = ${top4Sites[1].id})}"   th:utext="${top4Sites[1].siteName}"></a></h4>
 	              <p class="description">
-	              	<span><img th:src="@{img/icons8-city-48.png}" alt="city-icon"></span>
+	              	<span><img th:src="@{/img/icons8-city-48.png}" alt="city-icon"></span>
 	              	 :  
 	              	<span><a th:utext="${top4Sites[1].city}"></a></span>
 	              </p>
@@ -145,7 +145,7 @@
 	            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
 	              <h4 class="title"><a target="_blank" th:href="@{/site/{id}(id = ${top4Sites[2].id})}"   th:utext="${top4Sites[2].siteName}"></a></h4>
 	              <p class="description">
-	              	<span><img th:src="@{img/icons8-city-48.png}" alt="city-icon"></span>
+	              	<span><img th:src="@{/img/icons8-city-48.png}" alt="city-icon"></span>
 	              	 :  
 	              	<span><a th:utext="${top4Sites[2].city}"></a></span>
 	              </p>
@@ -156,7 +156,7 @@
 	            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
 	              <h4 class="title"><a target="_blank" th:href="@{/site/{id}(id = ${top4Sites[3].id})}"   th:utext="${top4Sites[3].siteName}"></a></h4>
 	              <p class="description">
-	              	<span><img th:src="@{img/icons8-city-48.png}" alt="city-icon"></span>
+	              	<span><img th:src="@{/img/icons8-city-48.png}" alt="city-icon"></span>
 	              	 :  
 	              	<span><a th:utext="${top4Sites[3].city}"></a></span>
 	              </p>

@@ -169,3 +169,9 @@ li {
 .table-responsive {
 	margin-top : 5%;
 }
+
+#tag {
+	font-size:60%;
+    text-align: center;
+    margin-top: -5%;
+}

@@ -47,6 +47,9 @@ public class Site {
 	@Column (name = "is_equipped")
 	boolean equipped;
 	
+	@Column (name="is_tagged")
+	boolean tagged;
+	
 	@OneToMany(mappedBy = "site", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Area> areas;
@@ -55,13 +58,14 @@ public class Site {
 		
 	}
 	
-	public Site(String siteName, String region, String department, String city, int areasNumber, boolean equipped) {
+	public Site(String siteName, String region, String department, String city, int areasNumber, boolean equipped, boolean tagged) {
 		this.siteName = siteName;
 		this.region = region;
 		this.department = department;
 		this.city = city;
 		this.areasNumber = areasNumber;
-		this.equipped = equipped;		
+		this.equipped = equipped;
+		this.tagged = tagged;
 	}
 
 	public int getId() {
@@ -138,9 +142,18 @@ public class Site {
 		this.areas = areas;
 	}
 
+	public boolean isTagged() {
+		return tagged;
+	}
+
+	public void setTagged(boolean tagged) {
+		this.tagged = tagged;
+	}
+
 	@Override
 	public String toString() {
-		return "Site(" + "id=" + id + ", userId=" + userId + ", siteName=" + siteName + ", region=" + region + ", department=" + department + ", city=" + city + ", areasNumber=" + areasNumber + ", equipped=" + equipped + "}";
+		return "Site(" + "id=" + id + ", userId=" + userId + ", siteName=" + siteName + ", region=" + region + ", department=" + department 
+				+ ", city=" + city + "," + " areasNumber=" + areasNumber + ", equipped=" + equipped + ", tagged=" + tagged + "}";
 	}
 
 }

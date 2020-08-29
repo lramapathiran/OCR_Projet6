@@ -37,17 +37,22 @@
 				        	</div>
 	 					</div>                 
 	                  </div>
-	                  <div class="card-body">    
-	                  	
-	                  	<div>
-					    	<p class="col-sm-8"><strong>Region </strong>: <span th:utext="${site.region}"></span></p>
-					    	<p class="col-sm-8"><strong>Département </strong>: <span th:utext="${site.department}"></span></p>
-					    	<p class="col-sm-8"><strong>Ville </strong>: <span th:utext="${site.city}"></span></p>
-					    	<p class="col-sm-8"><strong>Nombre de Secteurs </strong>: <span th:utext="${site.areasNumber}"></span></p>
-					    	<p class="col-sm-4"><strong>Equipé </strong>: 
-					    		<span th:if="${site.equipped}">Oui</span>
-					    		<span th:unless="${site.equipped}">Non</span>	
-					    	</p>
+	                  <div class="card-body">   
+	                  	<div class="row d-flex">
+		                  	<div class="col-sm-9">
+						    	<p class="col-sm-8"><strong>Region </strong>: <span th:utext="${site.region}"></span></p>
+						    	<p class="col-sm-8"><strong>Département </strong>: <span th:utext="${site.department}"></span></p>
+						    	<p class="col-sm-8"><strong>Ville </strong>: <span th:utext="${site.city}"></span></p>
+						    	<p class="col-sm-8"><strong>Nombre de Secteurs </strong>: <span th:utext="${site.areasNumber}"></span></p>
+						    	<p class="col-sm-8"><strong>Equipé </strong>: 
+						    		<span th:if="${site.equipped}">Oui</span>
+						    		<span th:unless="${site.equipped}">Non</span>	
+						    	</p>
+					    	</div>
+					    	<div class="col-sm-3 float-md-right"  id="tag">
+					    		<img th:src="@{/img/icons8-mountain-48.png}" alt="tag-icon">
+		                  		<p>Officiel Les amis de l’escalade</p>
+		                  	</div>
 				    	</div>
 		    			<h4 class="col-sm-6">Les Secteurs</h4>
 	                  	                       

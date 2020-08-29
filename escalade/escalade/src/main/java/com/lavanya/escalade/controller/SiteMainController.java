@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lavanya.escalade.model.Area;
 import com.lavanya.escalade.model.Site;
+import com.lavanya.escalade.model.Topo;
 import com.lavanya.escalade.model.User;
 import com.lavanya.escalade.service.AreaService;
 import com.lavanya.escalade.service.SiteService;
@@ -63,7 +64,7 @@ public class SiteMainController {
 	          return "addSite";
 	    }
 		
-		
+		site.setTagged(false);
 		siteService.save(site);
 		
 		int siteId = site.getId();
@@ -138,5 +139,16 @@ public class SiteMainController {
 		
 		
 		return "sitesListForVisitors";
+	}
+	
+	@PostMapping("/addTag")
+	public String getTagOnSite(@Valid @ModelAttribute ("site") Site site, BindingResult result, int adminId, int currentPage, Model model) {
+		
+		if (result.hasErrors()) {
+	          return "redirect:/sites?userId="+adminId+"&pageNumber="+currentPage;
+	    }
+		siteService.save(site);
+		
+		return "redirect:/sites?userId="+adminId+"&pageNumber="+currentPage;
 	}
 }
