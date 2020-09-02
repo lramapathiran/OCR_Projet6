@@ -50,8 +50,10 @@
 						    	</p>
 					    	</div>
 					    	<div class="col-sm-3 float-md-right"  id="tag">
-					    		<img th:src="@{/img/icons8-mountain-48.png}" alt="tag-icon">
-		                  		<p>Officiel Les amis de l’escalade</p>
+					    		<span th:if="${site.tagged} == true">
+						    		<img th:src="@{/img/icons8-mountain-48.png}" alt="tag-icon">
+			                  		<p>Officiel Les amis de l’escalade</p>
+		                  		</span>
 		                  	</div>
 				    	</div>
 		    			<h4 class="col-sm-6">Les Secteurs</h4>
