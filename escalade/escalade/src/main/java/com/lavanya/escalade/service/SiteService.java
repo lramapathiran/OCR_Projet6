@@ -40,6 +40,11 @@ public class SiteService {
 		siteRepository.save(site);
 	}
 	
+	public void update (int id, boolean tagged) {
+		
+		siteRepository.updateTag(id, tagged);
+	}
+	
 	public List<Site> getUserAllSites(int userId) {
 		
 		return siteRepository.findByUserId(userId);

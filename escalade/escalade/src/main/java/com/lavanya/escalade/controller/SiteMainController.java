@@ -144,10 +144,12 @@ public class SiteMainController {
 	@PostMapping("/addTag")
 	public String getTagOnSite(@Valid @ModelAttribute ("site") Site site, BindingResult result, int adminId, int currentPage, Model model) {
 		
+		System.out.println(site);
 		if (result.hasErrors()) {
 	          return "redirect:/sites?userId="+adminId+"&pageNumber="+currentPage;
 	    }
-		siteService.save(site);
+		
+		siteService.update(site.getId(), site.isTagged());
 		
 		return "redirect:/sites?userId="+adminId+"&pageNumber="+currentPage;
 	}
