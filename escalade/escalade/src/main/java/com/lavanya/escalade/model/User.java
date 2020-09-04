@@ -9,6 +9,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.lavanya.escalade.validation.PasswordMatches;
+import com.lavanya.escalade.validation.ValidEmail;
+
+@PasswordMatches
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
 	
@@ -21,11 +25,14 @@ public class User {
 	private String lastName;
 	
 	@NotBlank(message = "Ce champs est obligatoire")
+	@ValidEmail
 	private String email;
 	
 	@NotNull
 	@Size(min = 8, max = 14, message="veuillez rentrer un mot de passe ayant 8 à 14 caractères!")
 	private String password;
+	
+	private String matchingPassword;
 	
 	@Column (name = "admin_rights")
 	private boolean admin;
@@ -39,16 +46,6 @@ public class User {
 
 	public User() {
 		
-	}
-	
-	public User(String firstName, String lastName, String email, String Password, boolean admin, String roles, boolean isActive) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.admin = admin;
-		this.roles = roles;
-		this.isActive = isActive;
 	}
 	
 	public String getFirstName() {
@@ -83,6 +80,14 @@ public class User {
 		this.password = password;
 	}
 	
+
+	public String getMatchingPassword() {
+		return matchingPassword;
+	}
+
+	public void setMatchingPassword(String matchingPassword) {
+		this.matchingPassword = matchingPassword;
+	}
 
 	public boolean isAdmin() {
 		return admin;

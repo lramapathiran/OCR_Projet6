@@ -31,9 +31,17 @@ public class UserService implements UserDetailsService{
 		return userRepository.findAll(pageable);
 	}
 	
-	public void save(User user) {
+	public void save(final User user) {
+		
+		if (emailExists(user.getEmail())) {
+            throw new UserAlreadyExistException("Veuillez utiliser une autre adresse, celle-ci existe déjà: " + user.getEmail());
+        }
 		userRepository.save(user);
 	}
+	
+	private boolean emailExists(final String email) {
+        return userRepository.findByEmail(email) != null;
+    }
 	
 	public User getUserById(int id) {
 		
