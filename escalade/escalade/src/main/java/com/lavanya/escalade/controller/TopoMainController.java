@@ -132,6 +132,7 @@ public class TopoMainController {
 	@PostMapping("/reservation")
 	public String setReservation(Topo topo, Model model) {
 		
+		System.out.println(topo);
 		int id = topo.getUserId();
 		
 		topoService.save(topo);
