@@ -50,7 +50,7 @@
 	                      <label class="col-sm-2 col-form-label" for="topoDescription">Description</label>
 	                      <div class="col-sm-8">
 		                      <textarea  rows = "8" cols = "80" th:field = "*{topoDescription}" id="topoDescription" form = "topoForm" class="form-control" maxlength="500">... </textarea>
-		                      <small class="form-text text-muted ml-3">max 200 caractères</small>
+		                      <small class="form-text text-muted ml-3">max 500 caractères</small>
 		                      <span th:if="${#fields.hasErrors('topoDescription')}" th:errors="*{topoDescription}" th:errorclass="fieldError"></span>
 		                  </div>
 	                  </div>
@@ -71,7 +71,7 @@
                     
                       <div class="form-group row">
                         <div class="col-md-6  mx-auto d-block">
-                          <a th:href="@{/user(userId = ${user.id})}"><button class="btn btn-secondary">Annuler</button></a>
+                          <a th:href="@{/user}"><button class="btn btn-secondary">Annuler</button></a>
                           <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </div>
                       </div>
@@ -83,7 +83,7 @@
             </div>
           </section>
         </div>
-        <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsAdmin.html :: footer-connected"></footer>
+        <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
       </div>
     </div>
 

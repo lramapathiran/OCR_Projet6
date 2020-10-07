@@ -8,9 +8,10 @@
   </head>
   <body>
     <!-- navbar-->
-     <header id="header2" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: header2Visit"></header>
+     <header id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
     
     <div class="d-flex align-items-stretch">
+      <div id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
       <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">       	
 	          <section class="site-paginated py-5">
@@ -71,12 +72,10 @@
 	
 	          </section>
         </div>
-        <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsAdmin.html :: footer-connected"></footer>
+        <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
       </div>
     </div>
     <!-- JavaScript files-->
     <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
-    <!-- Vendor JS Files -->
-	  <th:block th:replace="fragments/componentsVisit.html :: js-scriptVisit"></th:block>
   </body>
 </html>

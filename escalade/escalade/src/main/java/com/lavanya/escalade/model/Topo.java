@@ -41,7 +41,7 @@ public class Topo {
 	
 	@Column (name = "description")
 	@NotBlank(message = "Ce champs est obligatoire")
-	@Size(max = 200)
+	@Size(max = 500)
 	String topoDescription;
 	
 	@Column (name = "date")

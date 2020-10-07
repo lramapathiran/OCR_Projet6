@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <head th:insert="fragments/componentsRessources.html :: headVisit">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <head th:insert="fragments/componentsRessources.html :: headVisit">
     <title>Les Utilisateurs-LADE</title>
     <meta name="description" content="">
-  </head>
-  <body>
+ </head>
+ <body>
     <!-- navbar-->
     <header id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
     
@@ -29,7 +30,6 @@
 	                          	<th>Nom</th>
 								<th>Prénom</th>
 								<th>email</th>
-								<th>mot de passe</th>
 								<th>Droits d'utilisateurs</th>
 	                        </tr>
 	                      </thead>
@@ -38,11 +38,8 @@
 								<td th:utext = "${user.firstName}" scope="row">...</td>
 								<td th:utext = "${user.lastName}" scope="row">...</td>
 								<td th:utext = "${user.email}" scope="row">...</td>
-								<td th:utext = "${user.password}" scope="row">...</td>
-								<td scope="row">
-									<span th:if="${user.admin}">Administrateur</span>
-									<span th:unless="${user.admin}">Utilisateur</span>
-								</td>
+								<td scope="row" th:if="${user.roles} == 'USER'">Utilisateur</td>
+								<td scope="row" th:if="${user.roles} == 'ADMIN'">Administrateur</td>
 							</tr>
 	                      </tbody>
 	                    </table>
@@ -51,19 +48,19 @@
 		                   	Total d'Utilisateurs : [[${totalUsers}]] - Page : [[${currentPage}]]/[[${totalPages}]]
 		                   	&nbsp; - &nbsp;
 		                   	<span>
-		                   		<a th:if="${currentPage > 1}" th:href="@{/users(userId = ${user.id},pageNumber=${currentPage - 1})}">Précédent</a>
+		                   		<a th:if="${currentPage > 1}" th:href="@{/users(pageNumber=${currentPage - 1})}">Précédent</a>
 		                   		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
 		                   	</span>
 		                   	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
-		                   		<a th:if="${i != currentPage}" th:href="@{/users(userId = ${user.id},pageNumber=${i})}">[[${i}]]</a>
+		                   		<a th:if="${i != currentPage}" th:href="@{/users(pageNumber=${i})}">[[${i}]]</a>
 		                   		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
 		                   	</span>
 		                   	<span>
-		                   		<a th:if="${currentPage != totalPages}" th:href="@{/users(userId = ${user.id},pageNumber=${currentPage + 1})}">Suivant</a>
+		                   		<a th:if="${currentPage != totalPages}" th:href="@{/users(pageNumber=${currentPage + 1})}">Suivant</a>
 		                   		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
 		                   	</span>
 		                   	<span>
-		                   		<a th:if="${currentPage != totalPages}" th:href="@{/users(userId = ${user.id},pageNumber=${totalPages})}">Dernier</a>
+		                   		<a th:if="${currentPage != totalPages}" th:href="@{/users(pageNumber=${totalPages})}">Dernier</a>
 		                   		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
 		                   	</span>
 		                </div> 
@@ -76,10 +73,10 @@
 
           </section>
         </div>
-        <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsAdmin.html :: footer-connected"></footer>
+        <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
       </div>
     </div>
     <!-- JavaScript files-->
     <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
-  </body>
+</body>
 </html>

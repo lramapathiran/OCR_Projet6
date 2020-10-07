@@ -57,14 +57,14 @@
 										<form action="#" th:action="@{/addTag}" th:method="post">	
 											<input type="hidden" name="id" th:value = "${site.id}"/>
 											<input type="hidden" name="userId" th:value = "${site.userId}"/>
-											<input type="hidden" name="siteName" th:value = "${site.siteName}"/>
-											<input type="hidden" name="region" th:value = "${site.region}"/>
-											<input type="hidden" name="department" th:value = "${site.department}"/>
-											<input type="hidden" name="city" th:value = "${site.city}"/>
-											<input type="hidden" name="areasNumber" th:value = "${site.areasNumber}"/>
-											<input type="hidden" name="equipped" th:value = "${site.equipped}"/>
+<!-- 											<input type="hidden" name="siteName" th:value = "${site.siteName}"/> -->
+<!-- 											<input type="hidden" name="region" th:value = "${site.region}"/> -->
+<!-- 											<input type="hidden" name="department" th:value = "${site.department}"/> -->
+<!-- 											<input type="hidden" name="city" th:value = "${site.city}"/> -->
+<!-- 											<input type="hidden" name="areasNumber" th:value = "${site.areasNumber}"/> -->
+<!-- 											<input type="hidden" name="equipped" th:value = "${site.equipped}"/> -->
 <!-- 											<input type="hidden" name="areas" th:value= "${site.areas}"/> -->
-											<input type="hidden" name="adminId" th:value = "${user.id}"/>
+<!-- 											<input type="hidden" name="adminId" th:value = "${user.id}"/> -->
 											<input type="hidden" name="currentPage" th:value = "${currentPage}"/>
 											
 											<span class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -87,19 +87,19 @@
 		                    	Total de Sites : [[${totalSites}]] - Page : [[${currentPage}]]/[[${totalPages}]]
 		                    	&nbsp; - &nbsp;
 		                    	<span>
-		                    		<a th:if="${currentPage > 1}" th:href="@{/sites(userId = ${user.id},pageNumber=${currentPage - 1})}">Précédent</a>
+		                    		<a th:if="${currentPage > 1}" th:href="@{/sites(pageNumber=${currentPage - 1})}">Précédent</a>
 		                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
 		                    	</span>
 		                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
-		                    		<a th:if="${i != currentPage}" th:href="@{/sites(userId = ${user.id},pageNumber=${i})}">[[${i}]]</a>
+		                    		<a th:if="${i != currentPage}" th:href="@{/sites(pageNumber=${i})}">[[${i}]]</a>
 		                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
 		                    	</span>
 		                    	<span>
-		                    		<a th:if="${currentPage != totalPages}" th:href="@{/sites(userId = ${user.id},pageNumber=${currentPage + 1})}">Suivant</a>
+		                    		<a th:if="${currentPage != totalPages}" th:href="@{/sites(pageNumber=${currentPage + 1})}">Suivant</a>
 		                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
 		                    	</span>
 		                    	<span>
-		                    		<a th:if="${currentPage != totalPages}" th:href="@{/sites(userId = ${user.id},pageNumber=${totalPages})}">Dernier</a>
+		                    		<a th:if="${currentPage != totalPages}" th:href="@{/sites(pageNumber=${totalPages})}">Dernier</a>
 		                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
 		                    	</span>
 		                    </div> 
@@ -112,7 +112,7 @@
 	
 	          </section>
         </div>
-        <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsAdmin.html :: footer-connected"></footer>
+        <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
       </div>
     </div>
     <!-- JavaScript files-->

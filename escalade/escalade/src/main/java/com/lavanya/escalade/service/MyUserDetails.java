@@ -2,6 +2,7 @@ package com.lavanya.escalade.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,29 +10,49 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.lavanya.escalade.error.UserAlreadyExistException;
 import com.lavanya.escalade.model.User;
 
-public class UserServiceImpl implements UserDetails{
+public class MyUserDetails implements UserDetails{
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	public String firstName;
+	public String lastName;
 	private String userName;
 	private String password;
 	private boolean isActive;
 	private List<GrantedAuthority> authorities;
+	private int id;
 
-	public UserServiceImpl(User user) {
+	public MyUserDetails(User user) {
 		this.userName = user.getEmail();
-		this.password = user.getPassword();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.password = user.getEncodedPassword();
 		this.isActive = user.isActive();
-		this.authorities = Arrays.stream(user.getRoles().split(","))
-				.map(SimpleGrantedAuthority::new)
-				.collect(Collectors.toList());
+		this.authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRoles()));
+		this.id = user.getId();
+		
 
 	}
-
-	public UserServiceImpl() {}
 	
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+
+	public MyUserDetails() {}
+
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

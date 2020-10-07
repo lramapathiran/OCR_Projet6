@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-	<head th:insert="fragments/componentsVisit.html :: headVisit">
+	<head th:insert="fragments/componentsRessources.html :: headVisit">
 	  <meta charset="utf-8">
 	  <meta content="width=device-width, initial-scale=1.0 shrink-to-fit=no" name="viewport">
 	  <title>Topo</title>
@@ -10,10 +10,11 @@
 	<body>
 	
 	  <!-- ======= Header ======= -->
-	  <header id="header2" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: header2Visit"></header>
+	  <header id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
 	  
 	  <!-- ======= Hero Section ======= -->
 	  <div class="d-flex align-items-stretch justify-content-center">
+	  	<div id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
 	  	<div class="page-holder w-100 d-flex flex-wrap">
 	  
 		  <section id="site">
@@ -83,12 +84,13 @@
 	  </div>	<!-- End Hero -->
 	
 	  <!-- ======= Footer ======= -->
-	  <footer id="footer" th:insert="fragments/componentsVisit.html :: footerVisit"></footer><!-- End Footer -->
+	  <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
+	  <!-- End Footer -->
 	
 	  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 	
 	  <!-- Vendor JS Files -->
-	  <th:block th:replace="fragments/componentsVisit.html :: js-scriptVisit"></th:block>
+	  <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
 	
 	</body>
 	

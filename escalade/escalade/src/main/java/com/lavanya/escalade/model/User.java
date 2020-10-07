@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,13 +31,26 @@ public class User {
 	
 	@NotNull
 	@Size(min = 8, max = 14, message="veuillez rentrer un mot de passe ayant 8 à 14 caractères!")
+	@Transient
 	private String password;
 	
+	@Transient
 	private String matchingPassword;
 	
-	@Column (name = "admin_rights")
-	private boolean admin;
+	@Column(name="password")
+	private String encodedPassword;
 	
+//	@Column (name = "admin_rights")
+//	private boolean admin;
+	
+	public String getEncodedPassword() {
+		return encodedPassword;
+	}
+
+	public void setEncodedPassword(String encodedPassword) {
+		this.encodedPassword = encodedPassword;
+	}
+
 	private String roles;
 	private boolean isActive;
 	
@@ -89,13 +103,13 @@ public class User {
 		this.matchingPassword = matchingPassword;
 	}
 
-	public boolean isAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
-	}
+//	public boolean isAdmin() {
+//		return admin;
+//	}
+//
+//	public void setAdmin(boolean admin) {
+//		this.admin = admin;
+//	}
 
 	public int getId() {
 		return id;
@@ -124,7 +138,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User(" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", admin=" + admin + ", roles=" + roles + ", isActive=" + isActive + "}";
+		return "User(" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", roles=" + roles + ", isActive=" + isActive + "}";
 	}
 
 }

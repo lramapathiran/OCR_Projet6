@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-	<head th:insert="fragments/componentsVisit.html :: headVisit">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments/componentsRessources.html :: headVisit">
 	  <meta charset="utf-8">
 	  <meta content="width=device-width, initial-scale=1.0 shrink-to-fit=no" name="viewport">
 	  <title>Site</title>
-	</head>
+</head>
 
-	<body>
+<body>
 	
 	  <!-- ======= Header ======= -->
-	  <header id="header2" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: header2Visit"></header>
-	  
+
+     <header  sec:authorize="isAnonymous()" id="header2" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: header2Visit"></header>
+     
+     <header sec:authorize="isAuthenticated()" id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
+     	  
 	  <!-- ======= Hero Section ======= -->
-	  <div class="d-flex align-items-stretch justify-content-center">
+	  <div class="d-flex align-items-stretch">
+	  	<div sec:authorize="isAuthenticated()" id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
 	  	<div class="page-holder w-100 d-flex flex-wrap">
 	  
 		  <section id="site">
@@ -31,7 +35,7 @@
 					        <div class="col-md-4 row text-center go-to-form-topo">
 					        	<h5 class="text-uppercase mb-0 go-to-form-title-topo">Topo</h5>
 					            <span class="float-md-right text-center">
-					            	<a th:href="@{/createTopo/{siteId}/{userId}(userId=${site.userId},siteId=${site.id})}"><button type="button" class="btn btn-secondary add-button"><i class="fa fa-plus" aria-hidden="true"></i>
+					            	<a th:href="@{/createTopo/{siteId}(siteId=${site.id})}"><button type="button" class="btn btn-secondary add-button"><i class="fa fa-plus" aria-hidden="true"></i>
 					            	</button></a>
 					            </span>
 				        	</div>
@@ -72,6 +76,15 @@
 				    		</tr>
 						  </tbody>
 	                    </table>
+	                    
+	                    <div sec:authorize="isAuthenticated()">
+	                    	<h4 class="col-sm-6">Topos : </h4>
+	                    	<p class="col-sm-12" th:if="${toposOfTheSite.empty}">Aucun topo enregistré pour ce site à ce jour!</p>
+						  	<ul th:unless="${toposOfTheSite.empty}" th:each="topo : ${toposOfTheSite}">
+							    <li><a target="_blank" th:href="@{/topo/{id}(id = ${topo.id})}" th:utext="${topo.topoName}"></a></li>
+							</ul>
+						 </div>
+	                    
 	                  </div>
 	                </div>
 	              </div>
@@ -81,13 +94,12 @@
 	  </div>	<!-- End Hero -->
 	
 	  <!-- ======= Footer ======= -->
-	  <footer id="footer" th:insert="fragments/componentsVisit.html :: footerVisit"></footer><!-- End Footer -->
+	  <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer></footer><!-- End Footer -->
 	
 	  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 	
 	  <!-- Vendor JS Files -->
-	  <th:block th:replace="fragments/componentsVisit.html :: js-scriptVisit"></th:block>
+	  <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
 	
-	</body>
-	
+</body>	
 </html>

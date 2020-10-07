@@ -3,23 +3,27 @@ package com.lavanya.escalade.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lavanya.escalade.error.UserAlreadyExistException;
 import com.lavanya.escalade.model.Site;
 import com.lavanya.escalade.model.Topo;
 import com.lavanya.escalade.model.User;
 import com.lavanya.escalade.service.UserService;
+import com.lavanya.escalade.service.MyUserDetails;
 import com.lavanya.escalade.service.SiteService;
 import com.lavanya.escalade.service.TopoService;
 
@@ -37,7 +41,11 @@ public class UserMainController {
 	
   
 	@GetMapping("/")
-	public String showHomePage(Model model) {
+	public String showHomePage(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
+		
+		if (userConnected != null) {
+			model.addAttribute("user", userConnected);
+		}
 		
 		Page<Site> sitePage = siteService.getTop4Sites();		
 		List<Site> top4Sites = sitePage.getContent();
@@ -69,31 +77,31 @@ public class UserMainController {
 	}
   
     @PostMapping("/saveUser")
-	public String saveUser (@ModelAttribute("user") @Valid User user,BindingResult result, @ModelAttribute("passwordFirstTry") String passwordFirstTry, Model model) {
+	public String saveUser (@ModelAttribute("user") @Valid User user,BindingResult result, final HttpServletRequest request, Model model,final Errors errors) {
 	  
     	if (result.hasErrors()) {	  
     		return "addUser";
     	}
+    	
+    	try {
+        	user.setRoles("USER");
+        	user.setActive(true);
+        	userService.save(user);
+	    } catch (final UserAlreadyExistException uaeEx) {
+	        model.addAttribute("user", user);
+	        model.addAttribute("message", "Cet adresse existe déjà, veuillez renseigner une autre adresse email!");
+            return "addUser";
+	    }
      
+
 	 
-    	if (user.getPassword().equals(passwordFirstTry)) {
-    		user.setAdmin(false);
-    		userService.save(user);
-    	}
-    	else {
-    		String passwordErrormessage = "Les deux mots de passe doivent être identiques!";
-    		model.addAttribute("passwordConfirmFail", passwordErrormessage);
-    		return "addUser";
-    	}
-	 
-      	return "redirect:/";
+      	return "redirect:/user";
 	}
   
     
     @GetMapping("/users")
-   	public String showUsersListByPage(@RequestParam ("userId") int id, @RequestParam ("pageNumber") int currentPage, Model model) {
+   	public String showUsersListByPage(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam ("pageNumber") int currentPage, Model model) {
 		
-		User userConnected = userService.getUserById(id);
 		model.addAttribute("user", userConnected);
 		
 		Page<User> page = userService.getAllUsers(currentPage);
@@ -112,18 +120,19 @@ public class UserMainController {
 
     }
     
+ 
     @GetMapping("/user")
-	public String showUserConnectedHomePage(@RequestParam (value = "userId") int id, User user, Model model) {
+	public String showUserConnectedHomePage(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 	   
-	   user = userService.getUserById(id);
-	   int userId = user.getId();
-	   model.addAttribute("user", user);
+	   
+	   int userId = userConnected.getId();
+	   model.addAttribute("user", userConnected);
 	  
-
+	   
 	   List<Site> listUserSites= siteService.getUserAllSites(userId);
 	   model.addAttribute("listUserSites", listUserSites);
 	  
-	   return "user";
+	   return "userHome";
 	}
    
    

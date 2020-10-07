@@ -6,7 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Slice;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +21,9 @@ import com.lavanya.escalade.model.Site;
 import com.lavanya.escalade.model.Topo;
 import com.lavanya.escalade.model.User;
 import com.lavanya.escalade.service.AreaService;
+import com.lavanya.escalade.service.MyUserDetails;
 import com.lavanya.escalade.service.SiteService;
+import com.lavanya.escalade.service.TopoService;
 import com.lavanya.escalade.service.UserService;
 
 @Controller
@@ -36,12 +38,14 @@ public class SiteMainController {
 	@Autowired
 	private AreaService areaService;
 	
+	@Autowired
+	private TopoService topoService;
 
 	
 	@GetMapping("/createSite")
-	public String showSiteForm(@RequestParam (value = "userId") int id, Model model) {
+	public String showSiteForm(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
-		User userConnected = userService.getUserById(id);
+		int id = userConnected.getId();
 		model.addAttribute("user", userConnected);
 		
 		Site site = new Site();
@@ -71,15 +75,13 @@ public class SiteMainController {
 		
 		
 		return "redirect:/site/"+siteId;
-//		return "redirect:/user?userId="+id;
 	}
 	
 	@GetMapping("/user/sites")
-	public String showListOfSitesOfUser(@RequestParam (value = "userId") int id, User user, Model model) {
+	public String showListOfSitesOfUser(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 	   
-	   user = userService.getUserById(id);
-	   int userId = user.getId();
-	   model.addAttribute("user", user);
+	   int userId = userConnected.getId();
+	   model.addAttribute("user", userConnected);
 	  
 
 	   List<Site> listUserSites= siteService.getUserAllSites(userId);
@@ -90,9 +92,8 @@ public class SiteMainController {
 
 	
 	@GetMapping("/sites")
-   	public String showSitesListByPage(@RequestParam ("userId") int id, @RequestParam (value = "pageNumber") int currentPage, Model model) {
+   	public String showSitesListByPage(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam (value = "pageNumber") int currentPage, Model model) {
 		
-		User userConnected = userService.getUserById(id);
 		model.addAttribute("user", userConnected);
 		
 		Page<Site> page = siteService.getAllSites(currentPage);
@@ -112,19 +113,31 @@ public class SiteMainController {
     }
 	
 	@GetMapping(value = {"/site/{id}"})
-	public String getSite(@PathVariable(name = "id") int id, Site site, Model model) {
+	public String getSite(@PathVariable(name = "id") int id, Site site, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
+		
+		if (userConnected != null) {
+			model.addAttribute("user", userConnected);
+		}
+		
 		site = siteService.getSiteById(id);
 		List<Area> listOfAreas= areaService.getAreasBySiteId(id);
 		
 		site.setAreas(listOfAreas);
+		
+		List<Topo> listOfTopos = topoService.getTopoBySiteId(id);
 
 		model.addAttribute("site", site);
+		model.addAttribute("toposOfTheSite", listOfTopos);
 		
 		return "site.html";
 	}
 	
 	@GetMapping("/showSites")
-	public String showNextPagesOfSitesToVisitors(@RequestParam (value = "pageNumber") int currentPage, Model model) {
+	public String showNextPagesOfSitesToVisitors(@RequestParam (value = "pageNumber") int currentPage, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
+		
+		if (userConnected != null) {
+			model.addAttribute("user", userConnected);
+		}
 		
 		Page<Site> page = siteService.getAllSites(currentPage);
 		
@@ -142,12 +155,10 @@ public class SiteMainController {
 	}
 	
 	@PostMapping("/addTag")
-	public String getTagOnSite(@Valid Site site, int adminId, int currentPage, Model model) {
-		
-		System.out.println(site);
+	public String getTagOnSite(@ModelAttribute ("site") Site site, @AuthenticationPrincipal MyUserDetails userConnected, int currentPage, Model model) {
 		
 		siteService.update(site.getId(), site.isTagged());
 		
-		return "redirect:/sites?userId="+adminId+"&pageNumber="+currentPage;
+		return "redirect:/sites?pageNumber="+currentPage;
 	}
 }

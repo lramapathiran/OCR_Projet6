@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-	<head th:insert="fragments/componentsVisit.html :: headVisit">
+	<head th:insert="fragments/componentsRessources.html :: headVisit">
 	  <meta charset="utf-8">
 	  <meta content="width=device-width, initial-scale=1.0 shrink-to-fit=no" name="viewport">
 	  <title>Les amis de l'Escalade</title>
@@ -10,7 +10,9 @@
 	<body>
 	
 	  <!-- ======= Header ======= -->
-	  <header id="header" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: headerVisit"></header>
+	  <header sec:authorize="isAnonymous()" id="header" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: headerVisit"></header>
+     
+     <header sec:authorize="isAuthenticated()" id="header" class="fixed-top row header-visit" th:insert="fragments/componentsAdmin.html :: headerHomePageConnected"></header>
 	  
 	  <!-- ======= Hero Section ======= -->
 	  <section id="hero">
@@ -282,10 +284,8 @@
 	  <!-- ======= Footer ======= -->
 	  <footer id="footer" th:insert="fragments/componentsVisit.html :: footerVisit"></footer><!-- End Footer -->
 	
-	  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-	
 	  <!-- Vendor JS Files -->
-	  <th:block th:replace="fragments/componentsVisit.html :: js-scriptVisit"></th:block>
+	  <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
 	
 	</body>
 	

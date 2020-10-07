@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lavanya.escalade.enums.Reservation;
-import com.lavanya.escalade.model.Area;
 import com.lavanya.escalade.model.Site;
 import com.lavanya.escalade.model.Topo;
 import com.lavanya.escalade.model.User;
-
+import com.lavanya.escalade.service.MyUserDetails;
 import com.lavanya.escalade.service.SiteService;
 import com.lavanya.escalade.service.TopoService;
 import com.lavanya.escalade.service.UserService;
@@ -37,16 +37,15 @@ public class TopoMainController {
 	@Autowired
 	private SiteService siteService;
 	
-	@GetMapping("/createTopo/{siteId}/{userId}")
-	public String showTopoForm(@PathVariable("siteId") int id, @PathVariable("userId") int userId, Model model) {
+	@GetMapping("/createTopo/{siteId}")
+	public String showTopoForm(@PathVariable("siteId") int id, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
-		User userConnected = userService.getUserById(userId);
-		
+			
 		model.addAttribute("user", userConnected);
 		
 		Topo topo = new Topo();
 		topo.setSiteId(id);
-		topo.setUserId(userId);
+		topo.setUserId(userConnected.getId());
 		model.addAttribute("topo", topo);
 
 		  
@@ -75,13 +74,11 @@ public class TopoMainController {
 	}
 	
 	@GetMapping("/user/topos")
-	public String showListOfToposOfUser(@RequestParam (value = "userId") int id, User user, Model model) {
+	public String showListOfToposOfUser(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 	   
-	   user = userService.getUserById(id);
-	   int userId = user.getId();
-	   model.addAttribute("user", user);
+	   int userId = userConnected.getId();
+	   model.addAttribute("user", userConnected);
 	  
-
 	   List<Topo> listUserTopos= topoService.getAllUserTopos(userId);
 	   model.addAttribute("listUserTopos", listUserTopos);
 	  
@@ -89,9 +86,8 @@ public class TopoMainController {
 	}
 	
 	@GetMapping("/topos")
-   	public String showToposListByPage(@RequestParam ("userId") int id, @RequestParam ("pageNumber") int currentPage, Model model) {
+   	public String showToposListByPage(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam ("pageNumber") int currentPage, Model model) {
 		
-		User userConnected = userService.getUserById(id);
 		model.addAttribute("user", userConnected);
 		
 		Page<Topo> page = topoService.getAllTopos(currentPage);
@@ -111,7 +107,7 @@ public class TopoMainController {
     }
 	
 	@GetMapping(value = {"/topo/{id}"})
-	public String getSite(@PathVariable(name = "id") int id, Topo topo, Model model) {
+	public String getTopo(@AuthenticationPrincipal MyUserDetails userConnected, @PathVariable(name = "id") int id, Topo topo, Model model) {
 		
 		topo = topoService.getTopoById(id);
 		int siteId = topo.getSiteId();
@@ -121,7 +117,8 @@ public class TopoMainController {
 		
 		Site site = siteService.getSiteById(siteId);
 		String siteName = site.getSiteName();		
-
+		
+		model.addAttribute("user", userConnected);
 		model.addAttribute("topo", topo);
 		model.addAttribute("siteName", siteName);
 		model.addAttribute("topoCreatorEmail", userEmail);
@@ -132,12 +129,9 @@ public class TopoMainController {
 	@PostMapping("/reservation")
 	public String setReservation(Topo topo, Model model) {
 		
-		System.out.println(topo);
-		int id = topo.getUserId();
-		
 		topoService.save(topo);
 		
-		return "redirect:/user/topos?userId="+id;
+		return "redirect:/user/topos";
 	}
 	
 	@PostMapping("/request/reservation")
@@ -152,7 +146,7 @@ public class TopoMainController {
 
 	
 	@GetMapping("/showTopos")
-	public String showNextPagesOfToposToVisitors(@RequestParam (value = "pageNumber") int currentPage, Model model) {
+	public String showNextPagesOfToposToVisitors(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam (value = "pageNumber") int currentPage, Model model) {
 		
 		Page<Topo> page = topoService.getAllTopos(currentPage);
 		
@@ -160,13 +154,14 @@ public class TopoMainController {
 		int totalPages = page.getTotalPages();
 		long totalTopos = page.getTotalElements();
 		
+		model.addAttribute("user", userConnected);
 		model.addAttribute("toposPage", toposPage);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("totalSites", totalTopos);
 		
 		
-		return "toposListForVisitors";
+		return "toposListForUserConnected";
 	}
 
 }

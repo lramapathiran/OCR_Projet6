@@ -1,6 +1,9 @@
 /* your styles go here */
+.fieldError {
+	color: red;
+}
 .sidebar {
-	background: #212529;
+	background: #271f19;
 }
 
 .row {
@@ -13,12 +16,12 @@
 }
 
 .col-sm-3 {
-	margin: Opx;
+	margin: 0px;
 	padding: 7px 0px;
 }
 
 .nav-admin {
-	padding: 9px 0px 2px 200px;
+	padding: 9px 0px 2px 140px;
 }
 
 .logo {
@@ -27,7 +30,7 @@
 
 .nav-visit {
 	padding: 0px;
-	margin-left: 200px;
+	margin: 0px auto;
 } 
 
 .navigation-visit {
@@ -175,3 +178,36 @@ li {
     text-align: center;
     margin-top: -5%;
 }
+
+.user-name {
+	margin: 0px auto;
+	color:white;
+}
+
+.user-name-home {
+	padding: 0rem 0rem 0rem 9rem;
+}
+
+.user-name-home a{
+	color: white;
+}
+
+.nav-home-connected {
+	padding : 0.2rem 0rem 0.1rem 7rem; 
+}
+
+.email {
+	color: white;
+	font-size:1.2vw;
+}
+
+.logo-footer {
+	width:5%;
+	max-width: 100%;
+	height: auto;
+}
+
+.contact-footer {
+	text-decoration:underline;
+}
+

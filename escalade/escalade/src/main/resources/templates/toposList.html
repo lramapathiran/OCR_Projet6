@@ -45,19 +45,19 @@
 		                    	Total de Topos : [[${totalTopos}]] - Page : [[${currentPage}]]/[[${totalPages}]]
 		                    	&nbsp; - &nbsp;
 		                    	<span>
-		                    		<a th:if="${currentPage > 1}" th:href="@{/topos(userId = ${user.id},pageNumber=${currentPage - 1})}">Précédent</a>
+		                    		<a th:if="${currentPage > 1}" th:href="@{/topos(pageNumber=${currentPage - 1})}">Précédent</a>
 		                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
 		                    	</span>
 		                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
-		                    		<a th:if="${i != currentPage}" th:href="@{/topos(userId = ${user.id},pageNumber=${i})}">[[${i}]]</a>
+		                    		<a th:if="${i != currentPage}" th:href="@{/topos(pageNumber=${i})}">[[${i}]]</a>
 		                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
 		                    	</span>
 		                    	<span>
-		                    		<a th:if="${currentPage != totalPages}" th:href="@{/topos(userId = ${user.id},pageNumber=${currentPage + 1})}">Suivant</a>
+		                    		<a th:if="${currentPage != totalPages}" th:href="@{/topos(pageNumber=${currentPage + 1})}">Suivant</a>
 		                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
 		                    	</span>
 		                    	<span>
-		                    		<a th:if="${currentPage != totalPages}" th:href="@{/topos(userId = ${user.id},pageNumber=${totalPages})}">Dernier</a>
+		                    		<a th:if="${currentPage != totalPages}" th:href="@{/topos(pageNumber=${totalPages})}">Dernier</a>
 		                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
 		                    	</span>
 		                    </div> 
@@ -70,7 +70,7 @@
 	
 	          </section>
         </div>
-        <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsAdmin.html :: footer-connected"></footer>
+        <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
       </div>
     </div>
     <!-- JavaScript files-->
