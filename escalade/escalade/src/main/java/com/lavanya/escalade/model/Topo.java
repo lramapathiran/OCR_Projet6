@@ -46,7 +46,7 @@ public class Topo {
 	
 	@Column (name = "date")
 	@NotNull(message = "Ce champs est obligatoire")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	Date topoDate;
 	
 	@Enumerated(EnumType.STRING)

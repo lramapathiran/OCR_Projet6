@@ -1,8 +1,5 @@
 package com.lavanya.escalade.security;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,10 +36,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/user").hasAnyAuthority(ADMIN, USER)
 			.antMatchers("/all").permitAll()
 			.and().formLogin()
+//			.loginPage("/login.html")
 			.defaultSuccessUrl("/user", true)
+			.failureUrl("/login?error=true")
+			.permitAll()
 			.and().logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/login")
+//			.logoutSuccessUrl("/login?logout=true")
 			.invalidateHttpSession(true)
 			.deleteCookies("JSESSIONID");
 	}

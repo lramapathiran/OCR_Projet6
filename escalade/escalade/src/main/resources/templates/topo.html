@@ -39,7 +39,7 @@
 					    	<p class="col-sm-12 description"><strong>Description </strong>: 
 					    		<span th:utext="${topo.topoDescription}"></span>
 					    	</p>
-					    	<p class="col-sm-8"><strong>Date de Parution </strong>: <span th:utext="${topo.topoDate}"></span></p>
+					    	<p class="col-sm-8"><strong>Date de Parution </strong>: <span th:utext="${#dates.format(topo.topoDate, 'dd-MM-yyyy')}"></span></p>
 					    	<p class="col-sm-10"><strong>Contact </strong>: 
 					    		<th:block th:switch="${topo.reservation}">
 								     <span th:case="${T(com.lavanya.escalade.enums.Reservation).R}" th:utext="${topoCreatorEmail}"></span>

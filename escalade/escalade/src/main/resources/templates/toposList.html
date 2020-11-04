@@ -36,7 +36,7 @@
 								<tr th:each="topo : ${toposPage}">
 									<td th:utext = "${topo.topoName}">...</td>
 									<td th:utext = "${topo.localization}">...</td>
-									<td th:utext = "${topo.topoDate}">...</td>
+									<td th:utext = "${#dates.format(topo.topoDate, 'dd-MM-yyyy')}">...</td>
 								</tr>
 							  </tbody>
 		                    </table>

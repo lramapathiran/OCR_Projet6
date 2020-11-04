@@ -18,7 +18,39 @@
       <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">       	
 	          <section class="site-paginated py-5">
-
+	          
+	          	<div class="search">
+	          		<form  th:action="@{/search}" th:object="${search}" th:method="post">
+	          			Rechercher:
+	          			<input type="text" name="keyword" th:value="${search.keyword}"/>	          			
+	          			&nbsp;
+	          			<input type="button" value="Clear" onclick="clearFilter()"/>
+	          			<br>
+	          			<label>Filtré par : </label>
+	          			<select id="department" name="department">
+	          				<option th:if="${search.department} == null" th:selected th:value= null>Département</option>
+	          				<option th:unless="${search.department} == null" th:selected th:utext="${search.department}" th:value="${search.department}">
+	          				<option th:unless="${search.department} == null" th:value= null>Département</option>
+						    <option th:each="department : ${departmentList}" th:value="${department}" th:utext="${department}"></option>
+						 </select>
+						 
+						 <select id="areasNumber" name="areasNumber">
+	          				<option th:if="${search.areasNumber} == null" th:selected th:value= null>Secteurs</option>
+	          				<option th:unless="${search.areasNumber} == null" th:selected th:utext="${search.areasNumber}" th:value="${search.areasNumber}">
+	          				<option th:unless="${search.areasNumber} == null" th:value=null>Secteurs</option>
+						    <option th:each="areasNumber : ${areasNumberList}" th:value="${areasNumber}" th:utext="${areasNumber}"></option>
+						 </select>
+						 
+						 <select id="routesNumber" name="routesNumber">
+	          				<option th:if="${search.routesNumber} == null" th:selected th:value= null>Voies</option>
+	          				<option th:unless="${search.routesNumber} == null" th:selected th:utext="${search.routesNumber}" th:value="${search.routesNumber}">
+	          				<option th:unless="${search.routesNumber} == null" th:value=null>Voies</option>
+						    <option th:each="routesNumber : ${routesNumberList}" th:value="${routesNumber}" th:utext="${routesNumber}"></option>
+						 </select>
+						 <button type="submit"><img th:src="@{/img/icons8-search-24.png}" alt="search logo"/></button>
+	          		</form>
+	          	</div>
+	          	
 	          	<div class="table-responsive">
 		            <div class="row justify-content-center">
 		              <div class="col-lg-6 mb-5">
@@ -26,30 +58,36 @@
 		                  <div class="card-header">
 		                    <h4 class="text-uppercase mb-0">Liste des Sites</h4>
 		                  </div>
-		                  <div class="card-body">                           
-		                    <ul th:each="site : ${sitesPage}">
-							    <li><a target="_blank" th:href="@{/site/{id}(id = ${site.id})}" th:utext="${site.siteName}"></a></li>
-							</ul>
-							
-							<div class="text-center">
-		                    	Page : [[${currentPage}]]/[[${totalPages}]]
-		                    	&nbsp; - &nbsp;
-		                    	<span>
-		                    		<a th:if="${currentPage > 1}" th:href="@{/showSites(pageNumber=${currentPage - 1})}">Précédent</a>
-		                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
-		                    	</span>
-		                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
-		                    		<a th:if="${i != currentPage}" th:href="@{/showSites(pageNumber=${i})}">[[${i}]]</a>
-		                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
-		                    	</span>
-		                    	<span>
-		                    		<a th:if="${currentPage != totalPages}" th:href="@{/showSites(pageNumber=${currentPage + 1})}">Suivant</a>
-		                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
-		                    	</span>
-		                    	<span>
-		                    		<a th:if="${currentPage != totalPages}" th:href="@{/showSites(pageNumber=${totalPages})}">Dernier</a>
-		                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
-		                    	</span>
+		                  <div class="card-body">  
+		                  
+		                  	<div th:if="${sitesPage.empty}"> 
+		                  		<p>Aucun résultat ne correspond à votre recherche!</p>
+		                  	</div>
+		                  	<div th:unless="${sitesPage.empty}">                         
+			                    <ul th:each="site : ${sitesPage}">
+								    <li><a target="_blank" th:href="@{/site/{id}(id = ${site.id})}" th:utext="${site.siteName}"></a></li>
+								</ul>
+								
+								<div class="text-center">
+			                    	Page : [[${currentPage}]]/[[${totalPages}]]
+			                    	&nbsp; - &nbsp;
+			                    	<span>
+			                    		<a th:if="${currentPage > 1}" th:href="@{/showSites/{pageNumber}(pageNumber=${currentPage - 1},keyword=${keyword})}">Précédent</a>
+			                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
+			                    	</span>
+			                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
+			                    		<a th:if="${i != currentPage}" th:href="@{/showSites/{pageNumber}(pageNumber=${i}, keyword=${keyword})}">[[${i}]]</a>
+			                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
+			                    	</span>
+			                    	<span>
+			                    		<a th:if="${currentPage != totalPages}" th:href="@{/showSites/{pageNumber}(pageNumber=${currentPage + 1}, keyword=${keyword})}">Suivant</a>
+			                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
+			                    	</span>
+			                    	<span>
+			                    		<a th:if="${currentPage != totalPages}" th:href="@{/showSites/{pageNumber}(pageNumber=${totalPages}, keyword=${keyword})}">Dernier</a>
+			                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
+			                    	</span>
+			                    </div>
 		                    </div> 
 		                  </div>
 		                </div>
@@ -66,5 +104,12 @@
     </div>
     <!-- JavaScript files-->
     <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
+    <script type="text/javascript">
+    	function clearFilter() {
+    		window.location ='/showSites/1';
+    	}    	
+    </script>
+    
+    
   </body>
 </html>

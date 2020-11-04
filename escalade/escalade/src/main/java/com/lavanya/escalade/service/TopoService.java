@@ -1,5 +1,6 @@
 package com.lavanya.escalade.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.lavanya.escalade.enums.Reservation;
 import com.lavanya.escalade.model.Site;
 import com.lavanya.escalade.model.Topo;
 import com.lavanya.escalade.repository.TopoRepository;
@@ -56,6 +58,17 @@ public class TopoService {
 		Pageable pageable = PageRequest.of(0, 3, sort);
 		
 		return topoRepository.findAll(pageable);
+	}
+	
+	public long getToposCountOfUser(int userId) {
+		return topoRepository.countByUserId(userId);
+	}
+	
+	public Long getCountOfToposToReserveByUser(int userId) {
+		
+		List<Topo> userTopos = topoRepository.findByUserId(userId);
+		Long ToposToReserve = userTopos.stream().filter( c -> c.getReservation() == Reservation.I ).count();
+		return ToposToReserve;
 	}
 	
 	

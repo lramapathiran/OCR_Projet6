@@ -16,5 +16,8 @@ public interface TopoRepository extends JpaRepository<Topo, Integer>{
 	
 	@Query("select u from Topo u where u.siteId = ?1")
 	List <Topo> findBySiteId(int siteId);
+	
+	public Long countByUserId(int userId);
+	
 
 }

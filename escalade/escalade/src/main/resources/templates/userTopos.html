@@ -4,6 +4,7 @@
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Mes Topos</title>
+	<meta name="description" content="">
   </head>
   
   <body>
@@ -44,7 +45,7 @@
 							<tr th:each="topo : ${listUserTopos}">
 								<td><a target="_blank" th:href="@{/topo/{id}(id = ${topo.id})}" th:utext = "${topo.topoName}"></a>...</td>
 								<td th:utext = "${topo.localization}">...</td>
-								<td th:utext = "${topo.topoDate}">...</td>
+								<td th:utext = "${#dates.format(topo.topoDate, 'dd-MM-yyyy')}">...</td>
 								<td th:utext = "${topo.reservation.label}">...</td>								
 								
 								<td>

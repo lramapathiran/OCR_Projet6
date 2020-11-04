@@ -21,7 +21,7 @@
 }
 
 .nav-admin {
-	padding: 9px 0px 2px 140px;
+	padding: 0.56rem 0rem 0.125rem 18.75rem;
 }
 
 .logo {
@@ -52,6 +52,7 @@
 
 #site {
 	margin: auto;
+	padding-top : 7.5rem;
 	width: 50%;	
 }
 
@@ -180,12 +181,13 @@ li {
 }
 
 .user-name {
-	margin: 0px auto;
+	margin: 0rem auto;
+	padding: 0rem 0rem 0rem 10.5rem;
 	color:white;
 }
 
 .user-name-home {
-	padding: 0rem 0rem 0rem 9rem;
+	padding: 0rem 0rem 0rem 19rem;
 }
 
 .user-name-home a{
@@ -193,7 +195,7 @@ li {
 }
 
 .nav-home-connected {
-	padding : 0.2rem 0rem 0.1rem 7rem; 
+	padding : 0.2rem 0rem 0.1rem 15rem; 
 }
 
 .email {
@@ -211,3 +213,20 @@ li {
 	text-decoration:underline;
 }
 
+#footer {
+	margin-top : 7.8rem;
+}
+
+.commentaire {
+	margin-left : 3.75rem;
+	margin-top: -5rem;
+	padding : 3rem 0rem 3rem 26.37rem;
+}
+
+.commentDisplay {
+	margin: 0rem 8.4rem 1.5rem 9.2rem; 
+}
+
+.search{
+	margin:5rem 0rem 0rem 32rem;
+}

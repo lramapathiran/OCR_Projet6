@@ -1,7 +1,5 @@
 package com.lavanya.escalade.service;
 
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +21,61 @@ public class SiteService {
 	private SiteRepository siteRepository;
 	
 	public Page<Site> getAllSites(int pageNumber) {
+		
+			
 		Sort sort = Sort.by("siteName").ascending();
 		Pageable pageable = PageRequest.of(pageNumber - 1, 10, sort);
 		Page<Site> page = siteRepository.findAll(pageable);
 		
 		return page;
 	}
+	
+	public Page<Site> getAllSitesFilteredByKeyword(int pageNumber, String keyword) {
+		
+		Sort sort = Sort.by("siteName").ascending();
+		Pageable pageable = PageRequest.of(pageNumber - 1, 10, sort);
+		
+		if(keyword == null) {
+			return siteRepository.findAll(pageable);
+		}
+		
+		
+		Page<Site> page = siteRepository.findAll(pageable, keyword);
+		
+		return page;
+	}
+	
+	public Page<Site> getAllSitesFiltered(int pageNumber, String keyword, String department, Integer areasNumber, Integer routesNumber) {
+		
+		Sort sort = Sort.by("siteName").ascending();
+		Pageable pageable = PageRequest.of(pageNumber - 1, 10, sort);
+		
+		
+				
+		Page<Site> page = siteRepository.findFilteredSite(pageable, keyword, department, areasNumber, routesNumber);
+		
+		return page;
+	}
+	
+	public List<String> getDepartmentList() {
+		
+		return siteRepository.findDistinctDepartment();
+		
+	}
+	
+	public List<Integer> getAreasNumberList() {
+		
+		return siteRepository.findDistinctAreasNumber();
+		
+	}
+	
+	
+	public List<Integer> getRoutesNumberList() {
+		
+		return siteRepository.findDistinctRoutesNumber();
+		
+	}
+	
 	
 	public void save (Site site) {
 		
@@ -65,6 +111,10 @@ public class SiteService {
 		Page<Site> page = siteRepository.findAll(pageable);
 		
 		return page;
+	}
+	
+	public long getSitesCountOfUser(int userId) {
+		return siteRepository.countByUserId(userId);
 	}
 	
 }

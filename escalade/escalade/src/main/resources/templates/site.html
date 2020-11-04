@@ -18,9 +18,9 @@
 	  <!-- ======= Hero Section ======= -->
 	  <div class="d-flex align-items-stretch">
 	  	<div sec:authorize="isAuthenticated()" id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
-	  	<div class="page-holder w-100 d-flex flex-wrap">
+	  	<div class="page-holder w-100 d-flex flex-wrap row">
 	  
-		  <section id="site">
+		  <section class="col-lg-12" id="site">
 		  
 		  	<div class="row mb-4">
 	              <div class="col-lg-9 mb-4 mb-lg-0 site-card">
@@ -90,16 +90,125 @@
 	              </div>
 	            </div>
 		  </section> 
+		  
+		  <section class="col-lg-12 commentaire" sec:authorize="isAuthenticated()">
+            <div class="row">
+              
+<!--               Form Elements -->
+              <div class="col-lg-12 mb-5">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Ajouter un commentaire</h3>
+                  </div>
+                  <div class="card-body">
+                    <form th:if="${comment.commentId == 0}" class="form-vertical row" action="#" th:action="@{/saveComment}" th:object="${comment}" id="commentForm" method="post">
+                    
+                      <input type="hidden" name="siteId" th:value="${siteId}" id="siteId"/>			  
+	                  
+ 	                  <div class="form-group col-sm-12 ${#fields.hasErrors('commentContent')}? has-error">
+		                      <textarea  rows = "8" cols = "80" th:field = "*{commentContent}" id="commentContent" form = "commentForm" class="form-control" maxlength="600"></textarea>
+		                      <small class="form-text text-muted ml-3">max 600 caractères</small>
+		                      <span th:if="${#fields.hasErrors('commentContent')}" th:errors="*{commentContent}" th:errorclass="fieldError"></span>
+		          
+	                  </div>                         
+                    
+                      <div class="form-group col-sm-1">
+                        <div class="col-md-6  mx-auto d-block">
+                          <button type="submit" class="btn btn-primary">Ajouter</button>
+                        </div>
+                      </div>
+                        
+                    </form>
+                    
+                    <form th:unless="${comment.commentId == 0}" class="form-vertical row" action="#" th:action="@{/updateComment}" th:object="${comment}" id="commentForm" method="post">
+                    
+                      <input type="hidden" name="siteId" th:value="${comment.siteId}" id="siteId"/>
+                      <input type="hidden" name="commentId" th:value="${comment.commentId}" id="id"/>		
+                      	  
+	                  
+ 	                  <div class="form-group col-sm-12 ${#fields.hasErrors('commentContent')}? has-error">
+		                      <textarea  rows = "8" cols = "80" th:field="*{commentContent}" id="commentContent" form = "commentForm" class="form-control" maxlength="600"></textarea>
+		                      <small class="form-text text-muted ml-3">max 600 caractères</small>
+		                      <span th:if="${#fields.hasErrors('commentContent')}" th:errors="*{commentContent}" th:errorclass="fieldError"></span>
+		          
+	                  </div>                         
+                    
+                      <div class="form-group row">
+                        <div class="col-md-6  mx-auto d-block">
+                        	<a th:href="@{/site/{id}(id=${comment.siteId})}"><button type="button" class="btn btn-secondary">Annuler</button></a>
+                          	<button type="submit" value="update" class="btn btn-primary">Modifier</button>
+                        </div>
+                      </div>
+                        
+                    </form>
+                   
+                    
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <section class="col-lg-12">
+          	<div th:if="${siteComments == null}" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
+          		<div class="text-md-left">
+          			<p><strong>Soyez le premier à commenter!</strong></p>
+          		</div>
+          	</div>
+          	<div th:unless="${siteComments == null}" th:each="item : ${siteComments}" class="col-lg-12">
+          		<div th:each="entry, map : ${item}">
+          			<div class="col-lg-10 text-md-right">
+		          		<p th:utext="${#temporals.format(entry.value.commentDate, 'dd/MM/yy HH:mm')}"></p>
+		          	</div>
+
+		          	<div class="col-lg-10 commentDisplay message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
+		          		<div class="row" th:each="entry, map : ${item}">
+		          			
+			          		<div class="col-lg-12 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+				          		<h6 class="col-lg-2 mb-0 mt-3 mt-lg-0" th:each="user : ${entry.key}">
+				          				<span th:utext="${user.firstName}"></span>
+				          				<span th:utext="${user.lastName}"></span>
+				          		</h6>
+				          		<div class="col-lg-10 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+				                     <p class="col-lg-10 mb-0 mt-3 mt-lg-0" th:utext="${entry.value.commentContent}"></p>
+				                     <div sec:authorize="hasAuthority('ADMIN')" class="col-lg-2 bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode row">
+				                     	
+				                     	<span>			                     		
+				                     		<a th:href="@{/site/{id}/updateComment/{commentId}(id = ${siteId}, commentId = ${entry.value.commentId})}"><img th:src="@{/img/icons8-edit-32.png}" alt="update-icon"></a>
+				                     	</span>
+				                     	&nbsp;
+				                     	<th:block>
+				                     		
+				                     		<form action="#" th:action="@{/deleteComment}" method="post">
+				                     			<input type="hidden" name="commentId" th:value="${entry.value.commentId}"/>
+				                     			<input type="hidden" name="siteId" th:value="${entry.value.siteId}"/>
+				                     			<button type="submit">
+				                     				<span>
+				                     					<img th:src="@{/img/icons8-delete-32.png}" alt="delete-icon">
+				                     				</span>
+				                     			</button>
+				                     		</form>
+				                     	</th:block>
+				                     </div>
+				                </div>
+			                </div>
+		                </div>
+		          	</div>
+		          </div>
+          	</div>
+          </section>
+          
+          <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer><!-- End Footer -->
+	
+	  	  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+	
+		  <!-- Vendor JS Files -->
+		  <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
+          
 	  	</div>
-	  </div>	<!-- End Hero -->
-	
-	  <!-- ======= Footer ======= -->
-	  <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer></footer><!-- End Footer -->
-	
-	  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-	
-	  <!-- Vendor JS Files -->
-	  <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>
+	  </div>
+	  
 	
 </body>	
 </html>

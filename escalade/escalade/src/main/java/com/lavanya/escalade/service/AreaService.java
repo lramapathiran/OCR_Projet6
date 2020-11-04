@@ -24,11 +24,6 @@ public class AreaService {
 		areaRepository.save(area);
 	}
 	
-//	public List<Site> getAllSitesSites(int userId) {
-//		
-//		return siteRepository.findByUserId(userId);
-//		
-//	}
 	
 	public List<Area> getAreasBySiteId(int siteId) {
 		

@@ -1,16 +1,21 @@
 package com.lavanya.escalade.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +25,7 @@ import com.lavanya.escalade.enums.Reservation;
 import com.lavanya.escalade.model.Site;
 import com.lavanya.escalade.model.Topo;
 import com.lavanya.escalade.model.User;
+import com.lavanya.escalade.service.CommentService;
 import com.lavanya.escalade.service.MyUserDetails;
 import com.lavanya.escalade.service.SiteService;
 import com.lavanya.escalade.service.TopoService;
@@ -36,6 +42,15 @@ public class TopoMainController {
 	
 	@Autowired
 	private SiteService siteService;
+	
+	@Autowired
+	private CommentService commentService;
+	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+    }
 	
 	@GetMapping("/createTopo/{siteId}")
 	public String showTopoForm(@PathVariable("siteId") int id, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
@@ -62,7 +77,7 @@ public class TopoMainController {
 		if (result.hasErrors()) {
 			User userConnected = userService.getUserById(id);
 			model.addAttribute("user", userConnected);
-	        return "createTopo";
+	        return "addTopo";
 	    }
 		
 		topo.setReservation(Reservation.A);
@@ -78,6 +93,18 @@ public class TopoMainController {
 	   
 	   int userId = userConnected.getId();
 	   model.addAttribute("user", userConnected);
+	   
+	   long sitesCount = siteService.getSitesCountOfUser(userId);
+	   model.addAttribute("sitesCount", sitesCount);
+		   
+	   long toposCount = topoService.getToposCountOfUser(userId);
+	   model.addAttribute("toposCount", toposCount);
+	  
+	   long commentsCount = commentService.getCommentsCountOfUser(userId);
+	   model.addAttribute("commentsCount", commentsCount);
+		  
+	   long toposToReserve = topoService.getCountOfToposToReserveByUser(userId);
+	   model.addAttribute("toposToReserve", toposToReserve);
 	  
 	   List<Topo> listUserTopos= topoService.getAllUserTopos(userId);
 	   model.addAttribute("listUserTopos", listUserTopos);
@@ -88,7 +115,20 @@ public class TopoMainController {
 	@GetMapping("/topos")
    	public String showToposListByPage(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam ("pageNumber") int currentPage, Model model) {
 		
+		int userId = userConnected.getId();
 		model.addAttribute("user", userConnected);
+		   
+		long sitesCount = siteService.getSitesCountOfUser(userId);
+		model.addAttribute("sitesCount", sitesCount);
+			   
+		long toposCount = topoService.getToposCountOfUser(userId);
+		model.addAttribute("toposCount", toposCount);
+		  
+		long commentsCount = commentService.getCommentsCountOfUser(userId);
+		model.addAttribute("commentsCount", commentsCount);
+			  
+		long toposToReserve = topoService.getCountOfToposToReserveByUser(userId);
+		model.addAttribute("toposToReserve", toposToReserve);
 		
 		Page<Topo> page = topoService.getAllTopos(currentPage);
 		

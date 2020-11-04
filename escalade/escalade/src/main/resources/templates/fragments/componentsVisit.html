@@ -17,7 +17,7 @@
 	          <li class="active"><a href="/">Accueil</a></li>
 	          <li><a th:href="@{/signup}">S'inscrire</a></li>
 	          <li><a th:href="@{/login}">Se connecter</a></li>
-	          <li><a th:href="@{/showSites(pageNumber=1)}">Les Sites</a></li>
+	          <li><a th:href="@{/showSites/1}">Les Sites</a></li>
 	          <li class="drop-down"><a href="">Rechercher</a>
 	            <ul>
 	              <li><a href="#">Drop Down 1</a></li>
@@ -55,7 +55,7 @@
 	          <li class="active"><a href="/">Accueil</a></li>
 	          <li><a th:href="@{/signup}">S'inscrire</a></li>
 	          <li><a th:href="@{/login}">Se connecter</a></li>
-	          <li><a th:href="@{/showSites(pageNumber=1)}">Les Sites</a></li>
+	          <li><a th:href="@{/showSites/1}">Les Sites</a></li>
 	          <li class="drop-down"><a href="">Rechercher</a>
 	            <ul>
 	              <li><a href="#">Drop Down 1</a></li>
@@ -92,10 +92,12 @@
               <p class="mb-0">
               	<span><img class="logo-footer" th:src="@{/assets/img/logo.png}"></span>
               	<span>Les Amis de l'Escalade &copy; 2020</span>
+              	<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
               </p>
+              <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
             </div>
             
-            <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>            
+<!--             <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>             -->
           </div>
         </div>	    
 	

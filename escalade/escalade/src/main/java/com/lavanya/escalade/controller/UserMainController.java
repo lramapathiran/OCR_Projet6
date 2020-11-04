@@ -1,14 +1,21 @@
 package com.lavanya.escalade.controller;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,10 +26,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lavanya.escalade.error.UserAlreadyExistException;
+import com.lavanya.escalade.model.Comment;
 import com.lavanya.escalade.model.Site;
 import com.lavanya.escalade.model.Topo;
 import com.lavanya.escalade.model.User;
 import com.lavanya.escalade.service.UserService;
+import com.lavanya.escalade.service.CommentService;
 import com.lavanya.escalade.service.MyUserDetails;
 import com.lavanya.escalade.service.SiteService;
 import com.lavanya.escalade.service.TopoService;
@@ -39,9 +48,14 @@ public class UserMainController {
 	@Autowired
 	private TopoService topoService;
 	
+	@Autowired
+	private CommentService commentService;
+	
   
 	@GetMapping("/")
 	public String showHomePage(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
+		
+		List<Map<User,Comment>> last5CommentsList= new ArrayList<>();
 		
 		if (userConnected != null) {
 			model.addAttribute("user", userConnected);
@@ -55,6 +69,17 @@ public class UserMainController {
 		List<Topo> top3Topos = topoPage.getContent();
 		long totalTopos = topoPage.getTotalElements();
 		
+		Page<Comment> commentPage = commentService.getLast5Comments();
+		List<Comment> last5Comments = commentPage.getContent();
+		for(Comment comment : last5Comments) {
+			Map<User,Comment> map = new HashMap<>();
+			int userId = comment.getUserId();
+			User user = userService.getUserById(userId);
+			map.put(user, comment);
+			last5CommentsList.add(map);	
+			
+		}
+		
 		int totalUsers = userService.getTotalUsersRegistered();
 		
 		model.addAttribute("top4Sites", top4Sites);
@@ -62,6 +87,7 @@ public class UserMainController {
 		model.addAttribute("top3Topos", top3Topos);
 		model.addAttribute("totalTopos", totalTopos);
 		model.addAttribute("totalUsers", totalUsers);
+		model.addAttribute("last5Comments", last5CommentsList);
 		
 		return "index";
 	}
@@ -75,6 +101,33 @@ public class UserMainController {
     	model.addAttribute("user", user);	  
     	return "addUser";
 	}
+    
+    @GetMapping("/login")
+	public String showLoginPage (@RequestParam(value = "error", required = false) String error, 
+            @RequestParam(value = "logout", required = false) String logout,
+            Model model) {
+	  
+    	String errorMessge = null;
+        if(error != null) {
+            errorMessge = "L'identifiant ou le mot de passe est incorrect!!";
+        }
+        if(logout != null) {
+            errorMessge = "Vous vous êtes déconnecté avec succès!!";
+        }
+        model.addAttribute("errorMessge", errorMessge);
+        return "login";
+	}
+    
+    @GetMapping("/logout")
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){    
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login?logout=true";
+    }
+    
+    
   
     @PostMapping("/saveUser")
 	public String saveUser (@ModelAttribute("user") @Valid User user,BindingResult result, final HttpServletRequest request, Model model,final Errors errors) {
@@ -104,6 +157,20 @@ public class UserMainController {
 		
 		model.addAttribute("user", userConnected);
 		
+		int userId = userConnected.getId();
+		
+		long sitesCount = siteService.getSitesCountOfUser(userId);
+		model.addAttribute("sitesCount", sitesCount);
+		   
+		long toposCount = topoService.getToposCountOfUser(userId);
+		model.addAttribute("toposCount", toposCount);
+		  
+		long commentsCount = commentService.getCommentsCountOfUser(userId);
+		model.addAttribute("commentsCount", commentsCount);
+		  
+		long toposToReserve = topoService.getCountOfToposToReserveByUser(userId);
+		model.addAttribute("toposToReserve", toposToReserve);
+		
 		Page<User> page = userService.getAllUsers(currentPage);
 		
 		List<User> usersPage = page.getContent();
@@ -124,10 +191,23 @@ public class UserMainController {
     @GetMapping("/user")
 	public String showUserConnectedHomePage(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 	   
-	   
 	   int userId = userConnected.getId();
 	   model.addAttribute("user", userConnected);
+	   
+	   long sitesCount = siteService.getSitesCountOfUser(userId);
+	   model.addAttribute("sitesCount", sitesCount);
+	   
+	   long toposCount = topoService.getToposCountOfUser(userId);
+	   model.addAttribute("toposCount", toposCount);
+	   
+	   long commentsCount = commentService.getCommentsCountOfUser(userId);
+	   model.addAttribute("commentsCount", commentsCount);
 	  
+	   long toposToReserve = topoService.getCountOfToposToReserveByUser(userId);
+	   model.addAttribute("toposToReserve", toposToReserve);
+	   
+	   List<Comment> listOfUserComments = commentService.getUserComments(userId);
+	   model.addAttribute("userComments", listOfUserComments);
 	   
 	   List<Site> listUserSites= siteService.getUserAllSites(userId);
 	   model.addAttribute("listUserSites", listUserSites);
