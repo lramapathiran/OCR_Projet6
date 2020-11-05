@@ -107,14 +107,14 @@ public class UserMainController {
             @RequestParam(value = "logout", required = false) String logout,
             Model model) {
 	  
-    	String errorMessge = null;
+    	String errorMessage = null;
         if(error != null) {
-            errorMessge = "L'identifiant ou le mot de passe est incorrect!!";
+            errorMessage = "L'identifiant ou le mot de passe est incorrect!!";
         }
         if(logout != null) {
-            errorMessge = "Vous vous êtes déconnecté avec succès!!";
+            errorMessage = "Vous vous êtes déconnecté avec succès!!";
         }
-        model.addAttribute("errorMessge", errorMessge);
+        model.addAttribute("errorMessage", errorMessage);
         return "login";
 	}
     

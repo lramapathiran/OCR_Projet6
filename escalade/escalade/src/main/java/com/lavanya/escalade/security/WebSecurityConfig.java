@@ -36,13 +36,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/user").hasAnyAuthority(ADMIN, USER)
 			.antMatchers("/all").permitAll()
 			.and().formLogin()
-//			.loginPage("/login.html")
-			.defaultSuccessUrl("/user", true)
-			.failureUrl("/login?error=true")
+			.loginPage("/login")
 			.permitAll()
+			.defaultSuccessUrl("/user")
+			.failureUrl("/login.html?error=true")
 			.and().logout()
+			.permitAll()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//			.logoutSuccessUrl("/login?logout=true")
+			.logoutSuccessUrl("/login?logout=true")
 			.invalidateHttpSession(true)
 			.deleteCookies("JSESSIONID");
 	}
