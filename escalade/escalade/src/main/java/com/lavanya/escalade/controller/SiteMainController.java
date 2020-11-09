@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -230,11 +229,9 @@ public class SiteMainController {
 	
 	@GetMapping("/showSites/{pageNumber}")
 	public ModelAndView showNextPagesOfSitesToVisitors(@PathVariable(value = "pageNumber") int currentPage,@RequestParam(name="keyword", required=false) String keyword,
-			@RequestParam(name="department", required=false) String department, @RequestParam(name="areasNumber", required=false) String areasNumber, @RequestParam(name="routesNumber", required=false) String routesNumber, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
+			@RequestParam(name="department", required=false) String department, @RequestParam(name="areasNumber", required=false) Integer areasNumber, @RequestParam(name="routesNumber", required=false) Integer routesNumber, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
 		Search search = new Search();
-		Integer areasNumberConverted = null;
-		Integer routesNumberConverted = null;
 		
 		ModelAndView mav = new ModelAndView("sitesListForVisitors");
 		if (userConnected != null) {
@@ -242,27 +239,21 @@ public class SiteMainController {
 		}
 		
 		
-		if (keyword != null) {
+		if (keyword != null && keyword != "") {
 			search.setKeyword(keyword);
 		}
 		
-		if (department != null) {
+		if (department != null && department != "") {
 			search.setDepartment(department);
 		}
 		
-		if (areasNumber != null) {
-			search.setAreasNumber(areasNumber); 
-			areasNumberConverted = Integer.parseInt(areasNumber);
-		}
-		
-		if (routesNumber != null) {
-			search.setRoutesNumber(routesNumber); 
-			routesNumberConverted = Integer.parseInt(routesNumber);
-		}
+		search.setAreasNumber(areasNumber); 
+		search.setRoutesNumber(routesNumber); 
+
 		
 		model.addAttribute("search", search);
 		
-		Page<Site> page = siteService.getAllSitesFiltered(currentPage, keyword, department, areasNumberConverted, routesNumberConverted);
+		Page<Site> page = siteService.getAllSitesFiltered(currentPage, search);
 		
 		List<String> departmentList = siteService.getDepartmentList();
 		List<Integer> areasNumberList = siteService.getAreasNumberList();
@@ -284,88 +275,7 @@ public class SiteMainController {
 		return mav;
 	}
 	
-	@PostMapping("/search")
-	public String getSearchResult(Search search, Model model) {
-		
-		List<String> params = new ArrayList<>();
-		
-		String keyword = search.getKeyword();
-		String department = search.getDepartment();
-		String areasNumber = search.getAreasNumber();	
-		String routesNumber = search.getRoutesNumber();
-		
-		String param1 = "redirect:/showSites/1?";	
-		params.add(param1);
-		
-		if (keyword != "" && department == "" && areasNumber == "" && routesNumber == "") { 
-			params.add("keyword=" + Objects.toString(keyword,""));
-			}
-		
-		if (keyword != "" && department != "" && areasNumber == "" && routesNumber == "") { 
-			params.add("keyword=" + Objects.toString(keyword,"") + "&department=" + Objects.toString(department,""));	
-			}
-		
-		if (keyword != "" && department != "" && areasNumber != "" && routesNumber == "") { 
-			params.add("keyword=" + Objects.toString(keyword,"") + "&department=" + Objects.toString(department,"") + "&areasNumber=" + Objects.toString(areasNumber,""));
-			}
-		
-		if (keyword != "" && department != "" && areasNumber != "" && routesNumber != "") { 
-			params.add("keyword=" + Objects.toString(keyword,"") + "&department=" + Objects.toString(department,"") + "&areasNumber=" + Objects.toString(areasNumber,"") + "&routesNumber=" + Objects.toString(routesNumber,""));
-			}
-		
-		if (keyword == "" && department != "" && areasNumber == "" && routesNumber == "") { 
-			params.add("department=" + Objects.toString(department,""));
-			}
-		
-		if (keyword == "" && department != "" && areasNumber != "" && routesNumber == "") { 
-			params.add("department=" + Objects.toString(department,"") + "&areasNumber=" + Objects.toString(areasNumber,""));
-			}
-		
-		if (keyword == "" && department != "" && areasNumber != "" && routesNumber != "") { 
-			params.add("department=" + Objects.toString(department,"") + "&areasNumber=" + Objects.toString(areasNumber,"") + "&routesNumber=" + Objects.toString(routesNumber,""));
-			}
-		
-		if (keyword != "" && department != "" && areasNumber == "" && routesNumber != "") { 
-			params.add("keyword=" + Objects.toString(keyword,"") + "&department=" + Objects.toString(department,"")+ "&routesNumber=" + Objects.toString(routesNumber,""));
-			}
-		
-		if (keyword == "" && department != "" && areasNumber == "" && routesNumber != "") { 
-			params.add("department=" + Objects.toString(department,"") + "&routesNumber=" + Objects.toString(routesNumber,""));
-			}
-		
-		if (keyword == "" && department == "" && areasNumber != "" && routesNumber == "") { 
-			params.add("areasNumber=" + Objects.toString(areasNumber,""));
-			}
-		
-		if (keyword != "" && department == "" && areasNumber != "" && routesNumber == "") { 
-			params.add("keyword=" + Objects.toString(keyword,"") + "&areasNumber=" + Objects.toString(areasNumber,""));
-			}
-		
-		if (keyword != "" && department == "" && areasNumber != "" && routesNumber != "") { 
-			params.add("keyword=" + Objects.toString(keyword,"") + "&areasNumber=" + Objects.toString(areasNumber,"") + "&routesNumber=" + Objects.toString(routesNumber,""));
-			}
-		
-		if (keyword == "" && department == "" && areasNumber != "" && routesNumber != "") { 
-			params.add("areasNumber=" + Objects.toString(areasNumber,"") + "&routesNumber=" + Objects.toString(routesNumber,""));
-			}
-		
-		
-		if (keyword == "" && department == "" && areasNumber == "" && routesNumber != "") { 
-			params.add("routesNumber=" + Objects.toString(routesNumber,""));
-			}
-		
-		if (keyword != "" && department == "" && areasNumber == "" && routesNumber != "") { 
-			params.add("keyword=" + Objects.toString(keyword,"") + "&routesNumber=" + Objects.toString(routesNumber,""));
-			}
-		
-		
-		String url = String.join("&", params);		
-		
-		
-		return  url; 
-	}
-	
-	
+
 	@PostMapping("/addTag")
 	public String getTagOnSite(@ModelAttribute ("site") Site site, @AuthenticationPrincipal MyUserDetails userConnected, int currentPage, Model model) {
 		

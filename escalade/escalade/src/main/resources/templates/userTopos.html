@@ -30,8 +30,11 @@
 					        </h6>
 					    </div>            
 	                  </div>
-	                  <div class="card-body">                           
-	                    <table class="table table-striped table-hover card-text">
+	                  <div class="card-body">   
+	                  	<div th:if="${listUserTopos.empty}">
+	                  		<p>Aucun Topo enregistré pour le moment!</p>
+	                  	</div>                        
+	                    <table th:unless="${listUserTopos.empty}" class="table table-striped table-hover card-text">
 	                      <thead>
 							<tr>
 								<th>Nom</th>

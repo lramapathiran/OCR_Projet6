@@ -32,7 +32,7 @@
 					            	<span class="float-md-left" th:utext="${site.siteName}">Nom du Site</span>
 					            </h2>
 					        </div>
-					        <div class="col-md-4 row text-center go-to-form-topo">
+					        <div sec:authorize="isAuthenticated()" class="col-md-4 row text-center go-to-form-topo">
 					        	<h5 class="text-uppercase mb-0 go-to-form-title-topo">Topo</h5>
 					            <span class="float-md-right text-center">
 					            	<a th:href="@{/createTopo/{siteId}(siteId=${site.id})}"><button type="button" class="btn btn-secondary add-button"><i class="fa fa-plus" aria-hidden="true"></i>

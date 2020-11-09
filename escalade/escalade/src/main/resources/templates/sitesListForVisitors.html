@@ -20,7 +20,7 @@
 	          <section class="site-paginated py-5">
 	          
 	          	<div class="search">
-	          		<form  th:action="@{/search}" th:object="${search}" th:method="post">
+	          		<form  th:action="@{/showSites/1}" th:object="${search}" th:method="get">
 	          			Rechercher:
 	          			<input type="text" name="keyword" th:value="${search.keyword}"/>	          			
 	          			&nbsp;
@@ -72,19 +72,19 @@
 			                    	Page : [[${currentPage}]]/[[${totalPages}]]
 			                    	&nbsp; - &nbsp;
 			                    	<span>
-			                    		<a th:if="${currentPage > 1}" th:href="@{/showSites/{pageNumber}(pageNumber=${currentPage - 1},keyword=${keyword})}">Précédent</a>
+			                    		<a th:if="${currentPage > 1}" th:href="@{/showSites/{pageNumber}(pageNumber=${currentPage - 1},keyword=${keyword}, department=${department}, areasNumber=${areasNumber}, routesNumber=${routesNumber})}">Précédent</a>
 			                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
 			                    	</span>
 			                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
-			                    		<a th:if="${i != currentPage}" th:href="@{/showSites/{pageNumber}(pageNumber=${i}, keyword=${keyword})}">[[${i}]]</a>
+			                    		<a th:if="${i != currentPage}" th:href="@{/showSites/{pageNumber}(pageNumber=${i}, keyword=${keyword}, department=${department}, areasNumber=${areasNumber}, routesNumber=${routesNumber})}">[[${i}]]</a>
 			                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
 			                    	</span>
 			                    	<span>
-			                    		<a th:if="${currentPage != totalPages}" th:href="@{/showSites/{pageNumber}(pageNumber=${currentPage + 1}, keyword=${keyword})}">Suivant</a>
+			                    		<a th:if="${currentPage != totalPages}" th:href="@{/showSites/{pageNumber}(pageNumber=${currentPage + 1}, keyword=${keyword}, department=${department}, areasNumber=${areasNumber}, routesNumber=${routesNumber})}">Suivant</a>
 			                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
 			                    	</span>
 			                    	<span>
-			                    		<a th:if="${currentPage != totalPages}" th:href="@{/showSites/{pageNumber}(pageNumber=${totalPages}, keyword=${keyword})}">Dernier</a>
+			                    		<a th:if="${currentPage != totalPages}" th:href="@{/showSites/{pageNumber}(pageNumber=${totalPages}, keyword=${keyword}, department=${department}, areasNumber=${areasNumber}, routesNumber=${routesNumber})}">Dernier</a>
 			                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
 			                    	</span>
 			                    </div>

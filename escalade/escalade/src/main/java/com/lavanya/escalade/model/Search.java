@@ -4,8 +4,8 @@ public class Search {
 
 	String keyword;
 	String department;
-	String areasNumber;
-	String routesNumber; 
+	Integer areasNumber;
+	Integer routesNumber; 
 	
 	public Search() {
 		
@@ -27,19 +27,19 @@ public class Search {
 		this.department = department;
 	}
 
-	public String getAreasNumber() {
+	public Integer getAreasNumber() {
 		return areasNumber;
 	}
 
-	public void setAreasNumber(String areasNumber) {
+	public void setAreasNumber(Integer areasNumber) {
 		this.areasNumber = areasNumber;
 	}
 
-	public String getRoutesNumber() {
+	public Integer getRoutesNumber() {
 		return routesNumber;
 	}
 
-	public void setRoutesNumber(String routesNumber) {
+	public void setRoutesNumber(Integer routesNumber) {
 		this.routesNumber = routesNumber;
 	}
 	

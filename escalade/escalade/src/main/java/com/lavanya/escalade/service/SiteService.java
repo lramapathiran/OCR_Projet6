@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.lavanya.escalade.model.Area;
+import com.lavanya.escalade.model.Search;
 import com.lavanya.escalade.model.Site;
 import com.lavanya.escalade.repository.SiteRepository;
 
@@ -30,29 +31,13 @@ public class SiteService {
 		return page;
 	}
 	
-	public Page<Site> getAllSitesFilteredByKeyword(int pageNumber, String keyword) {
+	public Page<Site> getAllSitesFiltered(int pageNumber, Search search) {
 		
 		Sort sort = Sort.by("siteName").ascending();
 		Pageable pageable = PageRequest.of(pageNumber - 1, 10, sort);
-		
-		if(keyword == null) {
-			return siteRepository.findAll(pageable);
-		}
-		
-		
-		Page<Site> page = siteRepository.findAll(pageable, keyword);
-		
-		return page;
-	}
-	
-	public Page<Site> getAllSitesFiltered(int pageNumber, String keyword, String department, Integer areasNumber, Integer routesNumber) {
-		
-		Sort sort = Sort.by("siteName").ascending();
-		Pageable pageable = PageRequest.of(pageNumber - 1, 10, sort);
-		
-		
+
 				
-		Page<Site> page = siteRepository.findFilteredSite(pageable, keyword, department, areasNumber, routesNumber);
+		Page<Site> page = siteRepository.findFilteredSite(pageable, search);
 		
 		return page;
 	}
