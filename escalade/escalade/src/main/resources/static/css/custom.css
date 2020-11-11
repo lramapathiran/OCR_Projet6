@@ -1,4 +1,5 @@
 /* your styles go here */
+
 .fieldError {
 	color: red;
 }
@@ -24,22 +25,18 @@
 	padding: 0.56rem 0rem 0.125rem 18.75rem;
 }
 
-.logo {
-	padding-left: 20px;
-}
-
 .nav-visit {
-	padding: 0px;
-	margin: 0px auto;
+	padding: 0rem;
+	margin: 0rem 3rem;
 } 
 
 .navigation-visit {
 	padding: 0px;
-	margin: 0px 0px 0px -50px;
+	margin: 0px 0px 0px -1%;
 } 
 
 .menu {
-	margin-right: -40px;
+	margin-right: -18rem;
 }
 
 #header.header-scrolled {
@@ -47,7 +44,7 @@
 }
 
 .logo-visit {
-	padding: 0px 0px 5px 60px;
+	padding: 0rem 1rem 0.5rem 2rem;
 }
 
 #site {
@@ -214,7 +211,7 @@ li {
 }
 
 #footer {
-	margin-top : 7.8rem;
+	padding-top : 2rem;
 }
 
 .commentaire {
@@ -227,10 +224,55 @@ li {
 	margin: 0rem 8.4rem 1.5rem 9.2rem; 
 }
 
-.search{
-	margin:5rem 0rem 0rem 32rem;
+.search > form {
+	width: 50%;
+  	margin: 2.5rem auto;
+}
+
+.search-element {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.selectWrapper {
+	border-radius:36px;
+  	border:1px solid #cccccc;
+}
+
+.buttonWrapper {
+	border-radius:17px;
+  	border:1.5px solid #cccccc;
+}
+
+#clearWrapper {
+	background:#9db8f3;
+}
+
+#searchWrapper {
+	background:#b3c3cf;
 }
 
 .mobile-nav {
 	background: #e8e8e8;
+}
+
+.icofont-navigation-menu {
+	margin-right: -35%;
+}
+
+#count-two {
+    padding-left: 5.6rem;
+}
+
+#count-three {
+    padding-left: 8.7rem;
+}
+
+#count-three > p {
+    margin-left: 4rem;
+	margin-right: -7.6rem;
+}
+
 }

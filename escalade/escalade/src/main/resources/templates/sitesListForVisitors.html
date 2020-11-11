@@ -2,10 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head th:insert="fragments/componentsRessources.html :: headVisit">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta content="" name="description">
+	<meta content="" name="keywords">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">		  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="all,follow">
     <title>Les Sites-LADE</title>
-    <meta name="description" content="">
   </head>
   <body>
     <!-- navbar-->
@@ -21,33 +24,40 @@
 	          
 	          	<div class="search">
 	          		<form  th:action="@{/showSites/1}" th:object="${search}" th:method="get">
-	          			Rechercher:
-	          			<input type="text" name="keyword" th:value="${search.keyword}"/>	          			
-	          			&nbsp;
-	          			<input type="button" value="Clear" onclick="clearFilter()"/>
-	          			<br>
-	          			<label>Filtré par : </label>
-	          			<select id="department" name="department">
-	          				<option th:if="${search.department} == null" th:selected th:value= null>Département</option>
-	          				<option th:unless="${search.department} == null" th:selected th:utext="${search.department}" th:value="${search.department}">
-	          				<option th:unless="${search.department} == null" th:value= null>Département</option>
-						    <option th:each="department : ${departmentList}" th:value="${department}" th:utext="${department}"></option>
-						 </select>
-						 
-						 <select id="areasNumber" name="areasNumber">
-	          				<option th:if="${search.areasNumber} == null" th:selected th:value= null>Secteurs</option>
-	          				<option th:unless="${search.areasNumber} == null" th:selected th:utext="${search.areasNumber}" th:value="${search.areasNumber}">
-	          				<option th:unless="${search.areasNumber} == null" th:value=null>Secteurs</option>
-						    <option th:each="areasNumber : ${areasNumberList}" th:value="${areasNumber}" th:utext="${areasNumber}"></option>
-						 </select>
-						 
-						 <select id="routesNumber" name="routesNumber">
-	          				<option th:if="${search.routesNumber} == null" th:selected th:value= null>Voies</option>
-	          				<option th:unless="${search.routesNumber} == null" th:selected th:utext="${search.routesNumber}" th:value="${search.routesNumber}">
-	          				<option th:unless="${search.routesNumber} == null" th:value=null>Voies</option>
-						    <option th:each="routesNumber : ${routesNumberList}" th:value="${routesNumber}" th:utext="${routesNumber}"></option>
-						 </select>
-						 <button type="submit"><img th:src="@{/img/icons8-search-24.png}" alt="search logo"/></button>
+	          			<div class="search-element">
+		          			<label>Rechercher : </label>&nbsp;
+		          			<input type="text" name="keyword" th:value="${search.keyword}"/>
+		          			<br>
+		          		</div>
+		          		<br/>
+		          		<div class="search-element">
+		          			<select id="department" name="department" class="selectWrapper">
+		          				<option th:if="${search.department} == null" th:selected th:value= null>Département</option>
+		          				<option th:unless="${search.department} == null" th:selected th:utext="${search.department}" th:value="${search.department}">
+		          				<option th:unless="${search.department} == null" th:value= null>Département</option>
+							    <option th:each="department : ${departmentList}" th:value="${department}" th:utext="${department}"></option>
+							 </select>&nbsp;
+<!-- 							 <br/> -->
+<!-- 							 <br/>							  -->
+							 <select id="areasNumber" name="areasNumber" class="selectWrapper">
+		          				<option th:if="${search.areasNumber} == null" th:selected th:value= null>Secteurs</option>
+		          				<option th:unless="${search.areasNumber} == null" th:selected th:utext="${search.areasNumber}" th:value="${search.areasNumber}">
+		          				<option th:unless="${search.areasNumber} == null" th:value=null>Secteurs</option>
+							    <option th:each="areasNumber : ${areasNumberList}" th:value="${areasNumber}" th:utext="${areasNumber}"></option>
+							 </select>&nbsp;
+<!-- 							 <br/> -->
+<!-- 							 <br/>								  -->
+							 <select id="routesNumber" name="routesNumber" class="selectWrapper">
+		          				<option th:if="${search.routesNumber} == null" th:selected th:value= null>Voies</option>
+		          				<option th:unless="${search.routesNumber} == null" th:selected th:utext="${search.routesNumber}" th:value="${search.routesNumber}">
+		          				<option th:unless="${search.routesNumber} == null" th:value=null>Voies</option>
+							    <option th:each="routesNumber : ${routesNumberList}" th:value="${routesNumber}" th:utext="${routesNumber}"></option>
+							 </select>
+						</div>
+						<div class="row search-element">
+							 <input id="clearWrapper" class="buttonWrapper" type="button" value="Effacer" onclick="clearFilter()"/>&nbsp;
+							 <button id="searchWrapper" class="buttonWrapper" type="submit"><img th:src="@{/img/icons8-search-24.png}" alt="search logo"/></button>
+						</div>
 	          		</form>
 	          	</div>
 	          	
