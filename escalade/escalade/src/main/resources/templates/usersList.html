@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
  <head th:insert="fragments/componentsRessources.html :: headVisit">
+ 	<meta content="" name="description">
+	<meta content="" name="keywords">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">		  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="all,follow">
     <title>Les Utilisateurs-LADE</title>
-    <meta name="description" content="">
  </head>
  <body>
     <!-- navbar-->
@@ -18,10 +21,10 @@
           
           <section class="py-5" th:insert="fragments/componentsAdmin.html :: dashboard-data"></section>
         
-          <section class="py-5">
+          <section class="py-5" id="card">
           	<div class="table-responsive">
 	            <div class="row justify-content-center">
-	              <div class="col-lg-7 mb-5">
+	              <div class="col-lg-10 mb-5">
 	                <div class="card">
 	                  <div class="card-header">
 	                    <h6 class="text-uppercase mb-0">Liste des Uilisateurs</h6>
@@ -38,8 +41,8 @@
 	                      </thead>
 	                      <tbody>
 	                      	<tr th:each="user : ${usersPage}">
-								<td th:utext = "${user.firstName}" scope="row">...</td>
 								<td th:utext = "${user.lastName}" scope="row">...</td>
+								<td th:utext = "${user.firstName}" scope="row">...</td>
 								<td th:utext = "${user.email}" scope="row">...</td>
 								<td scope="row" th:if="${user.roles} == 'USER'">Utilisateur</td>
 								<td scope="row" th:if="${user.roles} == 'ADMIN'">Administrateur</td>

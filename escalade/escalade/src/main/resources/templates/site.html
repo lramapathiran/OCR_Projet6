@@ -36,7 +36,7 @@
 					            	<span class="float-md-left" th:utext="${site.siteName}">Nom du Site</span>
 					            </h2>
 					        </div>
-					        <div sec:authorize="isAuthenticated()" class="col-md-4 row text-center go-to-form-topo">
+					        <div sec:authorize="isAuthenticated()" class="col-md-4 d-flex justify-content-end row text-center go-to-form-topo">
 					        	<h5 class="text-uppercase mb-0 go-to-form-title-topo">Topo</h5>
 					            <span class="float-md-right text-center">
 					            	<a th:href="@{/createTopo/{siteId}(siteId=${site.id})}"><button type="button" class="btn btn-secondary add-button"><i class="fa fa-plus" aria-hidden="true"></i>
@@ -95,7 +95,7 @@
 	            </div>
 		  </section> 
 		  
-		  <section class="col-lg-12 commentaire" sec:authorize="isAuthenticated()">
+		  <section class="commentaire" sec:authorize="isAuthenticated()">
             <div class="row">
               
 <!--               Form Elements -->
@@ -116,8 +116,8 @@
 		          
 	                  </div>                         
                     
-                      <div class="form-group col-sm-1">
-                        <div class="col-md-6  mx-auto d-block">
+                      <div class="form-group col-sm-12">
+                        <div class="d-flex justify-content-center mx-auto d-block">
                           <button type="submit" class="btn btn-primary">Ajouter</button>
                         </div>
                       </div>
@@ -137,9 +137,9 @@
 		          
 	                  </div>                         
                     
-                      <div class="form-group row">
-                        <div class="col-md-6  mx-auto d-block">
-                        	<a th:href="@{/site/{id}(id=${comment.siteId})}"><button type="button" class="btn btn-secondary">Annuler</button></a>
+                      <div class="form-group col-sm-12">
+                        <div class="row d-flex justify-content-center mx-auto d-block">
+                        	<a th:href="@{/site/{id}(id=${comment.siteId})}"><button type="button" class="btn btn-secondary">Annuler</button></a>&nbsp;
                           	<button type="submit" value="update" class="btn btn-primary">Modifier</button>
                         </div>
                       </div>
@@ -154,7 +154,7 @@
             </div>
           </section>
           
-          <section class="col-lg-12">
+          <section class="col-lg-12 comment-section">
           	<div th:if="${siteComments == null}" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
           		<div class="text-md-left">
           			<p><strong>Soyez le premier à commenter!</strong></p>
@@ -162,11 +162,11 @@
           	</div>
           	<div th:unless="${siteComments == null}" th:each="item : ${siteComments}" class="col-lg-12">
           		<div th:each="entry, map : ${item}">
-          			<div class="col-lg-10 text-md-right">
-		          		<p th:utext="${#temporals.format(entry.value.commentDate, 'dd/MM/yy HH:mm')}"></p>
+          			<div class="col-lg-12 text-md-right">
+		          		<p><strong><em th:utext="${#temporals.format(entry.value.commentDate, 'dd/MM/yy HH:mm')}"></em></strong></p>
 		          	</div>
 
-		          	<div class="col-lg-10 commentDisplay message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
+		          	<div class="col-lg-12 message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
 		          		<div class="row" th:each="entry, map : ${item}">
 		          			
 			          		<div class="col-lg-12 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
@@ -176,10 +176,10 @@
 				          		</h6>
 				          		<div class="col-lg-10 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
 				                     <p class="col-lg-10 mb-0 mt-3 mt-lg-0" th:utext="${entry.value.commentContent}"></p>
-				                     <div sec:authorize="hasAuthority('ADMIN')" class="col-lg-2 bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode row">
+				                     <div sec:authorize="hasAuthority('ADMIN')" class="col-lg-2 d-flex justify-content-center bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode row">
 				                     	
 				                     	<span>			                     		
-				                     		<a th:href="@{/site/{id}/updateComment/{commentId}(id = ${siteId}, commentId = ${entry.value.commentId})}"><img th:src="@{/img/icons8-edit-32.png}" alt="update-icon"></a>
+				                     		<a th:href="@{/site/{id}/updateComment/{commentId}(id = ${siteId}, commentId = ${entry.value.commentId})}"><i class="fas fa-user-edit fa-2x"></i></a>
 				                     	</span>
 				                     	&nbsp;
 				                     	<th:block>
@@ -187,9 +187,9 @@
 				                     		<form action="#" th:action="@{/deleteComment}" method="post">
 				                     			<input type="hidden" name="commentId" th:value="${entry.value.commentId}"/>
 				                     			<input type="hidden" name="siteId" th:value="${entry.value.siteId}"/>
-				                     			<button type="submit">
+				                     			<button class="comment-delete" type="submit">
 				                     				<span>
-				                     					<img th:src="@{/img/icons8-delete-32.png}" alt="delete-icon">
+				                     					<i class="fas fa-trash fa-2x"></i>
 				                     				</span>
 				                     			</button>
 				                     		</form>

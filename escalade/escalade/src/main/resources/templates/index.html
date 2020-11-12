@@ -12,7 +12,7 @@
 	  <!-- ======= Header ======= -->
 	  <header sec:authorize="isAnonymous()" id="header" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: headerVisit"></header>
      
-     <header sec:authorize="isAuthenticated()" id="header" class="fixed-top row header-visit" th:insert="fragments/componentsAdmin.html :: headerHomePageConnected"></header>
+     <header sec:authorize="isAuthenticated()" id="header" class="fixed-top header-visit" th:insert="fragments/componentsAdmin.html :: headerHomePageConnected"></header>
 	  
 	  <!-- ======= Hero Section ======= -->
 	  <section id="hero">

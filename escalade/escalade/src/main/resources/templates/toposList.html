@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head th:insert="fragments/componentsRessources.html :: headVisit">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="" name="description">
+	<meta content="" name="keywords">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">		  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="all,follow">
     <title>Les Topos-LADE</title>
-    <meta name="description" content="">
-  </head>
+   </head>
   <body>
     <!-- navbar-->
      <header id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
@@ -15,7 +18,7 @@
       <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
         	  <section class="py-5" th:insert="fragments/componentsAdmin.html :: dashboard-data"></section>
-	          <section class="py-5">
+	          <section class="py-5" id="card">
 	          	<div class="table-responsive">
 		            <div class="row">
 		              <div class="col-lg-9 mb-5">

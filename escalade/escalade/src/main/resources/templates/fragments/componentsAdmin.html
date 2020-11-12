@@ -7,24 +7,26 @@
 	<body>
 		  
 		  	  <!-- ======= Header for Home page once connected======= -->
-	      <div class="navbar2" th:fragment="headerHomePageConnected">
+	      <div class="navbar2 row d-flex" th:fragment="headerHomePageConnected">
 	
 	        <div class="logo row navigation-visit">
 	      	  <a href="/" class="logo-visit"><img th:src="@{/assets/img/logo.png}" alt="" class="img-fluid-visit"></a>
 	          <h1 class="text-light"><a href="/"><span class="logo">Les Amis de l'Escalade</span></a></h1>
 	        </div>
 	
-	        <nav class="nav-home-connected nav-menu menu d-none d-lg-block">
-	          <ul>
-	            <li class="active"><a href="/">Accueil</a></li>
-	            <li><a th:href="@{/showSites/1}">Les Sites</a></li>
-	            <li><a th:href="@{/showTopos(pageNumber=1)}">Les Topos</a></li>
-	            <li><a href="#footer">Contacts</a></li>
-	
-	          </ul>
-	        </nav><!-- .nav-menu -->
-	        
-	        <div class="ml-auto d-flex align-items-center list-unstyled mb-0 user-name-home" style="color:white">
+	        <div>
+		        <nav class="nav-home-connected nav-menu menu d-none d-lg-block">
+		          <ul>
+		            <li class="active"><a href="/">Accueil</a></li>
+		            <li><a th:href="@{/showSites/1}">Les Sites</a></li>
+		            <li><a th:href="@{/showTopos(pageNumber=1)}">Les Topos</a></li>
+		            <li><a href="#footer">Contacts</a></li>
+		
+		          </ul>
+		        </nav><!-- .nav-menu -->
+		   	</div>
+		        
+	        <div class="ml-auto d-flex align-items-center list-unstyled mb-0 user-name-home">
 		      <div><a th:href="@{/user}">
 			      <span th:utext="${user.firstName}"></span>&nbsp;
 		          <span th:utext="${user.lastName}"></span></a>
@@ -35,10 +37,10 @@
 	      
 	      <!-- ======= Header mix admin/visit ======= -->
 	    <div class="navbar2" th:fragment="headerVisitAdmin">
-	
+		  <div><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a></div>
 	      <div class="logo-connected row p-2">
 	      	<a href="/"><img th:src="@{/assets/img/logo.png}" alt="" class="img-fluid"></a>
-	        <h1 class="text-light"><a href="/"><span class="logo">Les Amis de l'Escalade</span></a></h1>
+	        <h1 class="text-light"><a href="/"><span class="logo logo-name">Les Amis de l'Escalade</span></a></h1>
 	      </div>
 		  
 	      <nav class="nav-admin nav-menu mr-auto d-none d-lg-block">
@@ -60,15 +62,15 @@
 	      
 <!-- 	      sidebar -->
 		  <div  th:fragment = "sidebar-connected">
-	        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MENU PRINCIPAL</div>
+	        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family side-menu">MENU</div>
 	        <ul class="sidebar-menu list-unstyled">
 	              <li class="sidebar-list-item"><a th:href="@{/user}" class="sidebar-link text-muted active"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
 	              <li class="sidebar-list-item"><a th:href="@{/user/sites}" class="sidebar-link text-muted"><i class="fas fa-map-marked-alt mr-3 text-gray"></i><span>Mes Sites</span></a></li>
 	              <li class="sidebar-list-item"><a th:href="@{/user/topos}" class="sidebar-link text-muted"><i class="fas fa-book-open mr-3 text-gray"></i><span>Mes Topos</span></a></li>
-	              <li class="sidebar-list-item"><a th:href="@{/logout}" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Se déconnecter</span></a></li>
+	              <li class="sidebar-list-item"><a th:href="@{/logout}" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Déconnexion</span></a></li>
 	        </ul>
 	        <div sec:authorize="hasAuthority('ADMIN')">
-		        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">ADMINISTRATEUR</div>
+		        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MEMBRE</div>
 		        <ul class="sidebar-menu list-unstyled">
 		              <li class="sidebar-list-item"><a th:href="@{/users(pageNumber=1)}" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Les Utilisateurs</span></a></li>
 		              <li class="sidebar-list-item"><a th:href="@{/sites(pageNumber=1)}" class="sidebar-link text-muted"><i class="fas fa-map-marked-alt mr-3 text-gray"></i><span>Les Sites</span></a></li>
@@ -89,7 +91,7 @@
                     <span th:unless = "${sitesCount} > 0" class="text-gray">Aucun</span>
                   </div>
                 </div>
-                <div class="icon text-white bg-violet"><i class="fas fa-server"></i></div>
+                <div class="icon text-white bg-violet"><i class="fas fa-mountain"></i></div>
               </div>
             </div>
             <div class="col-xl-3 col-lg-6 mb-4 mb-xl-0">
@@ -102,7 +104,7 @@
                     <span th:unless = "${toposCount} > 0" class="text-gray">Aucun</span>
                   </div>
                 </div>
-                <div class="icon text-white bg-green"><i class="far fa-clipboard"></i></div>
+                <div class="icon text-white bg-green"><i class="fas fa-map"></i></div>
               </div>
             </div>
             <div class="col-xl-3 col-lg-6 mb-4 mb-xl-0">
@@ -115,7 +117,7 @@
                     <span th:unless = "${commentsCount} > 0" class="text-gray">Aucun</span>
                   </div>
                 </div>
-                <div class="icon text-white bg-blue"><i class="fa fa-dolly-flatbed"></i></div>
+                <div class="icon text-white bg-blue"><i class="fas fa-comment-alt"></i></div>
               </div>
             </div>
             <div class="col-xl-3 col-lg-6 mb-4 mb-xl-0">
@@ -129,23 +131,10 @@
                     
                   </div>
                 </div>
-                <div class="icon text-white bg-red"><i class="fas fa-receipt"></i></div>
+                <div class="icon text-white bg-red"><i class="far fa-calendar-check"></i></div>
               </div>
             </div>
           </div>
-	    
-	    <!--       	  footer -->
-<!-- 		  <div class="container-fluid" th:fragment = "footer-connected"> -->
-<!--             <div class="row"> -->
-<!--               <div class="col-md-6 text-center text-md-left text-primary"> -->
-<!--                 <p class="mb-2 mb-md-0">Your company &copy; 2018-2020</p> -->
-<!--               </div> -->
-<!--               <div class="col-md-6 text-center text-md-right text-gray-400"> -->
-<!--                 <p class="mb-0">Design by <a href="https://bootstrapious.com/admin-templates" class="external text-gray-400">Bootstrapious</a></p> -->
-                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-<!--               </div> -->
-<!--             </div> -->
-<!--           </div> -->
 	      
 <!-- 	      Javascript  -->
 	      <th:block th:fragment="js-script">      

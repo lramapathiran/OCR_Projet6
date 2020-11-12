@@ -10,7 +10,7 @@
 	<title>Ajouter un Site</title>
 	
 	<!-- 	multiInput query test -->
-	<link th:href="@{/jq.multiinput.min.css}" rel="stylesheet">
+	<link th:href="@{/jq.multi.min.css}" rel="stylesheet">
   </head>
   <body>
     <!-- navbar-->
@@ -20,7 +20,7 @@
 	  <div id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
       <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-4">
-          <section class="py-6 d-flex justify-content-center">
+          <section class="py-6 d-flex justify-content-center topo-card">
             <div class="row justify-content-center">
               
               <!-- Form Elements -->
@@ -87,15 +87,15 @@
 	                  
 			                  <!--             Jquery dynamic MultiInput form -->
 			          <div>    
-					       <textarea class="form-control" id="areasData" name="areasData">
+					       <textarea class="form-control row" id="areasData" name="areasData">
 					           [{"areas":"","areas":"", "areas":""}]
 					       </textarea>
 					  </div>
 					   
                     
-                      <div class="form-group row">
-                        <div class="col-md-5  mx-auto d-block">
-                          <a th:href="@{/user/sites}"><button type="button" class="btn btn-secondary">Annuler</button></a>
+                      <div class="form-group row col-lg-12">
+                        <div class="col-md-5 d-flex justify-content-center mx-auto d-block">
+                          <a th:href="@{/user/sites}"><button type="button" class="btn btn-secondary">Annuler</button></a>&nbsp;
                           <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </div>
                       </div>
@@ -116,9 +116,7 @@
 	
 	<!--     Jquery for multiInput form -->
     <script src="https://use.fontawesome.com/1e73f8e328.js"></script>
-    <script th:src="@{/jq.multiinput.min.js}"></script>
-<!--     <script th:src="@{/jq.multiinput.js}"></script> -->
-    
+    <script th:src="@{/jq.multiinput.min.js}"></script>    
     <script th:src="@{/site.js}"></script>
   </body>
 </html>
