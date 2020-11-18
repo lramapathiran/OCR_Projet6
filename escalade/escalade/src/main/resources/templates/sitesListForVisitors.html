@@ -11,106 +11,108 @@
     <title>Les Sites-LADE</title>
   </head>
   <body>
-    <!-- navbar-->
-     <header  sec:authorize="isAnonymous()" id="header2" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: header2Visit"></header>
-     
-     <header sec:authorize="isAuthenticated()" id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
-    
-    <div class="d-flex align-items-stretch">
-      <div sec:authorize="isAuthenticated()" id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
-      <div class="page-holder w-100 d-flex flex-wrap">
-        <div class="container-fluid px-xl-5">       	
-	          <section class="site-paginated py-5">
-	          
-	          	<div class="search">
-	          		<form  th:action="@{/showSites/1}" th:object="${search}" th:method="get">
-	          			<div class="search-element">
-		          			<label>Rechercher : </label>&nbsp;
-		          			<input type="text" name="keyword" th:value="${search.keyword}"/>
-		          			<br>
-		          		</div>
-		          		<br/>
-		          		<div class="search-element">
-		          			<select id="department" name="department" class="selectWrapper">
-		          				<option th:if="${search.department} == null" th:selected th:value= null>Département</option>
-		          				<option th:unless="${search.department} == null" th:selected th:utext="${search.department}" th:value="${search.department}">
-		          				<option th:unless="${search.department} == null" th:value= null>Département</option>
-							    <option th:each="department : ${departmentList}" th:value="${department}" th:utext="${department}"></option>
-							 </select>&nbsp;
-<!-- 							 <br/> -->
-<!-- 							 <br/>							  -->
-							 <select id="areasNumber" name="areasNumber" class="selectWrapper">
-		          				<option th:if="${search.areasNumber} == null" th:selected th:value= null>Secteurs</option>
-		          				<option th:unless="${search.areasNumber} == null" th:selected th:utext="${search.areasNumber}" th:value="${search.areasNumber}">
-		          				<option th:unless="${search.areasNumber} == null" th:value=null>Secteurs</option>
-							    <option th:each="areasNumber : ${areasNumberList}" th:value="${areasNumber}" th:utext="${areasNumber}"></option>
-							 </select>&nbsp;
-<!-- 							 <br/> -->
-<!-- 							 <br/>								  -->
-							 <select id="routesNumber" name="routesNumber" class="selectWrapper">
-		          				<option th:if="${search.routesNumber} == null" th:selected th:value= null>Voies</option>
-		          				<option th:unless="${search.routesNumber} == null" th:selected th:utext="${search.routesNumber}" th:value="${search.routesNumber}">
-		          				<option th:unless="${search.routesNumber} == null" th:value=null>Voies</option>
-							    <option th:each="routesNumber : ${routesNumberList}" th:value="${routesNumber}" th:utext="${routesNumber}"></option>
-							 </select>
-						</div>
-						<div class="row search-element">
-							 <input id="clearWrapper" class="buttonWrapper" type="button" value="Effacer" onclick="clearFilter()"/>&nbsp;
-							 <button id="searchWrapper" class="buttonWrapper" type="submit"><img th:src="@{/img/icons8-search-24.png}" alt="search logo"/></button>
-						</div>
-	          		</form>
-	          	</div>
-	          	
-	          	<div class="table-responsive">
-		            <div class="row justify-content-center">
-		              <div class="col-lg-6 mb-5">
-		                <div class="card">
-		                  <div class="card-header">
-		                    <h4 class="text-uppercase mb-0">Liste des Sites</h4>
-		                  </div>
-		                  <div class="card-body">  
-		                  
-		                  	<div th:if="${sitesPage.empty}"> 
-		                  		<p>Aucun résultat ne correspond à votre recherche!</p>
-		                  	</div>
-		                  	<div th:unless="${sitesPage.empty}">                         
-			                    <ul th:each="site : ${sitesPage}">
-								    <li><a target="_blank" th:href="@{/site/{id}(id = ${site.id})}" th:utext="${site.siteName}"></a></li>
-								</ul>
-								
-								<div class="text-center">
-			                    	Page : [[${currentPage}]]/[[${totalPages}]]
-			                    	&nbsp; - &nbsp;
-			                    	<span>
-			                    		<a th:if="${currentPage > 1}" th:href="@{/showSites/{pageNumber}(pageNumber=${currentPage - 1},keyword=${search.keyword}, department=${search.department}, areasNumber=${search.areasNumber}, routesNumber=${search.routesNumber})}">Précédent</a>
-			                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
-			                    	</span>
-			                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
-			                    		<a th:if="${i != currentPage}" th:href="@{/showSites/{pageNumber}(pageNumber=${i}, keyword=${search.keyword}, department=${search.department}, areasNumber=${search.areasNumber}, routesNumber=${search.routesNumber})}">[[${i}]]</a>
-			                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
-			                    	</span>
-			                    	<span>
-			                    		<a th:if="${currentPage != totalPages}" th:href="@{/showSites/{pageNumber}(pageNumber=${currentPage + 1}, keyword=${search.keyword}, department=${search.department}, areasNumber=${search.areasNumber}, routesNumber=${search.routesNumber})}">Suivant</a>
-			                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
-			                    	</span>
-			                    	<span>
-			                    		<a th:if="${currentPage != totalPages}" th:href="@{/showSites/{pageNumber}(pageNumber=${totalPages}, keyword=${search.keyword}, department=${search.department}, areasNumber=${search.areasNumber}, routesNumber=${search.routesNumber})}">Dernier</a>
-			                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
-			                    	</span>
-			                    </div>
-		                    </div> 
-		                  </div>
-		                </div>
-		              </div> 
-		            </div>
-		           </div>
-	            
-	
-	          </section>
-        </div>
-        <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
+  	<div id="page">
+	    <!-- navbar-->
+	     <header  sec:authorize="isAnonymous()" id="header2" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: header2Visit"></header>
+	     
+	     <header sec:authorize="isAuthenticated()" id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
+	    
+	    <div class="d-flex align-items-stretch" id="content">
+	      <div sec:authorize="isAuthenticated()" id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
+	      <div class="page-holder w-100 d-flex flex-wrap">
+	        <div class="container-fluid px-xl-5">       	
+		          <section class="site-paginated py-5">
+		          
+		          	<div class="search">
+		          		<form  th:action="@{/showSites/1}" th:object="${search}" th:method="get">
+		          			<div class="search-element">
+			          			<label>Rechercher : </label>&nbsp;
+			          			<input type="text" name="keyword" th:value="${search.keyword}"/>
+			          			<br>
+			          		</div>
+			          		<br/>
+			          		<div class="search-element">
+			          			<select id="department" name="department" class="selectWrapper">
+			          				<option th:if="${search.department} == null" th:selected th:value= null>Département</option>
+			          				<option th:unless="${search.department} == null" th:selected th:utext="${search.department}" th:value="${search.department}">
+			          				<option th:unless="${search.department} == null" th:value= null>Département</option>
+								    <option th:each="department : ${departmentList}" th:value="${department}" th:utext="${department}"></option>
+								 </select>&nbsp;
+
+								 <select id="areasNumber" name="areasNumber" class="selectWrapper">
+			          				<option th:if="${search.areasNumber} == null" th:selected th:value= null>Secteurs</option>
+			          				<option th:unless="${search.areasNumber} == null" th:selected th:utext="${search.areasNumber}" th:value="${search.areasNumber}">
+			          				<option th:unless="${search.areasNumber} == null" th:value=null>Secteurs</option>
+								    <option th:each="areasNumber : ${areasNumberList}" th:value="${areasNumber}" th:utext="${areasNumber}"></option>
+								 </select>&nbsp;
+
+								 <select id="routesNumber" name="routesNumber" class="selectWrapper">
+			          				<option th:if="${search.routesNumber} == null" th:selected th:value= null>Voies</option>
+			          				<option th:unless="${search.routesNumber} == null" th:selected th:utext="${search.routesNumber}" th:value="${search.routesNumber}">
+			          				<option th:unless="${search.routesNumber} == null" th:value=null>Voies</option>
+								    <option th:each="routesNumber : ${routesNumberList}" th:value="${routesNumber}" th:utext="${routesNumber}"></option>
+								 </select>
+							</div>
+							
+							<div class="row search-element">
+								 <input id="clearWrapper" class="buttonWrapper" type="button" value="Effacer" onclick="clearFilter()"/>&nbsp;
+								 <button id="searchWrapper" class="buttonWrapper" type="submit"><img th:src="@{/img/icons8-search-24.png}" alt="search logo"/></button>
+							</div>
+		          		</form>
+		          	</div>
+		          	
+		          	<div class="table-responsive">
+			            <div class="row justify-content-center">
+			              <div class="col-lg-6 mb-5">
+			                <div class="card">
+			                  <div class="card-header">
+			                    <h4 class="text-uppercase mb-0">Liste des Sites</h4>
+			                  </div>
+			                  <div class="card-body">  
+			                  
+			                  	<div th:if="${sitesPage.empty}"> 
+			                  		<p>Aucun résultat ne correspond à votre recherche!</p>
+			                  	</div>
+			                  	<div th:unless="${sitesPage.empty}">                         
+				                    <ul th:each="site : ${sitesPage}">
+									    <li><a target="_blank" th:href="@{/site/{id}(id = ${site.id})}" th:utext="${site.siteName}"></a></li>
+									</ul>
+									
+									<div class="text-center">
+				                    	Page : [[${currentPage}]]/[[${totalPages}]]
+				                    	&nbsp; - &nbsp;
+				                    	<span>
+				                    		<a th:if="${currentPage > 1}" th:href="@{/showSites/{pageNumber}(pageNumber=${currentPage - 1},keyword=${search.keyword}, department=${search.department}, areasNumber=${search.areasNumber}, routesNumber=${search.routesNumber})}">Précédent</a>
+				                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
+				                    	</span>
+				                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
+				                    		<a th:if="${i != currentPage}" th:href="@{/showSites/{pageNumber}(pageNumber=${i}, keyword=${search.keyword}, department=${search.department}, areasNumber=${search.areasNumber}, routesNumber=${search.routesNumber})}">[[${i}]]</a>
+				                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
+				                    	</span>
+				                    	<span>
+				                    		<a th:if="${currentPage != totalPages}" th:href="@{/showSites/{pageNumber}(pageNumber=${currentPage + 1}, keyword=${search.keyword}, department=${search.department}, areasNumber=${search.areasNumber}, routesNumber=${search.routesNumber})}">Suivant</a>
+				                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
+				                    	</span>
+				                    	<span>
+				                    		<a th:if="${currentPage != totalPages}" th:href="@{/showSites/{pageNumber}(pageNumber=${totalPages}, keyword=${search.keyword}, department=${search.department}, areasNumber=${search.areasNumber}, routesNumber=${search.routesNumber})}">Dernier</a>
+				                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
+				                    	</span>
+				                    </div>
+			                    </div> 
+			                  </div>
+			                </div>
+			              </div> 
+			            </div>
+			           </div>
+		            
+		
+		          </section>
+	        </div>
+	      </div>
+	    </div>
+	    
+	    <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
         
-      </div>
     </div>
     <!-- JavaScript files-->
     <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>

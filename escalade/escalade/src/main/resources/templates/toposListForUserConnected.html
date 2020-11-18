@@ -10,73 +10,80 @@
     <title>Les Topos-LADE</title>
    </head>
   <body>
-    <!-- navbar-->
-     <header id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
-    
-    <div class="d-flex align-items-stretch">
-      <div id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
-      <div class="page-holder w-100 d-flex flex-wrap">
-        <div class="container-fluid px-xl-5">       	
-	          <section class="site-paginated py-5 topo-card">
 
-	          	<div class="table-responsive">
-		            <div class="row justify-content-center">
-		              <div class="col-lg-6 mb-5">
-		                <div class="card">
-		                  <div class="card-header">
-		                    <h4 class="text-uppercase mb-0">Liste des Topos</h4>
-		                  </div>
-		                  <div class="card-body">                           
-		                    <ul th:each="topo : ${toposPage}">
-							    <li>
-							    	<span><a target="_blank" th:href="@{/topo/{id}(id = ${topo.id})}" th:utext="${topo.topoName}"></a></span>
-							    	&nbsp; - &nbsp;
-							    	<p>Statut de Réservation : 
-								    	<th:block class="reservation" th:switch="${topo.reservation}">
-										    <span id="available" th:case="${T(com.lavanya.escalade.enums.Reservation).A}">
-										    	Disponible</span>
-										    <span id="reserved" th:case="${T(com.lavanya.escalade.enums.Reservation).R}">
-										    	Accepté</span>
-										    <span id="unavailable" th:case="${T(com.lavanya.escalade.enums.Reservation).U}">
-										    	Indisponible</span>
-										    <span id="in-progress" th:case="${T(com.lavanya.escalade.enums.Reservation).I}">
-										    	En cours de réservation</span>
-										</th:block>
-									</p>
-							    </li>
-							</ul>
-							
-							<div class="text-center">
-		                    	Page : [[${currentPage}]]/[[${totalPages}]]
-		                    	&nbsp; - &nbsp;
-		                    	<span>
-		                    		<a th:if="${currentPage > 1}" th:href="@{/showTopos(pageNumber=${currentPage - 1})}">Précédent</a>
-		                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
-		                    	</span>
-		                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
-		                    		<a th:if="${i != currentPage}" th:href="@{/showTopos(pageNumber=${i})}">[[${i}]]</a>
-		                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
-		                    	</span>
-		                    	<span>
-		                    		<a th:if="${currentPage != totalPages}" th:href="@{/showTopos(pageNumber=${currentPage + 1})}">Suivant</a>
-		                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
-		                    	</span>
-		                    	<span>
-		                    		<a th:if="${currentPage != totalPages}" th:href="@{/showTopos(pageNumber=${totalPages})}">Dernier</a>
-		                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
-		                    	</span>
-		                    </div> 
-		                  </div>
-		                </div>
-		              </div> 
-		            </div>
-		           </div>
-	            
+    <div id="page">
+    	<!-- navbar-->
+	    <header id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
+	    
+	    <div class="d-flex align-items-stretch" id="content">
+	      <div id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
+	      <div class="page-holder w-100 d-flex flex-wrap">
+	        <div class="container-fluid px-xl-5">       	
+		          <section class="site-paginated py-5 topo-card">
 	
-	          </section>
-        </div>
-        <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
-      </div>
+		          	<div class="table-responsive">
+			            <div class="row justify-content-center">
+			              <div class="col-lg-6 mb-5">
+			                <div class="card">
+			                  <div class="card-header">
+			                    <h4 class="text-uppercase mb-0">Liste des Topos</h4>
+			                  </div>
+			                  <div class="card-body"> 
+			                  	<p><strong><em th:if="${toposPage.empty}">Aucun utilisateur n'a mis à disposition de topo réservable. Soyez le premier!</em></strong></p>                          
+			                    <ul th:unless="${toposPage.empty}" th:each="topo : ${toposPage}">
+								    <li>
+								    	<span><a target="_blank" th:href="@{/topo/{id}(id = ${topo.id})}" th:utext="${topo.topoName}"></a></span>
+								    	&nbsp; - &nbsp;
+								    	<p>Statut de Réservation : 
+									    	<th:block class="reservation" th:switch="${topo.reservation}">
+											    <span id="available" th:case="${T(com.lavanya.escalade.enums.Reservation).A}">
+											    	Disponible</span>
+											    <span id="reserved" th:case="${T(com.lavanya.escalade.enums.Reservation).R}">
+											    	Accepté</span>
+											    <span id="unavailable" th:case="${T(com.lavanya.escalade.enums.Reservation).U}">
+											    	Indisponible</span>
+											    <span id="in-progress" th:case="${T(com.lavanya.escalade.enums.Reservation).I}">
+											    	En cours de réservation</span>
+											</th:block>
+										</p>
+								    </li>
+								</ul>
+								
+								<div class="text-center">
+			                    	Page : [[${currentPage}]]/[[${totalPages}]]
+			                    	&nbsp; - &nbsp;
+			                    	<span>
+			                    		<a th:if="${currentPage > 1}" th:href="@{/showTopos(pageNumber=${currentPage - 1})}">Précédent</a>
+			                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
+			                    	</span>
+			                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
+			                    		<a th:if="${i != currentPage}" th:href="@{/showTopos(pageNumber=${i})}">[[${i}]]</a>
+			                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
+			                    	</span>
+			                    	<span>
+			                    		<a th:if="${currentPage != totalPages}" th:href="@{/showTopos(pageNumber=${currentPage + 1})}">Suivant</a>
+			                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
+			                    	</span>
+			                    	<span>
+			                    		<a th:if="${currentPage != totalPages}" th:href="@{/showTopos(pageNumber=${totalPages})}">Dernier</a>
+			                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
+			                    	</span>
+			                    </div> 
+			                  </div>
+			                </div>
+			              </div> 
+			            </div>
+			           </div>
+		            
+		
+		          </section>
+	        </div>
+	        
+	      </div>
+	    </div>
+	    
+	    <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
+    
     </div>
     <!-- JavaScript files-->
     <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>

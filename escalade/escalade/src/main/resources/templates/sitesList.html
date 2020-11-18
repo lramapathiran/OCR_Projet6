@@ -10,113 +10,107 @@
     <title>Les Sites-LADE</title>
   </head>
   <body>
-    <!-- navbar-->
-     <header id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
-    
-    <div class="d-flex align-items-stretch">
-      <div id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
-      <div class="page-holder w-100 d-flex flex-wrap">
-        <div class="container-fluid px-xl-5">
-        	  <section class="py-5" th:insert="fragments/componentsAdmin.html :: dashboard-data"></section>
-	          <section class="py-5" id="card">
-	          	<div class="table-responsive">
-		            <div class="row">
-		              <div class="col-lg-12 mb-5">
-		                <div class="card">
-		                  <div class="card-header">
-		                    <h6 class="text-uppercase mb-0">Liste des Sites</h6>
-		                  </div>
-		                  <div class="card-body">                           
-		                    <table class="table table-striped table-hover card-text">
-		                      <thead>
-								<tr>
-									<th>Nom</th>
-									<th>Region</th>
-									<th>Département</th>
-									<th>Ville</th>
-									<th>Voies</th>
-									<th>Equipé</th>
-									<th>Tagué</th>
-									<th>Tag</th>
-									
-								</tr>
-							  </thead>
-		                      <tbody>
-								<tr th:each="site : ${sitesPage}">
-									<td><a target="_blank" th:href="@{/site/{id}(id = ${site.id})}" th:utext = "${site.siteName}"></a>...</td>
-									<td th:utext = "${site.region}">...</td>
-									<td th:utext = "${site.department}">...</td>
-									<td th:utext = "${site.city}">...</td>
-									<td th:utext = "${site.areasNumber}">...</td>
-									<td>
-										<span th:if="${site.equipped}">Oui</span>
-										<span th:unless="${site.equipped}">Non</span>
-									</td>
-									<td>
-										<span th:if="${site.tagged}">Oui</span>
-										<span th:unless="${site.tagged}">Non</span>
-									</td>
-									<td>
-										<form action="#" th:action="@{/addTag}" th:method="post">	
-											<input type="hidden" name="id" th:value = "${site.id}"/>
-											<input type="hidden" name="userId" th:value = "${site.userId}"/>
-<!-- 											<input type="hidden" name="siteName" th:value = "${site.siteName}"/> -->
-<!-- 											<input type="hidden" name="region" th:value = "${site.region}"/> -->
-<!-- 											<input type="hidden" name="department" th:value = "${site.department}"/> -->
-<!-- 											<input type="hidden" name="city" th:value = "${site.city}"/> -->
-<!-- 											<input type="hidden" name="areasNumber" th:value = "${site.areasNumber}"/> -->
-<!-- 											<input type="hidden" name="equipped" th:value = "${site.equipped}"/> -->
-<!-- 											<input type="hidden" name="areas" th:value= "${site.areas}"/> -->
-<!-- 											<input type="hidden" name="adminId" th:value = "${user.id}"/> -->
-											<input type="hidden" name="currentPage" th:value = "${currentPage}"/>
-											
-											<span class="btn-group btn-group-toggle" data-toggle="buttons">
-												  <label class="btn btn-secondary active">
-												    <input type="radio" th:name="tagged" th:value="true" id="option1" autocomplete="off" th:checked="${site.tagged}==true"> Actif
-												  </label>
-												  <label class="btn btn-secondary option">
-												    <input type="radio" th:name="tagged" th:value="false" id="option2" autocomplete="off" th:checked="${site.tagged}==false"> Inactif
-												  </label>
-											</span>
-											
-											<button type="submit" class="float-md-right"><img src="https://img.icons8.com/color/30/000000/save.png"/></button>
-										</form>
-									</td>
-								</tr>
-							  </tbody>
-		                    </table>
-		                    <br>
-		                    <div class="text-center">
-		                    	Total de Sites : [[${totalSites}]] - Page : [[${currentPage}]]/[[${totalPages}]]
-		                    	&nbsp; - &nbsp;
-		                    	<span>
-		                    		<a th:if="${currentPage > 1}" th:href="@{/sites(pageNumber=${currentPage - 1})}">Précédent</a>
-		                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
-		                    	</span>
-		                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
-		                    		<a th:if="${i != currentPage}" th:href="@{/sites(pageNumber=${i})}">[[${i}]]</a>
-		                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
-		                    	</span>
-		                    	<span>
-		                    		<a th:if="${currentPage != totalPages}" th:href="@{/sites(pageNumber=${currentPage + 1})}">Suivant</a>
-		                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
-		                    	</span>
-		                    	<span>
-		                    		<a th:if="${currentPage != totalPages}" th:href="@{/sites(pageNumber=${totalPages})}">Dernier</a>
-		                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
-		                    	</span>
-		                    </div> 
-		                  </div>
-		                </div>
-		              </div> 
-		            </div>
-		           </div>
-	            
-	
-	          </section>
-        </div>
-        <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
-      </div>
+  	<div id="page">
+	    <!-- navbar-->
+	    <header id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
+	    
+	    <div class="d-flex align-items-stretch" id="content">
+	      <div id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
+	      <div class="page-holder w-100 d-flex flex-wrap">
+	        <div class="container-fluid px-xl-5">
+	        	  <section class="py-5" th:insert="fragments/componentsAdmin.html :: dashboard-data"></section>
+		          <section class="py-5" id="card">
+		          	<div class="table-responsive">
+			            <div class="row">
+			              <div class="col-lg-12 mb-5">
+			                <div class="card">
+			                  <div class="card-header">
+			                    <h6 class="text-uppercase mb-0">Liste des Sites</h6>
+			                  </div>
+			                  <div class="card-body">                           
+			                    <table class="table table-striped table-hover card-text">
+			                      <thead>
+									<tr>
+										<th>Nom</th>
+										<th>Region</th>
+										<th>Département</th>
+										<th>Ville</th>
+										<th>Voies</th>
+										<th>Equipé</th>
+										<th>Tagué</th>
+										<th>Tag</th>
+										
+									</tr>
+								  </thead>
+			                      <tbody>
+									<tr th:each="site : ${sitesPage}">
+										<td><a target="_blank" th:href="@{/site/{id}(id = ${site.id})}" th:utext = "${site.siteName}"></a>...</td>
+										<td th:utext = "${site.region}">...</td>
+										<td th:utext = "${site.department}">...</td>
+										<td th:utext = "${site.city}">...</td>
+										<td th:utext = "${site.areasNumber}">...</td>
+										<td>
+											<span th:if="${site.equipped}">Oui</span>
+											<span th:unless="${site.equipped}">Non</span>
+										</td>
+										<td>
+											<span th:if="${site.tagged}">Oui</span>
+											<span th:unless="${site.tagged}">Non</span>
+										</td>
+										<td>
+											<form action="#" th:action="@{/addTag}" th:method="post">	
+												<input type="hidden" name="id" th:value = "${site.id}"/>
+												<input type="hidden" name="userId" th:value = "${site.userId}"/>
+												<input type="hidden" name="currentPage" th:value = "${currentPage}"/>
+												
+												<span class="btn-group btn-group-toggle" data-toggle="buttons">
+													  <label class="btn btn-secondary active">
+													    <input type="radio" th:name="tagged" th:value="true" id="option1" autocomplete="off" th:checked="${site.tagged}==true"> Actif
+													  </label>
+													  <label class="btn btn-secondary option">
+													    <input type="radio" th:name="tagged" th:value="false" id="option2" autocomplete="off" th:checked="${site.tagged}==false"> Inactif
+													  </label>
+												</span>
+												
+												<button type="submit" class="float-md-right"><img src="https://img.icons8.com/color/30/000000/save.png"/></button>
+											</form>
+										</td>
+									</tr>
+								  </tbody>
+			                    </table>
+			                    <br>
+			                    <div class="text-center">
+			                    	Total de Sites : [[${totalSites}]] - Page : [[${currentPage}]]/[[${totalPages}]]
+			                    	&nbsp; - &nbsp;
+			                    	<span>
+			                    		<a th:if="${currentPage > 1}" th:href="@{/sites(pageNumber=${currentPage - 1})}">Précédent</a>
+			                    		<span th:unless="${currentPage > 1}">Précédent</span> &nbsp; - &nbsp;
+			                    	</span>
+			                    	<span th:each="i: ${#numbers.sequence(1,totalPages)}">
+			                    		<a th:if="${i != currentPage}" th:href="@{/sites(pageNumber=${i})}">[[${i}]]</a>
+			                    		<span th:unless="${i != currentPage}">[[${i}]]</span> &nbsp; - &nbsp;
+			                    	</span>
+			                    	<span>
+			                    		<a th:if="${currentPage != totalPages}" th:href="@{/sites(pageNumber=${currentPage + 1})}">Suivant</a>
+			                    		<span th:unless="${currentPage != totalPages}">Suivant</span> &nbsp; - &nbsp;
+			                    	</span>
+			                    	<span>
+			                    		<a th:if="${currentPage != totalPages}" th:href="@{/sites(pageNumber=${totalPages})}">Dernier</a>
+			                    		<span th:unless="${currentPage != totalPages}">Dernier</span> &nbsp; - &nbsp;
+			                    	</span>
+			                    </div> 
+			                  </div>
+			                </div>
+			              </div> 
+			            </div>
+			           </div>
+		            
+		
+		          </section>
+	        </div>
+	      </div>
+	    </div>
+	    <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
     </div>
     <!-- JavaScript files-->
     <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>

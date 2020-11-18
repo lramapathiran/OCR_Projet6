@@ -155,12 +155,23 @@
           </section>
           
           <section class="col-lg-12 comment-section">
-          	<div th:if="${siteComments == null}" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
-          		<div class="text-md-left">
-          			<p><strong>Soyez le premier à commenter!</strong></p>
-          		</div>
+          
+	        <div class="col-lg-12">          
+	          	<div th:if="${user}==null" class="col-lg-12 message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
+	          		<div class="text-md-center">
+	          			<p><strong>Vous souhaitez commenter, connectez-vous!!</strong></p>
+	          		</div>
+	          	</div>
+	        </div>
+	        
+	        <div class="col-lg-12" sec:authorize="isAuthenticated()">
+	          	<div th:if="${#arrays.isEmpty(siteComments)}" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
+	          		<div class="text-md-center">
+	          			<p><strong>Soyez le premier à commenter!</strong></p>
+	          		</div>
+	          	</div>
           	</div>
-          	<div th:unless="${siteComments == null}" th:each="item : ${siteComments}" class="col-lg-12">
+          	<div th:unless="${#arrays.isEmpty(siteComments)}" th:each="item : ${siteComments}" class="col-lg-12">
           		<div th:each="entry, map : ${item}">
           			<div class="col-lg-12 text-md-right">
 		          		<p><strong><em th:utext="${#temporals.format(entry.value.commentDate, 'dd/MM/yy HH:mm')}"></em></strong></p>

@@ -78,7 +78,8 @@
 		                      <div>
 		                      	<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="fieldError"></span>
 		                      	<span th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}" th:errorclass="fieldError"></span>
-		                      	<span th:utext="${message}"></span>
+		                      	<span  class="message" th:utext="${message}"></span>
+		                      	<span class="message" th:if="${#fields.hasErrors('global')}" th:errors="*{global}">Incorrect date</span>
 		                      </div>         
 							
 		                      
@@ -86,7 +87,7 @@
 		                    
 		                      <div class="form-group row">
 		                        <div class="col-md5  mx-auto d-block">
-		                          <a href="/"><button class="btn btn-secondary">Annuler</button></a>
+		                          <a th:href="@{/}"><button type="button" class="btn btn-secondary">Annuler</button></a>
 		                          <button type="submit" class="btn btn-primary">Enregistrer</button>
 		                        </div>
 		                      </div>

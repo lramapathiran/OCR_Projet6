@@ -45,7 +45,7 @@
 	                  <div class="form-group row ${#fields.hasErrors('localization')}? has-error">
 	                     <label class="col-sm-2 col-form-label" for="localization">Ville</label>
 	                     <div class="col-sm-8">
-		                     <input type="text" th:field="*{localization}" id="localization" class="form-control">
+		                     <input type="text" th:name="localization" th:value="${city}" id="localization" class="form-control">
 		                     <span th:if="${#fields.hasErrors('localization')}" th:errors="*{localization}" th:errorclass="fieldError"></span>
 		                 </div>
 	                  </div>
@@ -66,6 +66,7 @@
                         <div class="col-sm-8">
 	                        <input type="date" th:field="*{topoDate}" id="topoDate" class="form-control is-valid">
 	                        <span th:if="${#fields.hasErrors('topoDate')}" th:errors="*{topoDate}" th:errorclass="fieldError">Merci de préciser la Date</span>
+	                        <span th:if="${message}" th:text="${message}"></span>
 	                    </div>
                       </div>    
                          

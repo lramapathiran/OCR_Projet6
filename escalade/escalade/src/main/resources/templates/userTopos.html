@@ -11,99 +11,97 @@
   </head>
   
   <body>
-    <!-- navbar-->
-	 <header id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
+  	<div id="page">
+	    <!-- navbar-->
+		<header id="header2" class="fixed-top" th:insert="fragments/componentsAdmin.html :: headerVisitAdmin"></header>
+		
+	    <div class="d-flex align-items-stretch" id="content">
+		  <div id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
+		      <div class="page-holder w-100 d-flex flex-wrap">
+		        <div class="container-fluid px-xl-5">
+		          <section class="py-5" th:insert="fragments/componentsAdmin.html :: dashboard-data"></section>
+		          
+		          <section class="py-6 d-flex justify-content-center">
+		            <div class="row col-lg-12 mb-4 justify-content-center">
+		              <div class="col-lg-12 mb-4 mb-lg-0">
+		                <div class="card">
+		                  <div class="card-header">
+		                  	<div class="col-md-6 text-center">
+						        <h6 class="text-uppercase mb-0">
+						          	<span class="float-md-left">Ma Liste de Topos</span>
+						        </h6>
+						    </div>            
+		                  </div>
+		                  <div class="card-body">   
+		                  	<div th:if="${listUserTopos.empty}" class="d-flex justify-content-center">
+		                  		<p><strong>Aucun Topo enregistré pour le moment!</strong></p>
+		                  	</div>                        
+		                    <table th:unless="${listUserTopos.empty}" class="table table-striped table-hover card-text">
+		                      <thead>
+								<tr>
+									<th>Nom</th>
+									<th>Ville</th>
+									<th>Date</th>	
+									<th>Statut</th>
+									<th>Actions</th>					
+								</tr>
+							</thead>
+		                      <tbody>
+								<tr th:each="topo : ${listUserTopos}">
+									<td><a target="_blank" th:href="@{/topo/{id}(id = ${topo.id})}" th:utext = "${topo.topoName}"></a>...</td>
+									<td th:utext = "${topo.localization}">...</td>
+									<td th:utext = "${#dates.format(topo.topoDate, 'dd-MM-yyyy')}">...</td>
+									<td th:utext = "${topo.reservation.label}">...</td>								
+									
+									<td>
+										<form action="#" th:action="@{/reservation}" th:method="post">	
+											<input type="hidden" name="id" th:value = "${topo.id}"/>
+											<input type="hidden" name="userId" th:value = "${topo.userId}"/>
+											<input type="hidden" name="siteId" th:value = "${topo.siteId}"/>
+											<input type="hidden" name="topoName" th:value = "${topo.topoName}"/>
+											<input type="hidden" name="localization" th:value = "${topo.localization}"/>
+											<input type="hidden" name="topoDescription" th:value = "${topo.topoDescription}"/>
+											<input type="hidden" name="topoDate" th:value = "${topo.topoDate}"/>
+											
+											<span class="btn-group-toggle" data-toggle="buttons" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).A} or ${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).R}">
+												  <label class="btn btn-secondary active">
+												    <input type="radio" name="reservation" th:value="${topo.reservation.U}" checked autocomplete="off"> Indisponible
+												  </label>
+											</span>
+											
+											<span class="btn-group btn-group-toggle" data-toggle="buttons" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).I}">
+												  <label class="btn btn-secondary active">
+												    <input type="radio" name="reservation" th:value="${topo.reservation.R}" id="option1" autocomplete="off" checked>Accepté
+												  </label>
+												  <label class="btn btn-secondary option">
+												    <input type="radio" name="reservation" th:value="${topo.reservation.U}" id="option2" autocomplete="off"> Indisponible
+												  </label>
+											</span>
 	
-    <div class="d-flex align-items-stretch">
-	  <div id="sidebar" class="sidebar py-3" th:insert="fragments/componentsAdmin.html :: sidebar-connected"></div>
-	  
-      <div class="d-flex justify-content-center ">
-	      <div class="page-holder w-100 d-flex flex-wrap">
-	        <div class="container-fluid px-xl-5">
-	          <section class="py-5" th:insert="fragments/componentsAdmin.html :: dashboard-data"></section>
-	          
-	          <section class="py-6 d-flex justify-content-center">
-	            <div class="row col-lg-12 mb-4 justify-content-center">
-	              <div class="col-lg-12 mb-4 mb-lg-0">
-	                <div class="card">
-	                  <div class="card-header">
-	                  	<div class="col-md-6 text-center">
-					        <h6 class="text-uppercase mb-0">
-					          	<span class="float-md-left">Ma Liste de Topos</span>
-					        </h6>
-					    </div>            
-	                  </div>
-	                  <div class="card-body">   
-	                  	<div th:if="${listUserTopos.empty}" class="d-flex justify-content-center">
-	                  		<p><strong>Aucun Topo enregistré pour le moment!</strong></p>
-	                  	</div>                        
-	                    <table th:unless="${listUserTopos.empty}" class="table table-striped table-hover card-text">
-	                      <thead>
-							<tr>
-								<th>Nom</th>
-								<th>Ville</th>
-								<th>Date</th>	
-								<th>Statut</th>
-								<th>Actions</th>					
-							</tr>
-						</thead>
-	                      <tbody>
-							<tr th:each="topo : ${listUserTopos}">
-								<td><a target="_blank" th:href="@{/topo/{id}(id = ${topo.id})}" th:utext = "${topo.topoName}"></a>...</td>
-								<td th:utext = "${topo.localization}">...</td>
-								<td th:utext = "${#dates.format(topo.topoDate, 'dd-MM-yyyy')}">...</td>
-								<td th:utext = "${topo.reservation.label}">...</td>								
-								
-								<td>
-									<form action="#" th:action="@{/reservation}" th:method="post">	
-										<input type="hidden" name="id" th:value = "${topo.id}"/>
-										<input type="hidden" name="userId" th:value = "${topo.userId}"/>
-										<input type="hidden" name="siteId" th:value = "${topo.siteId}"/>
-										<input type="hidden" name="topoName" th:value = "${topo.topoName}"/>
-										<input type="hidden" name="localization" th:value = "${topo.localization}"/>
-										<input type="hidden" name="topoDescription" th:value = "${topo.topoDescription}"/>
-										<input type="hidden" name="topoDate" th:value = "${topo.topoDate}"/>
-										
-										<span class="btn-group-toggle" data-toggle="buttons" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).A} or ${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).R}">
-											  <label class="btn btn-secondary active">
-											    <input type="radio" name="reservation" th:value="${topo.reservation.U}" checked autocomplete="off"> Indisponible
-											  </label>
-										</span>
-										
-										<span class="btn-group btn-group-toggle" data-toggle="buttons" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).I}">
-											  <label class="btn btn-secondary active">
-											    <input type="radio" name="reservation" th:value="${topo.reservation.R}" id="option1" autocomplete="off" checked>Accepté
-											  </label>
-											  <label class="btn btn-secondary option">
-											    <input type="radio" name="reservation" th:value="${topo.reservation.U}" id="option2" autocomplete="off"> Indisponible
-											  </label>
-										</span>
-
-										
-										<span class="btn-group-toggle" data-toggle="buttons" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).U}">
-											  <label class="btn btn-secondary active">
-											    <input type="radio" name="reservation" th:value="${topo.reservation.A}" checked autocomplete="off"> Disponible
-											  </label>
-										</span>
-										
-										<button type="submit" class="float-md-right"><img src="https://img.icons8.com/color/30/000000/save.png"/></button>
-									</form>
-								</td>
-							</tr>
-						</tbody>
-	                    </table>
-	                  </div>
-	                </div>
-	              </div>
-	            </div>
-	          </section>
-	        </div>
-	        
-	        <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
-	      </div>
-      
-      
-      </div>
+											
+											<span class="btn-group-toggle" data-toggle="buttons" th:if="${topo.reservation} == ${T(com.lavanya.escalade.enums.Reservation).U}">
+												  <label class="btn btn-secondary active">
+												    <input type="radio" name="reservation" th:value="${topo.reservation.A}" checked autocomplete="off"> Disponible
+												  </label>
+											</span>
+											
+											<button type="submit" class="float-md-right"><img src="https://img.icons8.com/color/30/000000/save.png"/></button>
+										</form>
+									</td>
+								</tr>
+							</tbody>
+		                    </table>
+		                  </div>
+		                </div>
+		              </div>
+		            </div>
+		          </section>
+		        </div>
+		      </div>
+	    </div>
+	    
+	    <footer class="footer align-self-end py-3 px-xl-5 w-100" th:insert="fragments/componentsVisit.html :: footerVisit" id="footer"></footer>
+    
     </div>
     <!-- JavaScript files-->
     <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>

@@ -49,14 +49,35 @@ public class TopoMainController {
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
+	
+	public String redirectToLoginPage(MyUserDetails userConnected, Model model) {
+		
+		if (userConnected == null) {
+			   String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
+			   model.addAttribute("nonConnectedMessage", nonConnectedMessage);
+		   }
+		
+		return "login";
+	}
 	
 	@GetMapping("/createTopo/{siteId}")
 	public String showTopoForm(@PathVariable("siteId") int id, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
+		if (userConnected == null) {    	
+	    	String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
+			model.addAttribute("nonConnectedMessage", nonConnectedMessage);
 			
+			return "login";
+    	}	
+		
+		Site site = siteService.getSiteById(id);
+		String city = site.getCity();
+		
 		model.addAttribute("user", userConnected);
+		model.addAttribute("city", city);
 		
 		Topo topo = new Topo();
 		topo.setSiteId(id);
@@ -72,8 +93,6 @@ public class TopoMainController {
 	public String saveTopo(@Valid @ModelAttribute ("topo") Topo topo, BindingResult result, Model model) {
 		
 		int id = topo.getUserId();
-//		String dateInString = topo.getTopoDate();
-//		Date date = formatter.parse(dateInString);		
 		if (result.hasErrors()) {
 			User userConnected = userService.getUserById(id);
 			model.addAttribute("user", userConnected);
@@ -90,6 +109,13 @@ public class TopoMainController {
 	
 	@GetMapping("/user/topos")
 	public String showListOfToposOfUser(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
+		
+		if (userConnected == null) {    	
+	    	String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
+			model.addAttribute("nonConnectedMessage", nonConnectedMessage);
+			
+			return "login";
+    	}
 	   
 	   int userId = userConnected.getId();
 	   model.addAttribute("user", userConnected);
@@ -114,6 +140,13 @@ public class TopoMainController {
 	
 	@GetMapping("/topos")
    	public String showToposListByPage(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam ("pageNumber") int currentPage, Model model) {
+		
+		if (userConnected == null) {    	
+	    	String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
+			model.addAttribute("nonConnectedMessage", nonConnectedMessage);
+			
+			return "login";
+    	}
 		
 		int userId = userConnected.getId();
 		model.addAttribute("user", userConnected);
@@ -148,6 +181,13 @@ public class TopoMainController {
 	
 	@GetMapping(value = {"/topo/{id}"})
 	public String getTopo(@AuthenticationPrincipal MyUserDetails userConnected, @PathVariable(name = "id") int id, Topo topo, Model model) {
+		
+		if (userConnected == null) {    	
+	    	String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
+			model.addAttribute("nonConnectedMessage", nonConnectedMessage);
+			
+			return "login";
+    	}
 		
 		topo = topoService.getTopoById(id);
 		int siteId = topo.getSiteId();
@@ -187,6 +227,13 @@ public class TopoMainController {
 	
 	@GetMapping("/showTopos")
 	public String showNextPagesOfToposToVisitors(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam (value = "pageNumber") int currentPage, Model model) {
+		
+		if (userConnected == null) {    	
+	    	String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
+			model.addAttribute("nonConnectedMessage", nonConnectedMessage);
+			
+			return "login";
+    	}
 		
 		Page<Topo> page = topoService.getAllTopos(currentPage);
 		

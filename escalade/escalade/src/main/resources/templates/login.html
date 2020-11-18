@@ -21,7 +21,10 @@
           </div>
           <div class="col-lg-5 px-lg-4">
             <h1 class="text-base text-primary text-uppercase mb-4" th:if="${errorMessage}!=null" th:utext="${errorMessage}" style="color:red; font-weight: bold; margin: 30px 0px;">Bubbly Dashboard</h1>
-            <h2 class="mb-4">Bienvenue!</h2>
+            <h2 class="mb-4">
+            	<span th:if="${nonConnectedMessage}==null">Bienvenue!</span>
+            	<span th:unless="${nonConnectedMessage}==null" th:utext="${nonConnectedMessage}">Bienvenue!</span>
+            </h2>
             <p class="text-muted">Merci d'entrer votre identifiant email et votre mot de passe!</p>
             <form id="loginForm" th:action="@{/login}" method="post" class="mt-4">
               <div class="form-group mb-4">
@@ -32,6 +35,8 @@
               </div>
               <button type="submit" class="btn btn-primary shadow px-5">Se connecter</button>
             </form>
+            <br/>            
+            <p>jamais inscrit? Alors c'est par <strong><a th:href="@{/signup}">ici</a></strong>!</p>
           </div>
         </div>
       </div>

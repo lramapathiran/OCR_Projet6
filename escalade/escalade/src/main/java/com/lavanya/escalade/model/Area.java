@@ -23,11 +23,9 @@ public class Area {
 	
 	
 	@Column (name = "name")
-	@NotBlank(message = "Ce champs est obligatoire")
 	String areaName;
 	
 	@Column (name = "routes_number")
-	@NotNull(message = "Ce champs est obligatoire")
 	@Positive
 	Integer routesNumber;
 	
@@ -66,11 +64,11 @@ public class Area {
 		this.areaName = areaName;
 	}
 
-	public int getRoutesNumber() {
+	public Integer getRoutesNumber() {
 		return routesNumber;
 	}
 
-	public void setRoutesNumber(int routesNumber) {
+	public void setRoutesNumber(Integer routesNumber) {
 		this.routesNumber = routesNumber;
 	}
 	

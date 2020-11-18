@@ -8,243 +8,245 @@
 	</head>
 
 	<body>
-	
-	  <!-- ======= Header ======= -->
-	  <header sec:authorize="isAnonymous()" id="header" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: headerVisit"></header>
-     
-     <header sec:authorize="isAuthenticated()" id="header" class="fixed-top header-visit" th:insert="fragments/componentsAdmin.html :: headerHomePageConnected"></header>
+		<div id="page">
+			  <!-- ======= Header ======= -->
+			 <header sec:authorize="isAnonymous()" id="header" class="fixed-top row header-visit" th:insert="fragments/componentsVisit.html :: headerVisit"></header>
+		     
+		     <header sec:authorize="isAuthenticated()" id="header" class="fixed-top header-visit" th:insert="fragments/componentsAdmin.html :: headerHomePageConnected"></header>
+			  
+			  <div id="content">
+				  <!-- ======= Hero Section ======= -->
+				  <section id="hero">
+				    <div class="hero-container" data-aos="fade-up">
+				      <h1>Bienvenue sur notre site communautaire!</h1>
+				      <h2>Envie de partager ou vivre des émotions fortes, Rejoignez-nous!</h2>
+				      <a href="#about" class="btn-get-started scrollto"><i class="bx bx-chevrons-down"></i></a>
+				    </div>
+				  </section><!-- End Hero -->
+				
+				  <main id="main">		
+					
+				    <!-- ======= About Section ======= -->
+				    <section id="about" class="about">
+				      <div class="container">
+				
+				        <div class="row no-gutters">
+				          <div class="content col-xl-5 d-flex align-items-stretch" data-aos="fade-up">
+				            <div class="content">
+				              <h3>Les Amis de l'Escalade</h3>
+				              <p>
+				                C'est un site communautaire pour tous les passionnés de l'escalade. Notre souhaitons faciliter la mise en relation et le partage d’informations.
+				              </p>
+				              
+				              <p>
+				              	Venez profiter de toutes nos infos et soyez acteurs en alimentant notre site avec toutes vos connaissances. Inscrivez-vous dès à présent!
+				              </p>
+				            </div>
+				          </div>
+				          <div class="col-xl-7 d-flex align-items-stretch">
+				            <div class="icon-boxes d-flex flex-column justify-content-center">
+				              <div class="row">
+				                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
+				                  <img th:src="@{/img/icons8-climbing-40.png}" alt="climbing-icon">
+				                  <h4>Plusieurs sites répertoriés</h4>
+				                  <p>Accédez aux fiches d'informations des sites d'escalade qui vous intéressent!</p>
+				                </div>
+				                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+				                  <img th:src="@{/img/icons8-quality-40.png}" alt="quality-tag">
+				                  <h4>Un gage de qualité</h4>
+				                  <p>Les sites enregistrés sur notre platforme sont vérifiés et tagués "Officiel les amis de l'escalade"</p>
+				                </div>
+				                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
+				                  <img th:src="@{/img/icons8-city-guide-40.png}" alt="topo-guide-icon">
+				                  <h4>Des guides topos</h4>
+				                  <p>En intégrant notre communautés, vous pourrez emprunter les guides topos disponibles</p>
+				                </div>
+				                
+				                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
+				                  <img th:src="@{/img/icons8-comments-40.png}" alt="comments-icon">
+				                  <h4>Une communauté active</h4>
+				                  <p>Commentez en toute liberté les sites que vous auriez pu ou auriez envie de visiter à l'aide de notre platforme</p>
+				                </div>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+				
+				      </div>
+				    </section><!-- End About Section -->
+				    
+				    <!-- ======= Counts Section ======= -->
+				    <section id="counts" class="counts  section-bg">
+				      <div class="container">
+				
+				        <div class="row no-gutters">
+				
+				          <div class="col-lg-4 col-md-4 d-md-flex align-items-md-stretch">
+				            <div class="count-box">
+				              <i class="icofont-users-alt-5"></i>
+				              <span data-toggle="counter-up" th:utext="${totalUsers}">23</span>
+				              <p><strong>Utilisateurs</strong> déjà inscrits</p>
+				            </div>
+				          </div>
+				
+				          <div class="col-lg-4 col-md-4 d-md-flex align-items-md-stretch">
+				            <div class="count-box" id="count-two">
+				              <i class="icofont-climbing"></i>
+				              <span data-toggle="counter-up" th:utext="${totalSites}"></span>
+				              <p><strong>Sites</strong> répertoriés</p>
+				            </div>
+				          </div>
+				
+				          <div class="col-lg-4 col-md-4 d-md-flex align-items-md-stretch">
+				            <div class="count-box" id="count-three">
+				              <i class="icofont-book"></i>
+				              <span data-toggle="counter-up" th:utext="${totalTopos}"></span>
+				              <p><strong>Topos</strong> réservables</p>
+				            </div>
+				          </div>
+				
+				        </div>
+				
+				      </div>
+				    </section><!-- End Counts Section -->
+				
+				    <!-- ======= Last Sites Section ======= -->
+				    <section id="services" class="services">
+				      <div class="container">
+				
+				        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+				          <h2>LES SITES</h2>
+				          <p>Voici les sites dernièrement ajoutés par nos utilisateurs passionnés!</p>
+				        </div>
+				
+				        <div class="row">
+				          <div class="col-md-6 col-lg-3 d-flex justify-content-around mb-5 mb-lg-0 view city-1">
+				            <div class="icon-box" data-aos="fade-up">
+				              <h4 class="title"><a target="_blank" th:href="@{/site/{id}(id = ${top4Sites[0].id})}"   th:utext="${top4Sites[0].siteName}"></a></h4>
+				              <p class="description">
+				              	<span><img th:src="@{/img/icons8-city-48.png}" alt="city-icon"></span>
+				              	 :  
+				              	<span><a th:utext="${top4Sites[0].city}"></a></span>
+				              </p>
+				            </div>
+				          </div>
+				
+				          <div class="col-md-6 col-lg-3 d-flex justify-content-around mb-5 mb-lg-0 view city-2">
+				            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+				              <h4 class="title"><a target="_blank" th:href="@{/site/{id}(id = ${top4Sites[1].id})}"   th:utext="${top4Sites[1].siteName}"></a></h4>
+				              <p class="description">
+				              	<span><img th:src="@{/img/icons8-city-48.png}" alt="city-icon"></span>
+				              	 :  
+				              	<span><a th:utext="${top4Sites[1].city}"></a></span>
+				              </p>
+				            </div>
+				          </div>
+				
+				          <div class="col-md-6 col-lg-3 d-flex justify-content-around mb-5 mb-lg-0 view city-3">
+				            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+				              <h4 class="title"><a target="_blank" th:href="@{/site/{id}(id = ${top4Sites[2].id})}"   th:utext="${top4Sites[2].siteName}"></a></h4>
+				              <p class="description">
+				              	<span><img th:src="@{/img/icons8-city-48.png}" alt="city-icon"></span>
+				              	 :  
+				              	<span><a th:utext="${top4Sites[2].city}"></a></span>
+				              </p>
+				            </div>
+				          </div>
+				
+				          <div class="col-md-6 col-lg-3 d-flex justify-content-around mb-5 mb-lg-0 view city-4">
+				            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+				              <h4 class="title"><a target="_blank" th:href="@{/site/{id}(id = ${top4Sites[3].id})}"   th:utext="${top4Sites[3].siteName}"></a></h4>
+				              <p class="description">
+				              	<span><img th:src="@{/img/icons8-city-48.png}" alt="city-icon"></span>
+				              	 :  
+				              	<span><a th:utext="${top4Sites[3].city}"></a></span>
+				              </p>
+				            </div>
+				          </div>
+				
+				        </div>
+				
+				      </div>
+				    </section><!-- End Last Sites Section -->
+				
+				    
+				
+				    <!-- ======= Cta/Link to subscribe Section ======= -->
+				    <section id="cta" class="cta">
+				      <div class="container" data-aos="zoom-in">
+				
+				        <div class="text-center">
+				          <h3>Vous voulez en profiter!</h3>
+				          <p>Quelque soit votre niveau: débutant ou confirmé! Rejoignez notre communauté et profitez de tous ses avantages pour une expérience hors du commun!</p>
+				          <a class="cta-btn" href="/signup">Inscrivez-vous!</a>
+				        </div>
+				
+				      </div>
+				    </section><!-- End Cta/Link to subscribe Section -->
+				
+				
+				    <!-- ======= Comments Section ======= -->
+				    <section id="testimonials" class="testimonials section-bg">
+				      <div class="container">
+				
+				        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+				          <h2>Les commentaires</h2>
+				          <p>Notre site fait partie des platformes les plus actives! Profitez du retour d'expérience d'autres utilisateurs ou partagez votre propre expérience!</p>
+				        </div>
+				
+				        <div class="owl-carousel testimonials-carousel">
+				        	<div th:each="entry : ${last5Comments}">
+								<div th:each="comment, map:${entry}">
+						          <div class="testimonial-item" data-aos="fade-up">
+						            <p>
+						              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+						              	<span th:utext="${comment.value.commentContent}"></span>
+						              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+						            </p>
+						            <img src="https://img.icons8.com/clouds/100/000000/group.png" class="testimonial-img" alt=""/>
+						            <h3>
+						            	<span th:utext="${comment.key.firstName}"></span>
+						            	<span th:utext="${comment.key.lastName}"></span>
+						            </h3>
+						            <h4>Adhérent actif</h4>
+						          </div>
+				          
+				          		</div>
+				          	</div>	
+				        </div>
+				
+				      </div>
+				    </section><!-- End comments Section -->
+				
+				    <!-- ======= Contact Section ======= -->
+				    <section id="contact" class="contact section-bg">
+				      <div class="container">
+				
+				        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+				          <h2>Contact</h2>
+				          <p>Besoins d'un conseil, d'aide? voici comment nous contacter :</p>
+				        </div>
+				
+				        <div class="row" data-aos="fade-up" data-aos-delay="100">
+				          <div class="col-lg-12">
+				            <div class="info-box mb-4">
+				              <i class="bx bx-envelope"></i>
+				              <h3>Ecrivez-nous</h3>
+				              <p>renseignements@lesamisdelescalade.com</p>
+				            </div>
+				          </div>
+				        </div>
+				
+				      </div>
+				    </section><!-- End Contact Section -->
+				
+				  </main><!-- End #main -->
+			  </div>
+			
+			  <!-- ======= Footer ======= -->
+			  <footer id="footer" th:insert="fragments/componentsVisit.html :: footerVisit"></footer><!-- End Footer -->
 	  
-	  <!-- ======= Hero Section ======= -->
-	  <section id="hero">
-	    <div class="hero-container" data-aos="fade-up">
-	      <h1>Bienvenue sur notre site communautaire!</h1>
-	      <h2>Envie de partager ou vivre des émotions fortes, Rejoignez-nous!</h2>
-	      <a href="#about" class="btn-get-started scrollto"><i class="bx bx-chevrons-down"></i></a>
-	    </div>
-	  </section><!-- End Hero -->
-	
-	  <main id="main">
-		
-		
-		
-	    <!-- ======= About Section ======= -->
-	    <section id="about" class="about">
-	      <div class="container">
-	
-	        <div class="row no-gutters">
-	          <div class="content col-xl-5 d-flex align-items-stretch" data-aos="fade-up">
-	            <div class="content">
-	              <h3>Les Amis de l'Escalade</h3>
-	              <p>
-	                C'est un site communautaire pour tous les passionnés de l'escalade. Notre souhaitons faciliter la mise en relation et le partage d’informations.
-	              </p>
-	              
-	              <p>
-	              	Venez profiter de toutes nos infos et soyez acteurs en alimentant notre site avec toutes vos connaissances. Inscrivez-vous dès à présent!
-	              </p>
-	            </div>
-	          </div>
-	          <div class="col-xl-7 d-flex align-items-stretch">
-	            <div class="icon-boxes d-flex flex-column justify-content-center">
-	              <div class="row">
-	                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
-	                  <img th:src="@{/img/icons8-climbing-40.png}" alt="climbing-icon">
-	                  <h4>Plusieurs sites répertoriés</h4>
-	                  <p>Accédez aux fiches d'informations des sites d'escalade qui vous intéressent!</p>
-	                </div>
-	                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
-	                  <img th:src="@{/img/icons8-quality-40.png}" alt="quality-tag">
-	                  <h4>Un gage de qualité</h4>
-	                  <p>Les sites enregistrés sur notre platforme sont vérifiés et tagués "Officiel les amis de l'escalade"</p>
-	                </div>
-	                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
-	                  <img th:src="@{/img/icons8-city-guide-40.png}" alt="topo-guide-icon">
-	                  <h4>Des guides topos</h4>
-	                  <p>En intégrant notre communautés, vous pourrez emprunter les guides topos disponibles</p>
-	                </div>
-	                
-	                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
-	                  <img th:src="@{/img/icons8-comments-40.png}" alt="comments-icon">
-	                  <h4>Une communauté active</h4>
-	                  <p>Commentez en toute liberté les sites que vous auriez pu ou auriez envie de visiter à l'aide de notre platforme</p>
-	                </div>
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-	
-	      </div>
-	    </section><!-- End About Section -->
-	    
-	    <!-- ======= Counts Section ======= -->
-	    <section id="counts" class="counts  section-bg">
-	      <div class="container">
-	
-	        <div class="row no-gutters">
-	
-	          <div class="col-lg-4 col-md-4 d-md-flex align-items-md-stretch">
-	            <div class="count-box">
-	              <i class="icofont-users-alt-5"></i>
-	              <span data-toggle="counter-up" th:utext="${totalUsers}">23</span>
-	              <p><strong>Utilisateurs</strong> déjà inscrits</p>
-	            </div>
-	          </div>
-	
-	          <div class="col-lg-4 col-md-4 d-md-flex align-items-md-stretch">
-	            <div class="count-box" id="count-two">
-	              <i class="icofont-climbing"></i>
-	              <span data-toggle="counter-up" th:utext="${totalSites}"></span>
-	              <p><strong>Sites</strong> répertoriés</p>
-	            </div>
-	          </div>
-	
-	          <div class="col-lg-4 col-md-4 d-md-flex align-items-md-stretch">
-	            <div class="count-box" id="count-three">
-	              <i class="icofont-book"></i>
-	              <span data-toggle="counter-up" th:utext="${totalTopos}"></span>
-	              <p><strong>Topos</strong> réservables</p>
-	            </div>
-	          </div>
-	
-	        </div>
-	
-	      </div>
-	    </section><!-- End Counts Section -->
-	
-	    <!-- ======= Last Sites Section ======= -->
-	    <section id="services" class="services">
-	      <div class="container">
-	
-	        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-	          <h2>LES SITES</h2>
-	          <p>Voici les sites dernièrement ajoutés par nos utilisateurs passionnés!</p>
-	        </div>
-	
-	        <div class="row">
-	          <div class="col-md-6 col-lg-3 d-flex justify-content-around mb-5 mb-lg-0 view city-1">
-	            <div class="icon-box" data-aos="fade-up">
-	              <h4 class="title"><a target="_blank" th:href="@{/site/{id}(id = ${top4Sites[0].id})}"   th:utext="${top4Sites[0].siteName}"></a></h4>
-	              <p class="description">
-	              	<span><img th:src="@{/img/icons8-city-48.png}" alt="city-icon"></span>
-	              	 :  
-	              	<span><a th:utext="${top4Sites[0].city}"></a></span>
-	              </p>
-	            </div>
-	          </div>
-	
-	          <div class="col-md-6 col-lg-3 d-flex justify-content-around mb-5 mb-lg-0 view city-2">
-	            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-	              <h4 class="title"><a target="_blank" th:href="@{/site/{id}(id = ${top4Sites[1].id})}"   th:utext="${top4Sites[1].siteName}"></a></h4>
-	              <p class="description">
-	              	<span><img th:src="@{/img/icons8-city-48.png}" alt="city-icon"></span>
-	              	 :  
-	              	<span><a th:utext="${top4Sites[1].city}"></a></span>
-	              </p>
-	            </div>
-	          </div>
-	
-	          <div class="col-md-6 col-lg-3 d-flex justify-content-around mb-5 mb-lg-0 view city-3">
-	            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-	              <h4 class="title"><a target="_blank" th:href="@{/site/{id}(id = ${top4Sites[2].id})}"   th:utext="${top4Sites[2].siteName}"></a></h4>
-	              <p class="description">
-	              	<span><img th:src="@{/img/icons8-city-48.png}" alt="city-icon"></span>
-	              	 :  
-	              	<span><a th:utext="${top4Sites[2].city}"></a></span>
-	              </p>
-	            </div>
-	          </div>
-	
-	          <div class="col-md-6 col-lg-3 d-flex justify-content-around mb-5 mb-lg-0 view city-4">
-	            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-	              <h4 class="title"><a target="_blank" th:href="@{/site/{id}(id = ${top4Sites[3].id})}"   th:utext="${top4Sites[3].siteName}"></a></h4>
-	              <p class="description">
-	              	<span><img th:src="@{/img/icons8-city-48.png}" alt="city-icon"></span>
-	              	 :  
-	              	<span><a th:utext="${top4Sites[3].city}"></a></span>
-	              </p>
-	            </div>
-	          </div>
-	
-	        </div>
-	
-	      </div>
-	    </section><!-- End Last Sites Section -->
-	
-	    
-	
-	    <!-- ======= Cta/Link to subscribe Section ======= -->
-	    <section id="cta" class="cta">
-	      <div class="container" data-aos="zoom-in">
-	
-	        <div class="text-center">
-	          <h3>Vous voulez en profiter!</h3>
-	          <p>Quelque soit votre niveau: débutant ou confirmé! Rejoignez notre communauté et profitez de tous ses avantages pour une expérience hors du commun!</p>
-	          <a class="cta-btn" href="/signup">Inscrivez-vous!</a>
-	        </div>
-	
-	      </div>
-	    </section><!-- End Cta/Link to subscribe Section -->
-	
-	
-	    <!-- ======= Comments Section ======= -->
-	    <section id="testimonials" class="testimonials section-bg">
-	      <div class="container">
-	
-	        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-	          <h2>Les commentaires</h2>
-	          <p>Notre site fait partie des platformes les plus actives! Profitez du retour d'expérience d'autres utilisateurs ou partagez votre propre expérience!</p>
-	        </div>
-	
-	        <div class="owl-carousel testimonials-carousel">
-	        	<div th:each="entry : ${last5Comments}">
-					<div th:each="comment, map:${entry}">
-			          <div class="testimonial-item" data-aos="fade-up">
-			            <p>
-			              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-			              	<span th:utext="${comment.value.commentContent}"></span>
-			              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-			            </p>
-			            <img src="https://img.icons8.com/clouds/100/000000/group.png" class="testimonial-img" alt=""/>
-			            <h3>
-			            	<span th:utext="${comment.key.firstName}"></span>
-			            	<span th:utext="${comment.key.lastName}"></span>
-			            </h3>
-			            <h4>Adhérent actif</h4>
-			          </div>
-	          
-	          		</div>
-	          	</div>	
-	        </div>
-	
-	      </div>
-	    </section><!-- End comments Section -->
-	
-	    <!-- ======= Contact Section ======= -->
-	    <section id="contact" class="contact section-bg">
-	      <div class="container">
-	
-	        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-	          <h2>Contact</h2>
-	          <p>Besoins d'un conseil, d'aide? voici comment nous contacter :</p>
-	        </div>
-	
-	        <div class="row" data-aos="fade-up" data-aos-delay="100">
-	          <div class="col-lg-12">
-	            <div class="info-box mb-4">
-	              <i class="bx bx-envelope"></i>
-	              <h3>Ecrivez-nous</h3>
-	              <p>renseignements@lesamisdelescalade.com</p>
-	            </div>
-	          </div>
-	        </div>
-	
-	      </div>
-	    </section><!-- End Contact Section -->
-	
-	  </main><!-- End #main -->
-	
-	  <!-- ======= Footer ======= -->
-	  <footer id="footer" th:insert="fragments/componentsVisit.html :: footerVisit"></footer><!-- End Footer -->
+	  </div>
 	
 	  <!-- Vendor JS Files -->
 	  <th:block th:replace="fragments/componentsRessources.html :: js-scriptVisit"></th:block>

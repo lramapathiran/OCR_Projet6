@@ -140,6 +140,7 @@ public class Site {
 	}
 
 	public void setAreas(List<Area> areas) {
+		areas.removeIf(area->area==null);
 		this.areas = areas;
 	}
 

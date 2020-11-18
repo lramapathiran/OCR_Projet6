@@ -40,9 +40,6 @@ public class User {
 	@Column(name="password")
 	private String encodedPassword;
 	
-//	@Column (name = "admin_rights")
-//	private boolean admin;
-	
 	public String getEncodedPassword() {
 		return encodedPassword;
 	}
@@ -102,14 +99,6 @@ public class User {
 	public void setMatchingPassword(String matchingPassword) {
 		this.matchingPassword = matchingPassword;
 	}
-
-//	public boolean isAdmin() {
-//		return admin;
-//	}
-//
-//	public void setAdmin(boolean admin) {
-//		this.admin = admin;
-//	}
 
 	public int getId() {
 		return id;

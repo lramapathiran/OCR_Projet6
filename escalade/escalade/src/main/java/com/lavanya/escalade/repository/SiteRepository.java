@@ -38,7 +38,7 @@ public interface SiteRepository extends JpaRepository<Site, Integer> {
     List<Integer> findDistinctRoutesNumber();
 	
 	@Query("select distinct u from Site u left join u.areas a where "
-			+ "(:#{#search.keyword} is null or concat(u.siteName, u.region, u.city, a.areaName) like :#{#search.keyword}) and "
+			+ "(:#{#search.keyword} is null or concat(u.siteName, u.region, u.city, a.areaName) like concat('%',:#{#search.keyword},'%')) and "
 			+ "(:#{#search.department} is null or u.department = :#{#search.department}) and "
 			+ "(:#{#search.areasNumber} is null or u.areasNumber = :#{#search.areasNumber}) and "
 			+ "(:#{#search.routesNumber} is null or a.routesNumber = :#{#search.routesNumber})"

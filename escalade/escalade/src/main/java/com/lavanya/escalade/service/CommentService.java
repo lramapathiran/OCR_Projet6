@@ -52,7 +52,7 @@ public class CommentService {
 	
 	public List<Comment> getUserComments(int userId){
 		
-		List<Comment> ListOfUserComments = commentRepository.findByUserId(userId);
+		List<Comment> ListOfUserComments = commentRepository.findByUserIdOrderByCommentDateDesc(userId);
 		
 		return ListOfUserComments;
 	}
