@@ -21,23 +21,10 @@ public class CommentMainController {
 	@Autowired 
 	private CommentService commentService;
 	
-	public String redirectToLoginPage(MyUserDetails userConnected, Model model) {
 		
-		if (userConnected == null) {
-			   String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
-			   model.addAttribute("nonConnectedMessage", nonConnectedMessage);
-		   }
-		
-		return "login";
-	}
-
-	
 	@PostMapping("/saveComment")
 	public String saveComment(@Valid @ModelAttribute ("comment") Comment comment, BindingResult result, Model model,@AuthenticationPrincipal MyUserDetails userConnected) {
-		
-		redirectToLoginPage(userConnected, model);
-		
-
+	
 		int siteId = comment.getSiteId();
 		int userId = userConnected.getId();
 		

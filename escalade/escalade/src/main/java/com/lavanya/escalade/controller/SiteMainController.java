@@ -51,26 +51,9 @@ public class SiteMainController {
 	@Autowired
 	private CommentService commentService;
 	
-	public String redirectToLoginPage(MyUserDetails userConnected, Model model) {
 		
-		if (userConnected == null) {    	
-	    	String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
-			model.addAttribute("nonConnectedMessage", nonConnectedMessage);
-    	}
-		
-		return "login";
-	}
-
-	
 	@GetMapping("/createSite")
 	public String showSiteForm(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
-		
-		if (userConnected == null) {    	
-	    	String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
-			model.addAttribute("nonConnectedMessage", nonConnectedMessage);
-			
-			return "login";
-    	}
 		
 		int id = userConnected.getId();
 		model.addAttribute("user", userConnected);
@@ -89,10 +72,10 @@ public class SiteMainController {
 		
 		int id = site.getUserId();
 		List<Area> areas = site.getAreas();
+		User userConnected = userService.getUserById(id);
+		model.addAttribute("user", userConnected);
 		
 		if (result.hasErrors()) {
-			User userConnected = userService.getUserById(id);
-			model.addAttribute("user", userConnected);
 			if (site.getAreasNumber() > 0) {
 				if (areas.size() != site.getAreasNumber()) {
 					model.addAttribute("message", "La section secteur ne contient pas le nombre de secteurs mentionné plus haut!");
@@ -114,7 +97,7 @@ public class SiteMainController {
 				return "addSite";					
 			}
 			for (Area area : areas) {
-					if (area.getAreaName() == "" || area.getCotationsRange() == "" || area.getRoutesNumber() == 0 || area.getRoutesNumber() == null) {
+					if (area.getAreaName() == "" || area.getCotationsRange() == "" || area.getRoutesNumber() == null || area.getRoutesNumber() == 0) {
 					model.addAttribute("message", "La section secteur n'a pas été entièrement renseignée ou ne contient pas le nombre de secteurs mentionné plus haut!");
 					return "addSite";
 				}
@@ -134,13 +117,6 @@ public class SiteMainController {
 	@GetMapping("/user/sites")
 	public String showListOfSitesOfUser(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 	   
-		if (userConnected == null) {
-			   String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
-			   model.addAttribute("nonConnectedMessage", nonConnectedMessage);
-			   
-			   return "login";
-		   }
-		
 	   int userId = userConnected.getId();
 	   model.addAttribute("user", userConnected);
 	   
@@ -167,13 +143,7 @@ public class SiteMainController {
 	@GetMapping("/sites")
    	public String showSitesListByPage(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam (value = "pageNumber") int currentPage, Model model) {
 		
-		if (userConnected == null) {    	
-	    	String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
-			model.addAttribute("nonConnectedMessage", nonConnectedMessage);
-			
-			return "login";
-    	}
-		
+
 		int userId = userConnected.getId();
 		model.addAttribute("user", userConnected);
 		   
@@ -249,13 +219,6 @@ public class SiteMainController {
 	
 	@GetMapping("/site/{id}/updateComment/{commentId}")
 	public String displayComment(@PathVariable(name = "id") int siteId, @PathVariable(name = "commentId") int commentId, Site site, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
-		
-		if (userConnected == null) {    	
-	    	String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
-			model.addAttribute("nonConnectedMessage", nonConnectedMessage);
-			
-			return "login";
-    	}
 		
 		model.addAttribute("user", userConnected);
 			

@@ -79,7 +79,7 @@
 		                      	<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="fieldError"></span>
 		                      	<span th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}" th:errorclass="fieldError"></span>
 		                      	<span  class="message" th:utext="${message}"></span>
-		                      	<span class="message" th:if="${#fields.hasErrors('global')}" th:errors="*{global}">Incorrect date</span>
+		                      	<span class="message" th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></span>
 		                      </div>         
 							
 		                      

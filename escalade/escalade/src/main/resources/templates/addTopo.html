@@ -53,8 +53,8 @@
  	                  <div class="form-group row ${#fields.hasErrors('topoDescription')}? has-error">
 	                      <label class="col-sm-2 col-form-label" for="topoDescription">Description</label>
 	                      <div class="col-sm-8">
-		                      <textarea  rows = "8" cols = "80" th:field = "*{topoDescription}" id="topoDescription" form = "topoForm" class="form-control" maxlength="500">... </textarea>
-		                      <small class="form-text text-muted ml-3">max 500 caractères</small>
+		                      <textarea  rows = "8" cols = "80" th:field = "*{topoDescription}" id="topoDescription" form = "topoForm" class="form-control" maxlength="1000">... </textarea>
+		                      <small class="form-text text-muted ml-3">max 1000 caractères</small>
 		                      <span th:if="${#fields.hasErrors('topoDescription')}" th:errors="*{topoDescription}" th:errorclass="fieldError"></span>
 		                  </div>
 	                  </div>

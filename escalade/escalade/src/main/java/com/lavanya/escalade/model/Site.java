@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -35,7 +34,6 @@ public class Site {
 	String region;
 	
 	@NotBlank(message = "Ce champs est obligatoire")
-	@Size(min = 2, max = 2)
 	String department;
 	
 	@NotBlank(message = "Ce champs est obligatoire")

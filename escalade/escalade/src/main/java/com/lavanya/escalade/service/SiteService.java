@@ -25,7 +25,7 @@ public class SiteService {
 		
 			
 		Sort sort = Sort.by("siteName").ascending();
-		Pageable pageable = PageRequest.of(pageNumber - 1, 10, sort);
+		Pageable pageable = PageRequest.of(pageNumber - 1, 5, sort);
 		Page<Site> page = siteRepository.findAll(pageable);
 		
 		return page;
@@ -34,7 +34,7 @@ public class SiteService {
 	public Page<Site> getAllSitesFiltered(int pageNumber, Search search) {
 		
 		Sort sort = Sort.by("siteName").ascending();
-		Pageable pageable = PageRequest.of(pageNumber - 1, 10, sort);
+		Pageable pageable = PageRequest.of(pageNumber - 1, 5, sort);
 
 				
 		Page<Site> page = siteRepository.findFilteredSite(pageable, search);

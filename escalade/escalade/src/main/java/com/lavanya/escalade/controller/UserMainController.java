@@ -36,7 +36,7 @@ import com.lavanya.escalade.service.MyUserDetails;
 import com.lavanya.escalade.service.SiteService;
 import com.lavanya.escalade.service.TopoService;
 
-@Controller // This means that this class is a Controller
+@Controller
 public class UserMainController {
   
 	@Autowired
@@ -51,18 +51,7 @@ public class UserMainController {
 	@Autowired
 	private CommentService commentService;
 	
-	public String redirectToLoginPage(MyUserDetails userConnected, Model model) {
-		
-		
-		if (userConnected == null) {    	
-	    	String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
-			model.addAttribute("nonConnectedMessage", nonConnectedMessage);
-		}
-		
-		return "login";
-	}
-	
-  
+	  
 	@GetMapping("/")
 	public String showHomePage(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
@@ -166,13 +155,6 @@ public class UserMainController {
     @GetMapping("/users")
    	public String showUsersListByPage(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam (name="pageNumber") int currentPage, Model model) {
     	
-    	if (userConnected == null) {    	
-	    	String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
-			model.addAttribute("nonConnectedMessage", nonConnectedMessage);
-			
-			return "login";
-    	}
-		
 		model.addAttribute("user", userConnected);
 		
 		int userId = userConnected.getId();
@@ -209,15 +191,7 @@ public class UserMainController {
     @GetMapping("/user")
 	public String showUserConnectedHomePage(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 	   
-    	
-    	if (userConnected == null) {    	
-	    	String nonConnectedMessage = "Vous n'êtes pas connecté!"; 
-			model.addAttribute("nonConnectedMessage", nonConnectedMessage);
-			
-			return "login";
-    	}
-    	
-	   int userId = userConnected.getId();
+    	int userId = userConnected.getId();
 	   model.addAttribute("user", userConnected);
 	   
 	   long sitesCount = siteService.getSitesCountOfUser(userId);

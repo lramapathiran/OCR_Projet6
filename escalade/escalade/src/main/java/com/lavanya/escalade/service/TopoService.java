@@ -1,6 +1,5 @@
 package com.lavanya.escalade.service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.lavanya.escalade.enums.Reservation;
-import com.lavanya.escalade.model.Site;
 import com.lavanya.escalade.model.Topo;
 import com.lavanya.escalade.repository.TopoRepository;
 
