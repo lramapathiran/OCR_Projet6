@@ -4,7 +4,9 @@ Créer un site communautaire autour de l'escalade.
 ## Pré-requis
 
 1- Installer le kit de développement Java (JDK 8 minimum).
+
 2- Installer Maven 4
+
 3- Installer mySQL 8
 
 ## Contenu du repository
