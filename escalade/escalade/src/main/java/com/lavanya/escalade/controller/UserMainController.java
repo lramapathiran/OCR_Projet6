@@ -59,7 +59,7 @@ public class UserMainController {
      * GET requests for / endpoint.
      * This controller-method retrieves from database last Comments, last Sites and the counts of total users, sites, topos.
      * Data extracted are then displayed to the view index.html.
-     * @param model 
+     * @param model  to pass data to the view.
      * @param userConnected is the authenticated User passed within the object MyUserDetails
      * @return index.html
      */	
@@ -108,7 +108,7 @@ public class UserMainController {
      * GET requests for /signup endpoint.
      * This controller-method creates a new object User and pass it to the form for the User to be created with all its attributes.
      *
-     * @param model 
+     * @param model to pass data to the view.
      * @return addUser.html
      */	
     @GetMapping("/signup")
@@ -124,7 +124,7 @@ public class UserMainController {
      * GET requests for /login endpoint.
      * This controller-method show the login page for the user to be connected
      * 
-     * @param model 
+     * @param model  to pass data to the view.
      * @param error is present if authentication failed. 
      * @param logout is present if the user is logged out.
      * @return login.html
@@ -170,7 +170,7 @@ public class UserMainController {
      *
      * @param user is the object User that needs to be saved.
      * @param result represents binding results, registers errors and allows for a Validator to be applied
-     * @param model
+     * @param model to pass data to the view.
      * @param errors stores and exposes information about data-binding and validation errors for a specific object.
      * @return addUser.html
      */	
@@ -201,8 +201,8 @@ public class UserMainController {
      * GET requests for /users endpoint.
      * This controller-method retrieves from database all users registered with admin or user role and pass that list to the view "usersList.html"
      * 
-     * @param model 
-     * @param currentPage, an int to specify which page of Users to display.
+     * @param model to pass data to the view.
+     * @param currentPage an int to specify which page of Users to be displayed.
      * @param userConnected is the authenticated User passed within the object MyUserDetails
      * @return usersList.html
      */	
@@ -244,10 +244,10 @@ public class UserMainController {
     
     /**
      * GET requests for /user endpoint.
-     * This controller-method retrieves from database all data required to display an home page for user connected.
+     * This controller-method retrieves from database all data required to be displayed in the home page for user connected.
      * data passed to the view are the list of comments of the user connected, a count of topos, sites and comments created by the user connected
      * 
-     * @param model
+     * @param model to pass data to the view.
      * @param userConnected is the authenticated User passed within the object MyUserDetails
      * @return userHome.html
      */	

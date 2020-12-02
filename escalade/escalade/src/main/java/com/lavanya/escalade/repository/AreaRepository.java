@@ -17,6 +17,8 @@ public interface AreaRepository extends JpaRepository<Area, Integer> {
 
 	/**
 	 * Query to retrieve the list of area of a specific site
+	 * @param siteId for id of the site of interest.
+	 * @return List of Area.
 	 */
 	@Query("select a from Area a JOIN a.site b where b.id = ?1")
 	List <Area> findBySiteId(int siteId);

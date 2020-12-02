@@ -58,7 +58,7 @@ public class TopoService {
 	
 	/**
 	 * method to retrieve a list of topos associated to a given site.
-	 * @param id, id of the site whose the topos are associated.
+	 * @param siteId, id of the site whose the topos are associated.
 	 * @return List of Topo object.
 	 */
 	public List<Topo> getTopoBySiteId(int siteId) {		

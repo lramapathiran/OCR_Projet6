@@ -59,7 +59,7 @@ public class SiteMainController {
      * GET requests for /createSite endpoint.
      * This controller-method creates a new object Site and pass it to the form for the user to create a Site with all its attributes.
      *
-     * @param model 
+     * @param model to pass data to the view.
      * @param userConnected is the authenticated User passed within the object MyUserDetails
      * @return addSite.html
      */	
@@ -84,7 +84,7 @@ public class SiteMainController {
      *
      * @param site is the object Site that needs to be saved.
      * @param result represents binding results, registers errors and allows for a Validator to be applied
-     * @param model
+     * @param model to pass data to the view.
      * @return site.html
      */	
 	@PostMapping("/saveSite")
@@ -137,7 +137,7 @@ public class SiteMainController {
      * GET requests for /user/sites endpoint.
      * This controller-method retrieves from database all sites created by the authenticated user and pass that list to the view "userSites.html"
      * 
-     * @param model 
+     * @param model to pass data to the view.
      * @param userConnected is the authenticated User passed within the object MyUserDetails
      * @return userSites.html
      */	
@@ -171,8 +171,8 @@ public class SiteMainController {
      * GET requests for /sitesList endpoint.
      * This controller-method retrieves from database all sites created by all users and pass that list to the view "sitesList.html"
      * 
-     * @param model 
-     * @param currentPage, an int to specify which page of Sites to display.
+     * @param model to pass data to the view.
+     * @param currentPage, an int to specify which page of Sites to be displayed.
      * @param userConnected is the authenticated User passed within the object MyUserDetails
      * @return sitesList.html
      */	
@@ -216,9 +216,10 @@ public class SiteMainController {
      * This controller-method retrieves from database all data related to a Site of interest and the Comments/Areas/Topos associated to that Site. 
      * Those data are then passed to the model and displayed in the view "site.html".
      * 
-     * @param model 
-     * @param siteId, an int to specify the id of the Site object to display.
+     * @param model to pass data to the view.
+     * @param siteId an int to specify the id of the Site object to be displayed.
      * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @param site the object Site to be displayed in the view.
      * @return site.html
      */	
 	@GetMapping("/site/{id}")
@@ -269,10 +270,11 @@ public class SiteMainController {
      * This controller-method retrieves the same data than the previous method, getSite() and pass them again to the view "site.html". 
      * It will also retrieve from database an object Comment for update purpose. 
      * 
-     * @param model 
-     * @param siteId, an int to specify the id of the Site object to display.
-     * @param commentId, an int to specify the id of the Comment object to update.
+     * @param model to pass data to the view.
+     * @param siteId an int to specify the id of the Site object to be displayed.
+     * @param commentId an int to specify the id of the Comment object to update.
      * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @param site object Site to be displayed in the view.
      * @return site.html
      */	
 	@GetMapping("/site/{id}/updateComment/{commentId}")
@@ -317,13 +319,12 @@ public class SiteMainController {
      * GET requests for /showSites/{pageNumber} endpoint.
      * This controller-method retrieves all sites created by all users and display them as Page to the view "sitesListForVisitors.html".
      * 
-     * @param model 
-     * @param currentPage, an int to specify which page of Sites to display.
-     * @param keyword, a String attribute from Search object used to filter a search sites by keyword.
-     * @param department, a String attribute from Search object used to filter a search sites by department.
-     * @param areasNumber, an Integer attribute from Search object used to filter a search sites by areasNumber.
-     * @param routesNumber, an Integer attribute from Search object used to filter a search sites by routesNumber.
-     * @param siteId, an int to specify the id of the Site object to display.
+     * @param model to pass data to the view.
+     * @param currentPage an int to specify which page of Sites to be displayed.
+     * @param keyword a String attribute from Search object used to filter a search sites by keyword.
+     * @param department a String attribute from Search object used to filter a search sites by department.
+     * @param areasNumber an Integer attribute from Search object used to filter a search sites by areasNumber.
+     * @param routesNumber an Integer attribute from Search object used to filter a search sites by routesNumber.
      * @param userConnected is the authenticated User passed within the object MyUserDetails
      * @return a model and view mav with view page as "sitesListForVisitors.html".
      */	
@@ -381,9 +382,9 @@ public class SiteMainController {
      * This controller-method the attribute tagged of Site in order to tag or not a site. 
      *
      * @param site is the object Site that needs to be updated.
-     * @param currentPage, an int to specify which page of Sites to display.
+     * @param currentPage, an int to specify which page of Sites to be displayed.
      * @param userConnected is the authenticated User passed within the object MyUserDetails
-     * @param model
+     * @param model to pass data to the view.
      * @return the end point /sites
      */	
 	@PostMapping("/addTag")

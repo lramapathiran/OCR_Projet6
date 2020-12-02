@@ -49,8 +49,7 @@ public class UserService implements UserDetailsService{
 	/**
 	 * method to save an object User with its password encoded in database.
 	 * @param user, object User to save in database.
-	 * @throws UserAlreadyExistException, throws this exception if the user to be saved
-	 * presents an email adress already used by another user.
+	 * @throws UserAlreadyExistException thrown if the user to be saved presents an email address already used by another user.
 	 */
 	@Transactional
 	public void save(final User user) throws UserAlreadyExistException{

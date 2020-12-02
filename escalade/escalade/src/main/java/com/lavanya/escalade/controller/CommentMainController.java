@@ -29,11 +29,11 @@ public class CommentMainController {
 	
 	/**
 	 * POST request to send data to /saveComment endpoint.
-     * This controller-method is part of CRUD and is used to save a comment in database
+     * This controller-method is part of CRUD and is used to save a comment in database.
      *
      * @param comment the object Comment that needs to be saved.
-     * @param result represents binding results, registers errors and allows for a Validator to be applied
-     * @param model 
+     * @param result represents binding results, registers errors and allows for a Validator to be applied.
+     * @param model to pass data to the view.
      * @param userConnected is the authenticated User passed within the object MyUserDetails.
      * @return the url /site.
      */
@@ -56,13 +56,13 @@ public class CommentMainController {
 	
 	/**
 	 * POST request to send data to /updateComment endpoint.
-     * This controller-method is part of CRUD and is used to update a comment in database
+     * This controller-method is part of CRUD and is used to update a comment in database.
      *
      * @param comment the object Comment to update.
-     * @param result represents binding results, registers errors and allows for a validator to be applied
-     * @param model 
+     * @param result represents binding results, registers errors and allows for a validator to be applied.
+     * @param model to pass data to the view.
      * @param userConnected is the authenticated User passed within the object MyUserDetails.
-     * @return the url /site
+     * @return the url /site.
      */
 	@PostMapping ("/updateComment")
 	public String updateComment(@Valid @ModelAttribute ("comment") Comment comment, BindingResult result, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
@@ -85,11 +85,11 @@ public class CommentMainController {
 	}
 	
 	/**
-     * This controller-method is part of CRUD and is used to delete a comment from database
+     * This controller-method is part of CRUD and is used to delete a comment from database.
      *
-     * @param comment the object Comment to delete
-     * @param model
-     * @return the url /site
+     * @param comment the object Comment to delete.
+     * @param model to pass data to the view.
+     * @return the url /site.
      */
 	@PostMapping ("/deleteComment")
 	public String deleteComment(Model model, @ModelAttribute("commentToDelete") Comment comment) {

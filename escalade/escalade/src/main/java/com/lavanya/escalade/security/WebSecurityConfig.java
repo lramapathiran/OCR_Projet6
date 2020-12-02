@@ -30,8 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * Method that add authentication based upon the custom UserDetailsService that is passed in.
 	 * It then returns a DaoAuthenticationConfigurer to allow customization of the authentication.
 	 * @param auth, create an AuthenticationManager. Allows for easily building in memory authentication,
-	 * adding UserDetailsService, and adding AuthenticationProvider's.
-	 * @throws Exception, check for all exceptions.
+	 * adding UserDetailsService and adding AuthenticationProvider's.
+	 * @throws Exception which checks for all exceptions.
 	*/
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	/**
 	* Override the method of the same name in WebSecurityConfigurerAdapter to configure the HttpSecurity.
 	* @param http, HttpSecurity
-	* @throws Exception, check for all exceptions.
+	* @throws Exception which checks for all exceptions.
 	*/
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -81,6 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	/**
 	* Service interface for encoding passwords.The preferred implementation is BCryptPasswordEncoder.
+	* @return an instance of BCryptPasswordEncoder.
 	*/
 	@Bean
     public PasswordEncoder passwordEncoder() {
