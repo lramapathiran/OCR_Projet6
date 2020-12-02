@@ -19,6 +19,10 @@ import com.lavanya.escalade.error.UserAlreadyExistException;
 import com.lavanya.escalade.model.User;
 import com.lavanya.escalade.repository.UserRepository;
 
+/**
+ * Service provider for all business functionalities related to User class.
+ * @author lavanya
+ */
 @Service
 public class UserService implements UserDetailsService{
 	
@@ -30,6 +34,11 @@ public class UserService implements UserDetailsService{
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	/**
+	 * method to retrieve all users saved in database and displayed with pagination.
+	 * @param pageNumber, int to access to the number of User Page to display.  
+	 * @return Page of User.
+	 */
 	public Page<User> getAllUsers(int pageNumber) {
 		Sort sort = Sort.by("lastName").ascending();
 		Pageable pageable = PageRequest.of(pageNumber -1, 10, sort);
@@ -37,8 +46,14 @@ public class UserService implements UserDetailsService{
 		return userRepository.findAll(pageable);
 	}
 	
+	/**
+	 * method to save an object User with its password encoded in database.
+	 * @param user, object User to save in database.
+	 * @throws UserAlreadyExistException, throws this exception if the user to be saved
+	 * presents an email adress already used by another user.
+	 */
 	@Transactional
-	public User save(final User user) throws UserAlreadyExistException{
+	public void save(final User user) throws UserAlreadyExistException{
 		
 		if (emailExists(user.getEmail())) {   
             throw new UserAlreadyExistException(
@@ -48,15 +63,23 @@ public class UserService implements UserDetailsService{
 		
 		user.setEncodedPassword(passwordEncoder.encode(user.getPassword()));
 		
-		return userRepository.save(user);
+		userRepository.save(user);
 	}
 	
+	/**
+	 * method to verify if a user to be saved has entered an email already existing in database.
+	 * @param email, email to verify its existence or not in database.
+	 * @return boolean, return true or false for when an email already exists in database.	 
+	 */
 	private boolean emailExists(String email) {
-		Optional<User> user = userRepository.findByEmail(email);
         return userRepository.findByEmail(email).isPresent();
     }
 	
-	
+	/**
+	 * method to retrieve a particular user identified by its id.
+	 * @param id, id of the user of interest to identify in database.
+	 * @return User object.
+	 */
 	public User getUserById(int id) {
 		
 		Optional<User>  userResponse = userRepository.findById(id);
@@ -64,6 +87,11 @@ public class UserService implements UserDetailsService{
 		return user;
 	}
 	
+	/**
+	 * method to retrieve the user principal to connect to the website using his username to authenticate.
+	 * @param email, used as username of the user to connect.
+	 * @return UserDetails.
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -74,8 +102,11 @@ public class UserService implements UserDetailsService{
 		return user.map(MyUserDetails::new).get();
 	}
 	
-	public Integer getTotalUsersRegistered() {
-		
+	/**
+	 * method to get a counting of total users created in database.
+	 * @return Integer, the total amount of users saved.
+	 */
+	public Integer getTotalUsersRegistered() {		
 		return userRepository.countUsersRegistered();
 	}
 

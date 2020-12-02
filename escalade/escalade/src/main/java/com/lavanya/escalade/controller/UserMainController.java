@@ -36,6 +36,10 @@ import com.lavanya.escalade.service.MyUserDetails;
 import com.lavanya.escalade.service.SiteService;
 import com.lavanya.escalade.service.TopoService;
 
+/**
+ * Controller used in MVC architecture to control all the requests related to User object.
+ * @author lavanya
+ */
 @Controller
 public class UserMainController {
   
@@ -51,7 +55,14 @@ public class UserMainController {
 	@Autowired
 	private CommentService commentService;
 	
-	  
+	/**
+     * GET requests for / endpoint.
+     * This controller-method retrieves from database last Comments, last Sites and the counts of total users, sites, topos.
+     * Data extracted are then displayed to the view index.html.
+     * @param model 
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return index.html
+     */	
 	@GetMapping("/")
 	public String showHomePage(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
@@ -93,7 +104,13 @@ public class UserMainController {
 	}
 
 	
-
+	/**
+     * GET requests for /signup endpoint.
+     * This controller-method creates a new object User and pass it to the form for the User to be created with all its attributes.
+     *
+     * @param model 
+     * @return addUser.html
+     */	
     @GetMapping("/signup")
 	public String showSignUpForm (Model model) {
 	  
@@ -102,6 +119,16 @@ public class UserMainController {
     	return "addUser";
 	}
     
+    
+    /**
+     * GET requests for /login endpoint.
+     * This controller-method show the login page for the user to be connected
+     * 
+     * @param model 
+     * @param error is present if authentication failed. 
+     * @param logout is present if the user is logged out.
+     * @return login.html
+     */	
     @GetMapping("/login")
 	public String showLoginPage (@RequestParam(value = "error", required = false) String error, 
             @RequestParam(value = "logout", required = false) String logout,
@@ -118,6 +145,15 @@ public class UserMainController {
         return "login";
 	}
     
+    
+    /**
+     * GET requests for /logout endpoint.
+     * This controller-method invalidate HttpSession and remove the authentication from the current SecurityContext.
+     * 
+     * @param request from which to obtain a HTTP session
+     * @param response, HttpServletResponse
+     * @return the url /login?logout=true
+     */	
     @GetMapping("/logout")
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -128,9 +164,18 @@ public class UserMainController {
     }
     
     
-  
+    /**
+	 * POST request to send data to /saveUser endpoint.
+     * This controller-method is part of CRUD and is used to save an User in database
+     *
+     * @param user is the object User that needs to be saved.
+     * @param result represents binding results, registers errors and allows for a Validator to be applied
+     * @param model
+     * @param errors stores and exposes information about data-binding and validation errors for a specific object.
+     * @return addUser.html
+     */	
     @PostMapping("/saveUser")
-	public String saveUser (@ModelAttribute("user") @Valid User user,BindingResult result, final HttpServletRequest request, Model model,final Errors errors) {
+	public String saveUser (@ModelAttribute("user") @Valid User user,BindingResult result, Model model,final Errors errors) {
 	  
     	if (result.hasErrors()) {	  
     		return "addUser";
@@ -152,6 +197,15 @@ public class UserMainController {
 	}
   
     
+    /**
+     * GET requests for /users endpoint.
+     * This controller-method retrieves from database all users registered with admin or user role and pass that list to the view "usersList.html"
+     * 
+     * @param model 
+     * @param currentPage, an int to specify which page of Users to display.
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return usersList.html
+     */	
     @GetMapping("/users")
    	public String showUsersListByPage(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam (name="pageNumber") int currentPage, Model model) {
     	
@@ -187,7 +241,16 @@ public class UserMainController {
 
     }
     
- 
+    
+    /**
+     * GET requests for /user endpoint.
+     * This controller-method retrieves from database all data required to display an home page for user connected.
+     * data passed to the view are the list of comments of the user connected, a count of topos, sites and comments created by the user connected
+     * 
+     * @param model
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return userHome.html
+     */	
     @GetMapping("/user")
 	public String showUserConnectedHomePage(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 	   

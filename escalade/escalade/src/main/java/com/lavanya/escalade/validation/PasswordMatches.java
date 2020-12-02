@@ -11,6 +11,12 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+
+/**
+ * Validation annotation
+ * Validates that the 2 passwords entered in user creation form are identical. 
+ * @author lavanya
+ */
 @Target({ TYPE, ANNOTATION_TYPE })
 @Retention(RUNTIME)
 @Constraint(validatedBy = PasswordMatchesValidator.class)

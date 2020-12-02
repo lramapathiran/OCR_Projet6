@@ -1,5 +1,11 @@
 package com.lavanya.escalade.model;
 
+
+/**
+ * Bean representing a Search.
+ * This class gathered all attributes required to make sites search according to one or a combination of filters.
+ * @author lavanya
+ */
 public class Search {
 
 	String keyword;

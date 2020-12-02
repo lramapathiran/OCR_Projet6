@@ -13,6 +13,12 @@ import javax.validation.constraints.Size;
 import com.lavanya.escalade.validation.PasswordMatches;
 import com.lavanya.escalade.validation.ValidEmail;
 
+
+/**
+ * Bean representing an User.
+ * User object is declared as a JPA entity with the corresponding annotation.
+ * @author lavanya
+ */
 @PasswordMatches
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
@@ -40,13 +46,6 @@ public class User {
 	@Column(name="password")
 	private String encodedPassword;
 	
-	public String getEncodedPassword() {
-		return encodedPassword;
-	}
-
-	public void setEncodedPassword(String encodedPassword) {
-		this.encodedPassword = encodedPassword;
-	}
 
 	private String roles;
 	private boolean isActive;
@@ -98,6 +97,14 @@ public class User {
 
 	public void setMatchingPassword(String matchingPassword) {
 		this.matchingPassword = matchingPassword;
+	}
+	
+	public String getEncodedPassword() {
+		return encodedPassword;
+	}
+
+	public void setEncodedPassword(String encodedPassword) {
+		this.encodedPassword = encodedPassword;
 	}
 
 	public int getId() {

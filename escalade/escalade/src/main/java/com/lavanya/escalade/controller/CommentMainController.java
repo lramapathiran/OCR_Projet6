@@ -15,13 +15,28 @@ import com.lavanya.escalade.model.Comment;
 import com.lavanya.escalade.service.CommentService;
 import com.lavanya.escalade.service.MyUserDetails;
 
+
+/**
+ * Controller used in MVC architecture to control all the requests related to Comment object.
+ * @author lavanya
+ */
 @Controller
 public class CommentMainController {
 	
 	@Autowired 
 	private CommentService commentService;
 	
-		
+	
+	/**
+	 * POST request to send data to /saveComment endpoint.
+     * This controller-method is part of CRUD and is used to save a comment in database
+     *
+     * @param comment the object Comment that needs to be saved.
+     * @param result represents binding results, registers errors and allows for a Validator to be applied
+     * @param model 
+     * @param userConnected is the authenticated User passed within the object MyUserDetails.
+     * @return the url /site.
+     */
 	@PostMapping("/saveComment")
 	public String saveComment(@Valid @ModelAttribute ("comment") Comment comment, BindingResult result, Model model,@AuthenticationPrincipal MyUserDetails userConnected) {
 	
@@ -39,6 +54,16 @@ public class CommentMainController {
 		return "redirect:/site/"+siteId;
 	}
 	
+	/**
+	 * POST request to send data to /updateComment endpoint.
+     * This controller-method is part of CRUD and is used to update a comment in database
+     *
+     * @param comment the object Comment to update.
+     * @param result represents binding results, registers errors and allows for a validator to be applied
+     * @param model 
+     * @param userConnected is the authenticated User passed within the object MyUserDetails.
+     * @return the url /site
+     */
 	@PostMapping ("/updateComment")
 	public String updateComment(@Valid @ModelAttribute ("comment") Comment comment, BindingResult result, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
@@ -59,6 +84,13 @@ public class CommentMainController {
 		return "redirect:/site/"+siteId;
 	}
 	
+	/**
+     * This controller-method is part of CRUD and is used to delete a comment from database
+     *
+     * @param comment the object Comment to delete
+     * @param model
+     * @return the url /site
+     */
 	@PostMapping ("/deleteComment")
 	public String deleteComment(Model model, @ModelAttribute("commentToDelete") Comment comment) {
 		

@@ -8,14 +8,17 @@ import org.springframework.stereotype.Repository;
 
 import com.lavanya.escalade.model.Area;
 
-
+/**
+ * Repository extending JPA repository for persistence of Area object.
+ * @author lavanya
+ */
 @Repository
 public interface AreaRepository extends JpaRepository<Area, Integer> {
 
+	/**
+	 * Query to retrieve the list of area of a specific site
+	 */
 	@Query("select a from Area a JOIN a.site b where b.id = ?1")
 	List <Area> findBySiteId(int siteId);
-	
-	@Query("select u from Area u where u.areaName like %?1%")
-	public List<Area> findAll(String keyword);
 	
 }

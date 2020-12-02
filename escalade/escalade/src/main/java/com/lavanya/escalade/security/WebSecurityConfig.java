@@ -12,7 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
+/**
+ * Configuration to overrides WebSecurityConfigurerAdapter for spring security.
+ * @author lavanya
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -22,12 +25,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
-
+	
+	/**
+	 * Method that add authentication based upon the custom UserDetailsService that is passed in.
+	 * It then returns a DaoAuthenticationConfigurer to allow customization of the authentication.
+	 * @param auth, create an AuthenticationManager. Allows for easily building in memory authentication,
+	 * adding UserDetailsService, and adding AuthenticationProvider's.
+	 * @throws Exception, check for all exceptions.
+	*/
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
-
+	
+	
+	/**
+	* Override the method of the same name in WebSecurityConfigurerAdapter to configure the HttpSecurity.
+	* @param http, HttpSecurity
+	* @throws Exception, check for all exceptions.
+	*/
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
@@ -62,7 +78,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.invalidateHttpSession(true)
 			.deleteCookies("JSESSIONID");
 	}
-
+	
+	/**
+	* Service interface for encoding passwords.The preferred implementation is BCryptPasswordEncoder.
+	*/
 	@Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

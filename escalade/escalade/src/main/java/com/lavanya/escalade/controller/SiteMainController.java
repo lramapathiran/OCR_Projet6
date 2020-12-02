@@ -33,6 +33,10 @@ import com.lavanya.escalade.service.SiteService;
 import com.lavanya.escalade.service.TopoService;
 import com.lavanya.escalade.service.UserService;
 
+/**
+ * Controller used in MVC architecture to control all the requests related to Site object.
+ * @author lavanya
+ */
 @Controller
 public class SiteMainController {
 	
@@ -51,7 +55,14 @@ public class SiteMainController {
 	@Autowired
 	private CommentService commentService;
 	
-		
+	/**
+     * GET requests for /createSite endpoint.
+     * This controller-method creates a new object Site and pass it to the form for the user to create a Site with all its attributes.
+     *
+     * @param model 
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return addSite.html
+     */	
 	@GetMapping("/createSite")
 	public String showSiteForm(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
@@ -67,6 +78,15 @@ public class SiteMainController {
 	}
 	
 	
+	/**
+	 * POST request to send data to /saveSite endpoint.
+     * This controller-method is part of CRUD and is used to save a Site in database
+     *
+     * @param site is the object Site that needs to be saved.
+     * @param result represents binding results, registers errors and allows for a Validator to be applied
+     * @param model
+     * @return site.html
+     */	
 	@PostMapping("/saveSite")
 	public String saveSite(@Valid @ModelAttribute ("site") Site site, BindingResult result, Model model) {
 		
@@ -82,7 +102,6 @@ public class SiteMainController {
 					return "addSite";					
 				}
 				for (Area area : areas) {
-//					nullpointer exception for area.getRoutesNumber()
 						if (area.getAreaName() == "" || area.getCotationsRange() == "" || area.getRoutesNumber() == 0 || area.getRoutesNumber() == null) {
 						model.addAttribute("message", "La section secteur n'a pas été entièrement renseignée!");
 					}
@@ -114,6 +133,14 @@ public class SiteMainController {
 		return "redirect:/site/"+siteId;
 	}
 	
+	/**
+     * GET requests for /user/sites endpoint.
+     * This controller-method retrieves from database all sites created by the authenticated user and pass that list to the view "userSites.html"
+     * 
+     * @param model 
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return userSites.html
+     */	
 	@GetMapping("/user/sites")
 	public String showListOfSitesOfUser(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 	   
@@ -140,6 +167,15 @@ public class SiteMainController {
 	}
 
 	
+	/**
+     * GET requests for /sitesList endpoint.
+     * This controller-method retrieves from database all sites created by all users and pass that list to the view "sitesList.html"
+     * 
+     * @param model 
+     * @param currentPage, an int to specify which page of Sites to display.
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return sitesList.html
+     */	
 	@GetMapping("/sites")
    	public String showSitesListByPage(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam (value = "pageNumber") int currentPage, Model model) {
 		
@@ -175,6 +211,16 @@ public class SiteMainController {
 
     }
 	
+	/**
+     * GET requests for /site/{id} endpoint.
+     * This controller-method retrieves from database all data related to a Site of interest and the Comments/Areas/Topos associated to that Site. 
+     * Those data are then passed to the model and displayed in the view "site.html".
+     * 
+     * @param model 
+     * @param siteId, an int to specify the id of the Site object to display.
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return site.html
+     */	
 	@GetMapping("/site/{id}")
 	public String getSite(@PathVariable(name = "id") int siteId, Site site, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
@@ -217,6 +263,18 @@ public class SiteMainController {
 		return "site";
 	}
 	
+	
+	/**
+     * GET requests for /site/{id}/updateComment/{commentId} endpoint.
+     * This controller-method retrieves the same data than the previous method, getSite() and pass them again to the view "site.html". 
+     * It will also retrieve from database an object Comment for update purpose. 
+     * 
+     * @param model 
+     * @param siteId, an int to specify the id of the Site object to display.
+     * @param commentId, an int to specify the id of the Comment object to update.
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return site.html
+     */	
 	@GetMapping("/site/{id}/updateComment/{commentId}")
 	public String displayComment(@PathVariable(name = "id") int siteId, @PathVariable(name = "commentId") int commentId, Site site, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
@@ -255,10 +313,24 @@ public class SiteMainController {
 		return "site";
  	}
 	
-	
+	/**
+     * GET requests for /showSites/{pageNumber} endpoint.
+     * This controller-method retrieves all sites created by all users and display them as Page to the view "sitesListForVisitors.html".
+     * 
+     * @param model 
+     * @param currentPage, an int to specify which page of Sites to display.
+     * @param keyword, a String attribute from Search object used to filter a search sites by keyword.
+     * @param department, a String attribute from Search object used to filter a search sites by department.
+     * @param areasNumber, an Integer attribute from Search object used to filter a search sites by areasNumber.
+     * @param routesNumber, an Integer attribute from Search object used to filter a search sites by routesNumber.
+     * @param siteId, an int to specify the id of the Site object to display.
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return a model and view mav with view page as "sitesListForVisitors.html".
+     */	
 	@GetMapping("/showSites/{pageNumber}")
 	public ModelAndView showNextPagesOfSitesToVisitors(@PathVariable(value = "pageNumber") int currentPage,@RequestParam(name="keyword", required=false) String keyword,
-			@RequestParam(name="department", required=false) String department, @RequestParam(name="areasNumber", required=false) Integer areasNumber, @RequestParam(name="routesNumber", required=false) Integer routesNumber, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
+			@RequestParam(name="department", required=false) String department, @RequestParam(name="areasNumber", required=false) Integer areasNumber, 
+			@RequestParam(name="routesNumber", required=false) Integer routesNumber, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
 		Search search = new Search();
 		
@@ -304,7 +376,16 @@ public class SiteMainController {
 		return mav;
 	}
 	
-
+	/**
+	 * POST request to send data to /addTag endpoint.
+     * This controller-method the attribute tagged of Site in order to tag or not a site. 
+     *
+     * @param site is the object Site that needs to be updated.
+     * @param currentPage, an int to specify which page of Sites to display.
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @param model
+     * @return the end point /sites
+     */	
 	@PostMapping("/addTag")
 	public String getTagOnSite(@ModelAttribute ("site") Site site, @AuthenticationPrincipal MyUserDetails userConnected, int currentPage, Model model) {
 		

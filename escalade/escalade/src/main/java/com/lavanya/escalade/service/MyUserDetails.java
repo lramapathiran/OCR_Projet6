@@ -9,6 +9,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.lavanya.escalade.model.User;
 
+/**
+ * Bean representing MyUserDetails.
+ * MyUserDetails object represents authenticated principal user object to access the Principal user details.
+ * @author lavanya
+ */
 public class MyUserDetails implements UserDetails{
 	
 	private static final long serialVersionUID = 1L;

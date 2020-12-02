@@ -12,6 +12,11 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+/**
+ * Validation annotation
+ * Validates that the email adress entered in user creation form has a valid pattern. 
+ * @author lavanya
+ */
 @Target({TYPE, FIELD, ANNOTATION_TYPE}) 
 @Retention(RUNTIME)
 @Constraint(validatedBy = EmailValidator.class)

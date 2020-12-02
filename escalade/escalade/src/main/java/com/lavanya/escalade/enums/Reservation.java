@@ -1,5 +1,10 @@
 package com.lavanya.escalade.enums;
 
+/**
+ * enum required for Topo class and required as one of its attributes 
+ * Different type of Reservation possible.
+ * @author lavanya
+ */
 public enum Reservation {
 	
 //	A for AVAILABLE, R for RESERVED, U for UNAVAILABLE, I for In progress

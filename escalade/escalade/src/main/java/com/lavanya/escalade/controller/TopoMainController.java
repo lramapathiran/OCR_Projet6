@@ -31,6 +31,10 @@ import com.lavanya.escalade.service.SiteService;
 import com.lavanya.escalade.service.TopoService;
 import com.lavanya.escalade.service.UserService;
 
+/**
+ * Controller used in MVC architecture to control all the requests related to Topo object.
+ * @author lavanya
+ */
 @Controller
 public class TopoMainController {
 	
@@ -52,7 +56,15 @@ public class TopoMainController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 	
-	
+	/**
+     * GET requests for /createTopo/{siteId} endpoint.
+     * This controller-method creates a new object Topo and pass it to the form for the user to create a Topo with all its attributes.
+     * 
+     * @param id, int to specify the site's id whose the topo in creation is associated.
+     * @param model 
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return addTopo.html
+     */	
 	@GetMapping("/createTopo/{siteId}")
 	public String showTopoForm(@PathVariable("siteId") int id, @AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
@@ -72,7 +84,15 @@ public class TopoMainController {
 	    return "addTopo";
 	}
 	
-	
+	/**
+	 * POST request to send data to /saveTopo endpoint.
+     * This controller-method is part of CRUD and is used to save a Topo in database
+     *
+     * @param topo is the object Topo that needs to be saved.
+     * @param result represents binding results, registers errors and allows for a Validator to be applied
+     * @param model
+     * @return the url /topo/{id}
+     */	
 	@PostMapping("/saveTopo")
 	public String saveTopo(@Valid @ModelAttribute ("topo") Topo topo, BindingResult result, Model model) {
 		
@@ -91,6 +111,15 @@ public class TopoMainController {
 		return "redirect:/topo/"+topoId;
 	}
 	
+	
+	/**
+     * GET requests for /user/topos endpoint.
+     * This controller-method retrieves from database all topos created by the authenticated user and pass that list to the view "userTopos.html"
+     * 
+     * @param model 
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return userTopos.html
+     */	
 	@GetMapping("/user/topos")
 	public String showListOfToposOfUser(@AuthenticationPrincipal MyUserDetails userConnected, Model model) {
 		
@@ -115,6 +144,15 @@ public class TopoMainController {
 	   return "userTopos";
 	}
 	
+	/**
+     * GET requests for /topos endpoint.
+     * This controller-method retrieves from database all topos created by all users and pass that list to the view "toposList.html"
+     * 
+     * @param model 
+     * @param currentPage, an int to specify which page of Topos to display.
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return toposList.html
+     */	
 	@GetMapping("/topos")
    	public String showToposListByPage(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam ("pageNumber") int currentPage, Model model) {
 		
@@ -149,6 +187,16 @@ public class TopoMainController {
 
     }
 	
+	/**
+     * GET requests for /topo/{id} endpoint.
+     * This controller-method retrieves from database all data related to a Topo of interest. 
+     * Those data are then passed to the model and displayed in the view "topo.html".
+     * 
+     * @param model 
+     * @param id, an int to specify the id of the Topo object to display.
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return topo.html
+     */	
 	@GetMapping(value = {"/topo/{id}"})
 	public String getTopo(@AuthenticationPrincipal MyUserDetails userConnected, @PathVariable(name = "id") int id, Topo topo, Model model) {
 		
@@ -169,6 +217,15 @@ public class TopoMainController {
 		return "topo.html";
 	}
 	
+	/**
+	 * POST request to send data to /reservation endpoint.
+     * This controller-method is part of CRUD and is used to update a Topo in database.
+     * The update concerns the reservation attribute of Topo to accept or not a reservation.
+     *
+     * @param topo is the object Topo whose reservation attribute needs to be updated.
+     * @param model
+     * @return the url /user/topos
+     */	
 	@PostMapping("/reservation")
 	public String setReservation(Topo topo, Model model) {
 		
@@ -177,6 +234,16 @@ public class TopoMainController {
 		return "redirect:/user/topos";
 	}
 	
+	
+	/**
+	 * POST request to send data to /request/reservation endpoint.
+     * This controller-method is part of CRUD and is used to update a Topo in database.
+     * The update concerns the reservation attribute of Topo to request a reservation.
+     *
+     * @param topo is the object Topo whose reservation attribute needs to be updated.
+     * @param model
+     * @return the url /user/topos
+     */	
 	@PostMapping("/request/reservation")
 	public String sendRequestForReservation(Topo topo, Model model) {
 		
@@ -188,6 +255,16 @@ public class TopoMainController {
 	}
 
 	
+	
+	/**
+     * GET requests for /showTopos endpoint.
+     * This controller-method retrieves all topos created by all users and display them as Page to the view "toposListForUserConnected.html".
+     * 
+     * @param model 
+     * @param currentPage, an int to specify which page of Topos to display.
+     * @param userConnected is the authenticated User passed within the object MyUserDetails
+     * @return "toposListForUserConnected.html".
+     */	
 	@GetMapping("/showTopos")
 	public String showNextPagesOfToposToVisitors(@AuthenticationPrincipal MyUserDetails userConnected, @RequestParam (value = "pageNumber") int currentPage, Model model) {
 		

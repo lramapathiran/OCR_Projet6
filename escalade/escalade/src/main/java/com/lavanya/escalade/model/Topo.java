@@ -17,6 +17,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.lavanya.escalade.enums.Reservation;
 
+
+/**
+ * Bean representing a Topo.
+ * Topo object is declared as a JPA entity with the corresponding annotation.
+ * @author lavanya
+ */
 @Entity
 public class Topo {
 	
